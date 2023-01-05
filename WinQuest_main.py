@@ -6,4 +6,4 @@ Created on Thu Jan  5 09:23:14 2023
 """
 
 if __name__ == "__main__":
-    1
+    pass
