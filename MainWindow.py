@@ -1,16 +1,12 @@
 import sys
 
-
+from PySide6 import QtUiTools
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton
+from PySide6.QtUiTools import QUiLoader
 
 
-class MainWindow(QMainWindow):
-    def __init__(self):
-        super().__init__()
-        self.setWindowTitle("WinQuest")
-        self.setWindowIcon(QIcon("resources/images/favicon_96x96.png"))
-        self.resize(800, 600)
+loader = QUiLoader()
 
 if __name__ == "__main__":
     # On crée l'instance d'application en lui passant le tableau des arguments.
@@ -20,13 +16,13 @@ if __name__ == "__main__":
     def say_hello():
         print("Button clicked, Hello!")
 
+    def clickclick():
+        print("clickclick")
 
+    window = loader.load("untitled.ui", None)
+    loader = QtUiTools.QUiLoader()
+    window.pushButton_5.clicked.connect(clickclick)
 
-        # TODO : Instancier et afficher votre fenêtre graphique.
-    window = MainWindow()
-    button = QPushButton("Click me", window)
-    button.clicked.connect(say_hello)
-    button.show()
     window.show()
 
     # On démarre la boucle de gestion des événements.
