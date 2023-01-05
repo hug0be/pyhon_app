@@ -2,7 +2,7 @@ import sys
 
 
 from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton
 
 
 class MainWindow(QMainWindow):
