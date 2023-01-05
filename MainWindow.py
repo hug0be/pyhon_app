@@ -14,5 +14,5 @@ if __name__ == "__main__":
     window = MainWindow()
     window.show()
 
-    # On démarre la boucle de gestion des événements.
+    # On démarre la boucle de gestion des événements. coucou
     sys.exit(app.exec())
