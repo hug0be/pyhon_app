@@ -7,7 +7,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("WinQuest")
-        self.setWindowIcon(QIcon("resources/images/favicon.png"))
+        self.setWindowIcon(QIcon("resources/images/favicon_96x96.png"))
         self.resize(800, 600)
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-# WinQuest
+# ![Alt text](resources/images/favicon_32x32.png?raw=true "Title") WinQuest
 Projet débuté dans un module Polytech, se concentrant sur la création d'application et la gestion de projet. 
 
 # Introduction
