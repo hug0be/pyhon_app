@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>599</height>
+    <width>779</width>
+    <height>661</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,28 +17,80 @@
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
-      <property name="spacing">
-       <number>5</number>
-      </property>
-      <property name="sizeConstraint">
-       <enum>QLayout::SetDefaultConstraint</enum>
-      </property>
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
       <item>
-       <widget class="QPushButton" name="pushButton_5">
+       <widget class="QTextEdit" name="connectUsername">
+        <property name="placeholderText">
+         <string>Nom d'utilisateur</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTextEdit" name="connectPassword">
+        <property name="placeholderText">
+         <string>Mot de passe</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="connectButton">
         <property name="text">
          <string>Se connecter</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>500</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QTextEdit" name="accountUsername">
+        <property name="placeholderText">
+         <string>Pseudonyme</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTextEdit" name="accountPassword">
+        <property name="placeholderText">
+         <string>Mot de passe</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="createAccountButton">
         <property name="text">
          <string>Créer un compte</string>
         </property>
        </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Maximum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>500</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </item>
