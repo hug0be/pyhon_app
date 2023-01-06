@@ -43,7 +43,7 @@ def create_account_attempt(window):
     """Méthode appeler pour une tentative de création de compte"""
     #Obtention des identifiants
     username = window.accountUsername.toPlainText()
-    password = window.accountPassword.toPlainText()
+    password = window.accountPassword.text()
 
     #Validation des identifiants
     if not username:
@@ -65,7 +65,7 @@ def connect_attempt(window):
     """Méthode appeler pour une tentative de connexion"""
     #Obtention des identifiants
     username = window.connectUsername.toPlainText()
-    password = window.connectPassword.toPlainText()
+    password = window.connectPassword.text()
 
     # Validation des identifiants
     if not username:

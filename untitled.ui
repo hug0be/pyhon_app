@@ -25,7 +25,10 @@
        </widget>
       </item>
       <item>
-       <widget class="QTextEdit" name="connectPassword">
+       <widget class="QLineEdit" name="connectPassword">
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
         <property name="placeholderText">
          <string>Mot de passe</string>
         </property>
@@ -63,7 +66,10 @@
        </widget>
       </item>
       <item>
-       <widget class="QTextEdit" name="accountPassword">
+       <widget class="QLineEdit" name="accountPassword">
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
         <property name="placeholderText">
          <string>Mot de passe</string>
         </property>
