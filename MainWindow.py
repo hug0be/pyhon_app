@@ -3,7 +3,7 @@ import sys
 
 from PySide6 import QtUiTools
 from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QApplication
 from PySide6.QtUiTools import QUiLoader
 
 
@@ -40,14 +40,14 @@ class Account:
             accounts = json.load(file)
             for account in accounts:
                 if username == account['username']:
-                    if password == accounts['password']: return True
+                    if password == account['password']: return True
                     raise WrongPasswordException
             raise UnknownAccountException
 class WrongPasswordException(Exception): pass
 class UnknownAccountException(Exception): pass
+
 def create_account_attempt():
     """Méthode appeler pour une tentative de création de compte"""
-
     #Obtention des identifiants
     username = window.accountUsername.toPlainText()
     password = window.accountPassword.toPlainText()
@@ -68,6 +68,33 @@ def create_account_attempt():
     #All good !
     Account(username, password).save()
 
+def connect_attempt():
+    """Méthode appeler pour une tentative de connexion"""
+    #Obtention des identifiants
+    username = window.connectUsername.toPlainText()
+    password = window.connectPassword.toPlainText()
+
+    # Validation des identifiants
+    if not username:
+        print("Le pseudo est vide")
+        return False
+    if not password:
+        print("Le mot de passe est vide")
+        return False
+
+    # Lancement de la tentative
+    try:
+        Account.access(username, password)
+    except WrongPasswordException:
+        print("Mot de passe incorrect")
+        return False
+    except UnknownAccountException:
+        print("Compte inexistant")
+        return False
+
+    # All good !
+    print("Authentification terminé")
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
@@ -77,7 +104,7 @@ if __name__ == "__main__":
     loader = QtUiTools.QUiLoader()
 
     #Bouton "Se connecter"
-    # window.connectButton.clicked.connect(connexionAttempt)
+    window.connectButton.clicked.connect(connect_attempt)
     window.createAccountButton.clicked.connect(create_account_attempt)
 
     window.show()
