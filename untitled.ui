@@ -46,6 +46,9 @@
       </item>
       <item>
        <widget class="QLabel" name="connectErrorsLabel">
+        <property name="styleSheet">
+         <string notr="true">color: #F3A917</string>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -97,6 +100,9 @@
       </item>
       <item>
        <widget class="QLabel" name="createAccountErrorsLabel">
+        <property name="styleSheet">
+         <string notr="true">color: #F3A917</string>
+        </property>
         <property name="text">
          <string/>
         </property>
