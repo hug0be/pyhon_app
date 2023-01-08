@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 #WinQuest
-data
+/data/
