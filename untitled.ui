@@ -18,7 +18,10 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QTextEdit" name="connectUsername">
+       <widget class="QLineEdit" name="connectUsername">
+        <property name="echoMode">
+         <enum>QLineEdit::Normal</enum>
+        </property>
         <property name="placeholderText">
          <string>Nom d'utilisateur</string>
         </property>
@@ -42,6 +45,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="connectErrorsLabel">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="verticalSpacer_2">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -59,9 +69,12 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QTextEdit" name="accountUsername">
+       <widget class="QLineEdit" name="accountUsername">
+        <property name="echoMode">
+         <enum>QLineEdit::Normal</enum>
+        </property>
         <property name="placeholderText">
-         <string>Pseudonyme</string>
+         <string>Nom d'utilisateur</string>
         </property>
        </widget>
       </item>
@@ -79,6 +92,13 @@
        <widget class="QPushButton" name="createAccountButton">
         <property name="text">
          <string>Créer un compte</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="createAccountErrorsLabel">
+        <property name="text">
+         <string/>
         </property>
        </widget>
       </item>

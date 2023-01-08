@@ -42,15 +42,17 @@ class Account:
 def create_account_attempt(window):
     """Méthode appeler pour une tentative de création de compte"""
     #Obtention des identifiants
-    username = window.accountUsername.toPlainText()
+    username = window.accountUsername.text()
     password = window.accountPassword.text()
 
     #Validation des identifiants
-    if not username:
-        print("Le pseudo est vide")
-        return False
-    if not password:
-        print("Le mot de passe est vide")
+    is_valid = username and password
+    if not is_valid:
+        text_error = ""
+        if not username: text_error += "Saisissez un nom d'utilisateur\n"
+        if not password: text_error += "Saisissez un mot de passe"
+        window.createAccountErrorsLabel.setText(text_error)
+        window.connectErrorsLabel.clear()
         return False
 
     #Check si les identifiants existent
@@ -64,15 +66,17 @@ def create_account_attempt(window):
 def connect_attempt(window):
     """Méthode appeler pour une tentative de connexion"""
     #Obtention des identifiants
-    username = window.connectUsername.toPlainText()
+    username = window.connectUsername.text()
     password = window.connectPassword.text()
 
     # Validation des identifiants
-    if not username:
-        print("Le pseudo est vide")
-        return False
-    if not password:
-        print("Le mot de passe est vide")
+    is_valid = username and password
+    if not is_valid:
+        text_error = ""
+        if not username: text_error += "Saisissez votre nom d'utilisateur\n"
+        if not password: text_error += "Saisissez votre mot de passe"
+        window.connectErrorsLabel.setText(text_error)
+        window.createAccountErrorsLabel.clear()
         return False
 
     # Lancement de la tentative

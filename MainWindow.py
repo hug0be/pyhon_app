@@ -1,4 +1,3 @@
-import json
 import sys
 
 from PySide6 import QtUiTools
