@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>575</height>
    </rect>
   </property>
   <property name="font">
@@ -103,7 +103,7 @@ QPushButton {
                 <string/>
                </property>
                <property name="icon">
-                <iconset resource="resources/resources.qrc">
+                <iconset>
                  <normaloff>:/icons/images/menu.svg</normaloff>:/icons/images/menu.svg</iconset>
                </property>
                <property name="iconSize">
@@ -141,7 +141,7 @@ QPushButton {
                 <string>Historique</string>
                </property>
                <property name="icon">
-                <iconset resource="resources/resources.qrc">
+                <iconset>
                  <normaloff>:/icons/images/archive.svg</normaloff>:/icons/images/archive.svg</iconset>
                </property>
                <property name="iconSize">
@@ -167,7 +167,7 @@ QPushButton {
                 <string>Se déconnecter</string>
                </property>
                <property name="icon">
-                <iconset resource="resources/resources.qrc">
+                <iconset>
                  <normaloff>:/icons/images/log-out.svg</normaloff>:/icons/images/log-out.svg</iconset>
                </property>
                <property name="iconSize">
@@ -255,8 +255,6 @@ QPushButton {
    </layout>
   </widget>
  </widget>
- <resources>
-  <include location="resources/resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

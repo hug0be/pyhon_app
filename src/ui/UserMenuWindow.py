@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'userMenuWindow.ui'
+## Form generated from reading UI file 'UserMenuWindow.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.1
 ##
@@ -23,7 +23,7 @@ class Ui_userMenu(object):
     def setupUi(self, userMenu):
         if not userMenu.objectName():
             userMenu.setObjectName(u"userMenu")
-        userMenu.resize(800, 600)
+        userMenu.resize(800, 575)
         font = QFont()
         font.setPointSize(8)
         userMenu.setFont(font)
