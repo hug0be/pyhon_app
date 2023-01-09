@@ -103,7 +103,11 @@ QPushButton {
                 <string/>
                </property>
                <property name="icon">
+<<<<<<< HEAD
                 <iconset>
+=======
+                <iconset resource="../resources/resources.qrc">
+>>>>>>> d37a0e8fb49dd98f0e1e503ba788dbceee8c6a0a
                  <normaloff>:/icons/images/menu.svg</normaloff>:/icons/images/menu.svg</iconset>
                </property>
                <property name="iconSize">
@@ -141,7 +145,11 @@ QPushButton {
                 <string>Historique</string>
                </property>
                <property name="icon">
+<<<<<<< HEAD
                 <iconset>
+=======
+                <iconset resource="../resources/resources.qrc">
+>>>>>>> d37a0e8fb49dd98f0e1e503ba788dbceee8c6a0a
                  <normaloff>:/icons/images/archive.svg</normaloff>:/icons/images/archive.svg</iconset>
                </property>
                <property name="iconSize">
@@ -167,7 +175,11 @@ QPushButton {
                 <string>Se déconnecter</string>
                </property>
                <property name="icon">
+<<<<<<< HEAD
                 <iconset>
+=======
+                <iconset resource="../resources/resources.qrc">
+>>>>>>> d37a0e8fb49dd98f0e1e503ba788dbceee8c6a0a
                  <normaloff>:/icons/images/log-out.svg</normaloff>:/icons/images/log-out.svg</iconset>
                </property>
                <property name="iconSize">
@@ -255,6 +267,12 @@ QPushButton {
    </layout>
   </widget>
  </widget>
+<<<<<<< HEAD
  <resources/>
+=======
+ <resources>
+  <include location="../resources/resources.qrc"/>
+ </resources>
+>>>>>>> d37a0e8fb49dd98f0e1e503ba788dbceee8c6a0a
  <connections/>
 </ui>
