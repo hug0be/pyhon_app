@@ -93,6 +93,8 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     loader = QUiLoader()
 
+    print(os.getcwd())
+
     #Convert file .ui -> .py
     os.system("pyside6-uic views/MainWindow.ui -o src/ui/MainWindow.py")
     os.system("pyside6-uic views/UserMenuWindow.ui -o src/ui/UserMenuWindow.py")
