@@ -13,7 +13,41 @@
   <property name="windowTitle">
    <string>WinQuest</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">* {
+	border: none;
+	background-color: transparent;
+	background: none;
+	padding: 0;
+	margin: 0;
+	color: #FFF;
+}
+
+#centralwidget  {
+	background-color: #5158BB;
+}
+
+.QLineEdit {
+	background: transparent;
+	border-bottom: 2px solid #F26DF9;
+}
+.QPushButton {
+	background-color: #F26DF9;
+	padding: 2px 5px;
+}
+
+#createAccountSecondaryButton {
+	border: 2px solid #F26DF9;
+	background: none;
+}</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
@@ -51,6 +85,13 @@
         </property>
         <property name="text">
          <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="createAccountSecondaryButton">
+        <property name="text">
+         <string>Créer un compte</string>
         </property>
        </widget>
       </item>
@@ -99,16 +140,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="createAccountErrorsLabel">
-        <property name="styleSheet">
-         <string notr="true">color: #F3A917</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item>
        <spacer name="verticalSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -123,6 +154,16 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="createAccountErrorsLabel">
+        <property name="styleSheet">
+         <string notr="true">color: #F3A917</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>

@@ -24,8 +24,36 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(779, 661)
+        MainWindow.setStyleSheet(u"* {\n"
+"	border: none;\n"
+"	background-color: transparent;\n"
+"	background: none;\n"
+"	padding: 0;\n"
+"	margin: 0;\n"
+"	color: #FFF;\n"
+"}\n"
+"\n"
+"#centralwidget  {\n"
+"	background-color: #5158BB;\n"
+"}\n"
+"\n"
+".QLineEdit {\n"
+"	background: transparent;\n"
+"	border-bottom: 2px solid #F26DF9;\n"
+"}\n"
+".QPushButton {\n"
+"	background-color: #F26DF9;\n"
+"	padding: 2px 5px;\n"
+"}\n"
+"\n"
+"#createAccountSecondaryButton {\n"
+"	border: 2px solid #F26DF9;\n"
+"	background: none;\n"
+"}")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
+        self.centralwidget.setLayoutDirection(Qt.LeftToRight)
+        self.centralwidget.setAutoFillBackground(False)
         self.horizontalLayout = QHBoxLayout(self.centralwidget)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.verticalLayout = QVBoxLayout()
@@ -53,6 +81,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.connectErrorsLabel)
 
+        self.createAccountSecondaryButton = QPushButton(self.centralwidget)
+        self.createAccountSecondaryButton.setObjectName(u"createAccountSecondaryButton")
+
+        self.verticalLayout.addWidget(self.createAccountSecondaryButton)
+
         self.verticalSpacer_2 = QSpacerItem(20, 500, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout.addItem(self.verticalSpacer_2)
@@ -79,15 +112,15 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addWidget(self.createAccountButton)
 
+        self.verticalSpacer = QSpacerItem(20, 500, QSizePolicy.Minimum, QSizePolicy.Maximum)
+
+        self.verticalLayout_2.addItem(self.verticalSpacer)
+
         self.createAccountErrorsLabel = QLabel(self.centralwidget)
         self.createAccountErrorsLabel.setObjectName(u"createAccountErrorsLabel")
         self.createAccountErrorsLabel.setStyleSheet(u"color: #F3A917")
 
         self.verticalLayout_2.addWidget(self.createAccountErrorsLabel)
-
-        self.verticalSpacer = QSpacerItem(20, 500, QSizePolicy.Minimum, QSizePolicy.Maximum)
-
-        self.verticalLayout_2.addItem(self.verticalSpacer)
 
 
         self.horizontalLayout.addLayout(self.verticalLayout_2)
@@ -108,6 +141,7 @@ class Ui_MainWindow(object):
         self.connectPassword.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Mot de passe", None))
         self.connectButton.setText(QCoreApplication.translate("MainWindow", u"Se connecter", None))
         self.connectErrorsLabel.setText("")
+        self.createAccountSecondaryButton.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er un compte", None))
         self.accountUsername.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Nom d'utilisateur", None))
         self.accountPassword.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Mot de passe", None))
         self.createAccountButton.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er un compte", None))
