@@ -32,7 +32,7 @@ def create_account_attempt():
 
     #All good !
     Account(username, password).save()
-    change_page("user_menu")
+    change_page("userMenuWindow")
 
 def connect_attempt():
     """Méthode appeler pour une tentative de connexion"""
@@ -62,15 +62,17 @@ def connect_attempt():
 
     # All good !
     print("Authentification terminé")
-    change_page("user_menu")
+    change_page("userMenuWindow")
 
 
 def change_page(name):
     """Change de page selon le nom donné"""
     global window
-    if name == "user_menu":
-        window = loader.load("userMenuWindow.ui", None)
-    window.show()
+    try:
+        window = loader.load(f"{name}.ui", None)
+        window.show()
+    except RuntimeError:
+        print(f"La page {name}.ui n'existe pas")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
