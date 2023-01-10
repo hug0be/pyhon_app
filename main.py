@@ -1,3 +1,4 @@
+import json
 import sys
 import os
 
@@ -113,6 +114,16 @@ class UserMenuWindow(QMainWindow):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     loader = QUiLoader()
+
+    #Check si le fichier accounts.json existe
+    if not os.path.exists("data/accounts.json"):
+        with open('data/accounts.json', 'w') as accounts_file:
+            accounts = [
+                {"username": "admin", "password": "foobar2", "admin": True},
+                {"username": "user", "password": "foobar2", "admin": False}
+            ]
+            accounts_file.write(json.dumps(accounts))
+            print("Fichier accounts.json créé")
 
     #Convert file .ui -> .py
     os.system("pyside6-uic views/MainWindow.ui -o src/ui/MainWindow.py")
