@@ -1,3 +1,4 @@
+import json
 import sys
 import os
 
@@ -6,10 +7,10 @@ from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtUiTools import QUiLoader
 
 from src.account import Account, WrongPasswordException, UnknownAccountException
-from src.quizz import Quizz, Answers
+from src.quizz import Quizz
 from src.ui import Ui_MainWindow, Ui_userMenu
 
-def change_page(name):
+def change_page():
     """Change de page selon le nom donné"""
     global window
     window = UserMenuWindow()
@@ -55,8 +56,7 @@ class MainWindow(QMainWindow):
             return False
 
         # All good !
-        print("Authentification terminé")
-        change_page("userMenuWindow")
+        change_page()
 
     def create_account_attempt(self):
         """Méthode appeler pour une tentative de création de compte"""
@@ -83,27 +83,59 @@ class MainWindow(QMainWindow):
 
         # All good !
         Account(username, password).save()
-        change_page("userMenuWindow")
+        change_page()
 
 class UserMenuWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         self.ui = Ui_userMenu()
         self.ui.setupUi(self)
-        self.ui.showQuizzListButton.clicked.connect(self.showQuizzList)
 
-    def showQuizzList(self):
+        #Binding changements de pages
+        # TODO: Retour arrière pour les pages "quizzListPage" et "createQuizzPage"
+        self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
+        self.ui.createQuizzButton.clicked.connect(self.show_quizz_creation_page)
+        self.ui.saveQuizzButton.clicked.connect(self.create_quizz_attempt)
+
+    def show_home_page(self):
+        self.ui.pagesList.setCurrentWidget(self.ui.homePage)
+    def show_quizz_list_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
+    def show_quizz_creation_page(self):
+        self.ui.pagesList.setCurrentWidget(self.ui.createQuizzPage)
+    def create_quizz_attempt(self):
+        """Méthode appeler pour une tentative de création de quizz"""
+        # Obtention des données
+        title = self.ui.quizzTitle.text()
+
+        # Validation des données
+        if not title:
+            self.ui.createQuizzErrorsLabel.setText("Saisissez un titre de quizz")
+            return False
+
+        # Check si le quizz existe
+        if Quizz.exists(title):
+            self.ui.createQuizzErrorsLabel.setText("Ce quizz existe déjà")
+            return False
+
+        # All good !
+        Quizz(title).save()
+        self.show_quizz_list_page()
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     loader = QUiLoader()
 
+    # Check si le fichier quizzes.json existe
+    if not os.path.exists("data/quizzes.json"):
+        with open('data/quizzes.json', 'w') as quizzes_file:
+            quizzes_file.write(json.dumps([]))
+        print("Fichier quizzes.json créé")
+
     #Convert file .ui -> .py
     os.system("pyside6-uic views/MainWindow.ui -o src/ui/MainWindow.py")
     os.system("pyside6-uic views/UserMenuWindow.ui -o src/ui/UserMenuWindow.py")
-
     os.system("pyside6-rcc resources/resources.qrc -o resources_rc.py")
 
     #Page principale
