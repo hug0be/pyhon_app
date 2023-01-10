@@ -16,8 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QMainWindow, QPushButton, QSizePolicy, QSpacerItem,
-    QStackedWidget, QVBoxLayout, QWidget)
+    QLineEdit, QMainWindow, QPushButton, QSizePolicy,
+    QSpacerItem, QStackedWidget, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_userMenu(object):
@@ -37,10 +37,6 @@ class Ui_userMenu(object):
 "	font-size: 12px;\n"
 "}\n"
 "\n"
-"#centralwidget  {\n"
-"	background-color: #5158BB;\n"
-"}\n"
-"\n"
 "#menu {\n"
 "	background-color: #2B4790;\n"
 "}\n"
@@ -53,8 +49,14 @@ class Ui_userMenu(object):
 "	background-color: #F26DF9;\n"
 "	padding: 5px 10px;\n"
 "}\n"
+"\n"
 "#pagesList > QWidget  {\n"
 "	background-color: #5158BB;\n"
+"}\n"
+"\n"
+"#createQuizzPage QLineEdit {\n"
+"	background: transparent;\n"
+"	border-bottom: 2px solid #F26DF9;\n"
 "}")
         self.centralwidget = QWidget(userMenu)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -153,7 +155,24 @@ class Ui_userMenu(object):
         self.label = QLabel(self.homePage)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(140, 100, 371, 71))
+        self.createQuizzButton = QPushButton(self.homePage)
+        self.createQuizzButton.setObjectName(u"createQuizzButton")
+        self.createQuizzButton.setGeometry(QRect(130, 290, 375, 31))
         self.pagesList.addWidget(self.homePage)
+        self.createQuizzPage = QWidget()
+        self.createQuizzPage.setObjectName(u"createQuizzPage")
+        self.saveQuizzButton = QPushButton(self.createQuizzPage)
+        self.saveQuizzButton.setObjectName(u"saveQuizzButton")
+        self.saveQuizzButton.setGeometry(QRect(200, 320, 306, 31))
+        self.quizzTitle = QLineEdit(self.createQuizzPage)
+        self.quizzTitle.setObjectName(u"quizzTitle")
+        self.quizzTitle.setGeometry(QRect(200, 280, 306, 18))
+        self.quizzTitle.setEchoMode(QLineEdit.Normal)
+        self.createQuizzErrorsLabel = QLabel(self.createQuizzPage)
+        self.createQuizzErrorsLabel.setObjectName(u"createQuizzErrorsLabel")
+        self.createQuizzErrorsLabel.setGeometry(QRect(200, 360, 306, 37))
+        self.createQuizzErrorsLabel.setStyleSheet(u"color: #F3A917")
+        self.pagesList.addWidget(self.createQuizzPage)
         self.quizzListPage = QWidget()
         self.quizzListPage.setObjectName(u"quizzListPage")
         self.quizzListPage.setEnabled(True)
@@ -168,7 +187,7 @@ class Ui_userMenu(object):
 
         self.retranslateUi(userMenu)
 
-        self.pagesList.setCurrentIndex(0)
+        self.pagesList.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(userMenu)
@@ -190,6 +209,10 @@ class Ui_userMenu(object):
         self.pushButton_2.setText(QCoreApplication.translate("userMenu", u"Se d\u00e9connecter", None))
         self.showQuizzListButton.setText(QCoreApplication.translate("userMenu", u"Liste des quizz", None))
         self.label.setText(QCoreApplication.translate("userMenu", u"<html><head/><body><p><span style=\" font-size:24pt;\">Bienvenue sur WinQuest !</span></p></body></html>", None))
+        self.createQuizzButton.setText(QCoreApplication.translate("userMenu", u"Cr\u00e9er un quizz", None))
+        self.saveQuizzButton.setText(QCoreApplication.translate("userMenu", u"Sauvegarder ce quizz", None))
+        self.quizzTitle.setPlaceholderText(QCoreApplication.translate("userMenu", u"Titre du quizz", None))
+        self.createQuizzErrorsLabel.setText("")
         self.label_3.setText(QCoreApplication.translate("userMenu", u"<html><head/><body><p><span style=\" font-size:24pt;\">Liste des quizz</span></p></body></html>", None))
     # retranslateUi
 

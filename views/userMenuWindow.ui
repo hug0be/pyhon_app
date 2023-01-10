@@ -29,10 +29,6 @@
 	font-size: 12px;
 }
 
-#centralwidget  {
-	background-color: #5158BB;
-}
-
 #menu {
 	background-color: #2B4790;
 }
@@ -45,8 +41,14 @@
 	background-color: #F26DF9;
 	padding: 5px 10px;
 }
+
 #pagesList &gt; QWidget  {
 	background-color: #5158BB;
+}
+
+#createQuizzPage QLineEdit {
+	background: transparent;
+	border-bottom: 2px solid #F26DF9;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -211,7 +213,7 @@
     <item>
      <widget class="QStackedWidget" name="pagesList">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="homePage">
        <property name="styleSheet">
@@ -241,6 +243,66 @@
         </property>
         <property name="text">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;Bienvenue sur WinQuest !&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="createQuizzButton">
+        <property name="geometry">
+         <rect>
+          <x>130</x>
+          <y>290</y>
+          <width>375</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Créer un quizz</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="createQuizzPage">
+       <widget class="QPushButton" name="saveQuizzButton">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>320</y>
+          <width>306</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Sauvegarder ce quizz</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="quizzTitle">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>280</y>
+          <width>306</width>
+          <height>18</height>
+         </rect>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::Normal</enum>
+        </property>
+        <property name="placeholderText">
+         <string>Titre du quizz</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="createQuizzErrorsLabel">
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>360</y>
+          <width>306</width>
+          <height>37</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #F3A917</string>
+        </property>
+        <property name="text">
+         <string/>
         </property>
        </widget>
       </widget>
