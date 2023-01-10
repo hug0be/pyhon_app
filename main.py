@@ -75,7 +75,7 @@ class MainWindow(QMainWindow):
             text_error = ""
             if not username: text_error += "Saisissez un nom d'utilisateur\n"
             if not password: text_error += "Saisissez un mot de passe\n"
-            if not password == passwordConfirmation: text_error += "Le mot de passe et la confirmation sont différent"
+            if password != passwordConfirmation and username: text_error += "Le mot de passe et la confirmation sont différent"
             self.ui.createAccountErrorsLabel.setText(text_error)
             self.ui.connectErrorsLabel.clear()
             return False

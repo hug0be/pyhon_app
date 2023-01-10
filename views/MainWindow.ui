@@ -134,8 +134,11 @@
       </item>
       <item>
        <widget class="QLineEdit" name="accountPasswordConfirmation">
-        <property name="text">
-         <string>Confirmez votre mot de passe</string>
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
+        <property name="placeholderText">
+         <string>Confirmation du mot de passe</string>
         </property>
        </widget>
       </item>
@@ -143,6 +146,16 @@
        <widget class="QPushButton" name="createAccountButton">
         <property name="text">
          <string>Créer un compte</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="createAccountErrorsLabel">
+        <property name="styleSheet">
+         <string notr="true">color: #F3A917</string>
+        </property>
+        <property name="text">
+         <string/>
         </property>
        </widget>
       </item>
@@ -161,16 +174,6 @@
          </size>
         </property>
        </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="createAccountErrorsLabel">
-        <property name="styleSheet">
-         <string notr="true">color: #F3A917</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
       </item>
      </layout>
     </item>

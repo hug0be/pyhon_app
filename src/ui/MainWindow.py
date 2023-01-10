@@ -109,6 +109,7 @@ class Ui_MainWindow(object):
 
         self.accountPasswordConfirmation = QLineEdit(self.centralwidget)
         self.accountPasswordConfirmation.setObjectName(u"accountPasswordConfirmation")
+        self.accountPasswordConfirmation.setEchoMode(QLineEdit.Password)
 
         self.verticalLayout_2.addWidget(self.accountPasswordConfirmation)
 
@@ -117,15 +118,15 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addWidget(self.createAccountButton)
 
-        self.verticalSpacer = QSpacerItem(20, 500, QSizePolicy.Minimum, QSizePolicy.Maximum)
-
-        self.verticalLayout_2.addItem(self.verticalSpacer)
-
         self.createAccountErrorsLabel = QLabel(self.centralwidget)
         self.createAccountErrorsLabel.setObjectName(u"createAccountErrorsLabel")
         self.createAccountErrorsLabel.setStyleSheet(u"color: #F3A917")
 
         self.verticalLayout_2.addWidget(self.createAccountErrorsLabel)
+
+        self.verticalSpacer = QSpacerItem(20, 500, QSizePolicy.Minimum, QSizePolicy.Maximum)
+
+        self.verticalLayout_2.addItem(self.verticalSpacer)
 
 
         self.horizontalLayout.addLayout(self.verticalLayout_2)
@@ -149,7 +150,7 @@ class Ui_MainWindow(object):
         self.createAccountSecondaryButton.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er un compte", None))
         self.accountUsername.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Nom d'utilisateur", None))
         self.accountPassword.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Mot de passe", None))
-        self.accountPasswordConfirmation.setText(QCoreApplication.translate("MainWindow", u"Confirmez votre mot de passe", None))
+        self.accountPasswordConfirmation.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Confirmation du mot de passe", None))
         self.createAccountButton.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er un compte", None))
         self.createAccountErrorsLabel.setText("")
     # retranslateUi
