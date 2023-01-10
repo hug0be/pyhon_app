@@ -75,9 +75,9 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
-      <widget class="QWidget" name="Acceuil_site">
+      <widget class="QWidget" name="homePage">
        <property name="styleSheet">
         <string notr="true"/>
        </property>
@@ -140,7 +140,7 @@ justify-content : center
         </property>
        </widget>
       </widget>
-      <widget class="QWidget" name="Se_connecter">
+      <widget class="QWidget" name="connectPage">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
@@ -247,7 +247,7 @@ justify-content : center
         </property>
        </widget>
       </widget>
-      <widget class="QWidget" name="Creer_compte">
+      <widget class="QWidget" name="createAccountPage">
        <widget class="QWidget" name="widget_4" native="true">
         <property name="geometry">
          <rect>
@@ -380,7 +380,6 @@ justify-content : center
     </item>
    </layout>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
   <include location="../resources/resources.qrc"/>

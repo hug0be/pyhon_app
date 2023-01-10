@@ -37,14 +37,14 @@ class MainWindow(QMainWindow):
         self.show()
 
     def show_home(self):
-        self.ui.pagesList.setCurrentWidget(self.ui.Acceuil_site)
+        self.ui.pagesList.setCurrentWidget(self.ui.homePage)
         #Quand l'user reviendra les erreurs auront disparu.
         self.ui.createAccountErrorsLabel.clear()
         self.ui.connectErrorsLabel.clear()
     def show_create_account_page(self):
-        self.ui.pagesList.setCurrentWidget(self.ui.Creer_compte)
+        self.ui.pagesList.setCurrentWidget(self.ui.createAccountPage)
     def show_connect_page(self):
-        self.ui.pagesList.setCurrentWidget(self.ui.Se_connecter)
+        self.ui.pagesList.setCurrentWidget(self.ui.connectPage)
     def connect_attempt(self):
         """Méthode appeler pour une tentative de connexion"""
         # Obtention des identifiants
@@ -79,7 +79,7 @@ class MainWindow(QMainWindow):
         # Obtention des identifiants
         username = self.ui.accountUsername.text()
         password = self.ui.accountPassword.text()
-        passwordConfirmation = self.ui.accountPasswordConfirmation.text()
+        password_confirmation = self.ui.accountPasswordConfirmation.text()
 
         # Check si le compte existe
         if Account.exists(username):
@@ -87,12 +87,12 @@ class MainWindow(QMainWindow):
             return False
 
         # Validation des identifiants
-        is_valid = username and password and password == passwordConfirmation
+        is_valid = username and password and password == password_confirmation
         if not is_valid:
             text_error = ""
             if not username: text_error += "Saisissez un nom d'utilisateur\n"
             if not password: text_error += "Saisissez un mot de passe\n"
-            if password != passwordConfirmation and username: text_error += "Le mot de passe et la confirmation sont différent"
+            if password != password_confirmation and username: text_error += "Le mot de passe et la confirmation sont différent"
             self.ui.createAccountErrorsLabel.setText(text_error)
             self.ui.connectErrorsLabel.clear()
             return False

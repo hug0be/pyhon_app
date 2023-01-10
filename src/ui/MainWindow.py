@@ -17,7 +17,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QLineEdit,
     QMainWindow, QPushButton, QSizePolicy, QStackedWidget,
-    QStatusBar, QVBoxLayout, QWidget)
+    QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_MainWindow(object):
@@ -67,10 +67,10 @@ class Ui_MainWindow(object):
         self.pagesList.setObjectName(u"pagesList")
         self.pagesList.setMinimumSize(QSize(470, 450))
         self.pagesList.setStyleSheet(u"")
-        self.Acceuil_site = QWidget()
-        self.Acceuil_site.setObjectName(u"Acceuil_site")
-        self.Acceuil_site.setStyleSheet(u"")
-        self.label = QLabel(self.Acceuil_site)
+        self.homePage = QWidget()
+        self.homePage.setObjectName(u"homePage")
+        self.homePage.setStyleSheet(u"")
+        self.label = QLabel(self.homePage)
         self.label.setObjectName(u"label")
         self.label.setEnabled(True)
         self.label.setGeometry(QRect(0, 0, 471, 191))
@@ -79,25 +79,25 @@ class Ui_MainWindow(object):
         font.setBold(True)
         self.label.setFont(font)
         self.label.setAlignment(Qt.AlignCenter)
-        self.chooseConnectButton = QPushButton(self.Acceuil_site)
+        self.chooseConnectButton = QPushButton(self.homePage)
         self.chooseConnectButton.setObjectName(u"chooseConnectButton")
         self.chooseConnectButton.setGeometry(QRect(159, 170, 152, 24))
         self.chooseConnectButton.setStyleSheet(u"*{\n"
 "display: flex;\n"
 "justify-content : center\n"
 "}")
-        self.chooseCreateAccountButton = QPushButton(self.Acceuil_site)
+        self.chooseCreateAccountButton = QPushButton(self.homePage)
         self.chooseCreateAccountButton.setObjectName(u"chooseCreateAccountButton")
         self.chooseCreateAccountButton.setGeometry(QRect(159, 210, 151, 24))
-        self.pagesList.addWidget(self.Acceuil_site)
-        self.Se_connecter = QWidget()
-        self.Se_connecter.setObjectName(u"Se_connecter")
+        self.pagesList.addWidget(self.homePage)
+        self.connectPage = QWidget()
+        self.connectPage.setObjectName(u"connectPage")
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.Se_connecter.sizePolicy().hasHeightForWidth())
-        self.Se_connecter.setSizePolicy(sizePolicy)
-        self.widget_3 = QWidget(self.Se_connecter)
+        sizePolicy.setHeightForWidth(self.connectPage.sizePolicy().hasHeightForWidth())
+        self.connectPage.setSizePolicy(sizePolicy)
+        self.widget_3 = QWidget(self.connectPage)
         self.widget_3.setObjectName(u"widget_3")
         self.widget_3.setGeometry(QRect(109, 120, 252, 208))
         sizePolicy.setHeightForWidth(self.widget_3.sizePolicy().hasHeightForWidth())
@@ -131,17 +131,17 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_5.addWidget(self.connectErrorsLabel)
 
-        self.backButton2 = QPushButton(self.Se_connecter)
+        self.backButton2 = QPushButton(self.connectPage)
         self.backButton2.setObjectName(u"backButton2")
         self.backButton2.setGeometry(QRect(40, 50, 75, 24))
         icon = QIcon()
         icon.addFile(u":/icons/images/back.png", QSize(), QIcon.Normal, QIcon.Off)
         self.backButton2.setIcon(icon)
         self.backButton2.setAutoDefault(False)
-        self.pagesList.addWidget(self.Se_connecter)
-        self.Creer_compte = QWidget()
-        self.Creer_compte.setObjectName(u"Creer_compte")
-        self.widget_4 = QWidget(self.Creer_compte)
+        self.pagesList.addWidget(self.connectPage)
+        self.createAccountPage = QWidget()
+        self.createAccountPage.setObjectName(u"createAccountPage")
+        self.widget_4 = QWidget(self.createAccountPage)
         self.widget_4.setObjectName(u"widget_4")
         self.widget_4.setGeometry(QRect(109, 120, 252, 208))
         sizePolicy.setHeightForWidth(self.widget_4.sizePolicy().hasHeightForWidth())
@@ -183,23 +183,20 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_6.addWidget(self.createAccountErrorsLabel)
 
-        self.backButton = QPushButton(self.Creer_compte)
+        self.backButton = QPushButton(self.createAccountPage)
         self.backButton.setObjectName(u"backButton")
         self.backButton.setGeometry(QRect(40, 50, 75, 24))
         self.backButton.setIcon(icon)
         self.backButton.setAutoDefault(False)
-        self.pagesList.addWidget(self.Creer_compte)
+        self.pagesList.addWidget(self.createAccountPage)
 
         self.horizontalLayout.addWidget(self.pagesList, 0, Qt.AlignHCenter|Qt.AlignVCenter)
 
         MainWindow.setCentralWidget(self.centralwidget)
-        self.statusbar = QStatusBar(MainWindow)
-        self.statusbar.setObjectName(u"statusbar")
-        MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
 
-        self.pagesList.setCurrentIndex(1)
+        self.pagesList.setCurrentIndex(0)
         self.backButton2.setDefault(False)
         self.backButton.setDefault(False)
 

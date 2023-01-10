@@ -151,13 +151,13 @@ class Ui_userMenu(object):
         self.homePage.setStyleSheet(u"")
         self.showQuizzListButton = QPushButton(self.homePage)
         self.showQuizzListButton.setObjectName(u"showQuizzListButton")
-        self.showQuizzListButton.setGeometry(QRect(130, 250, 375, 31))
+        self.showQuizzListButton.setGeometry(QRect(150, 250, 375, 31))
         self.label = QLabel(self.homePage)
         self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(140, 100, 371, 71))
+        self.label.setGeometry(QRect(140, 100, 401, 71))
         self.createQuizzButton = QPushButton(self.homePage)
         self.createQuizzButton.setObjectName(u"createQuizzButton")
-        self.createQuizzButton.setGeometry(QRect(130, 290, 375, 31))
+        self.createQuizzButton.setGeometry(QRect(150, 290, 375, 31))
         self.pagesList.addWidget(self.homePage)
         self.createQuizzPage = QWidget()
         self.createQuizzPage.setObjectName(u"createQuizzPage")
@@ -187,7 +187,7 @@ class Ui_userMenu(object):
 
         self.retranslateUi(userMenu)
 
-        self.pagesList.setCurrentIndex(1)
+        self.pagesList.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(userMenu)
@@ -208,7 +208,7 @@ class Ui_userMenu(object):
 #endif // QT_CONFIG(tooltip)
         self.pushButton_2.setText(QCoreApplication.translate("userMenu", u"Se d\u00e9connecter", None))
         self.showQuizzListButton.setText(QCoreApplication.translate("userMenu", u"Liste des quizz", None))
-        self.label.setText(QCoreApplication.translate("userMenu", u"<html><head/><body><p><span style=\" font-size:24pt;\">Bienvenue sur WinQuest !</span></p></body></html>", None))
+        self.label.setText(QCoreApplication.translate("userMenu", u"<html><head/><body><p><span style=\" font-size:24pt; font-weight:600;\">Bienvenue sur WinQuest !</span></p></body></html>", None))
         self.createQuizzButton.setText(QCoreApplication.translate("userMenu", u"Cr\u00e9er un quizz", None))
         self.saveQuizzButton.setText(QCoreApplication.translate("userMenu", u"Sauvegarder ce quizz", None))
         self.quizzTitle.setPlaceholderText(QCoreApplication.translate("userMenu", u"Titre du quizz", None))
