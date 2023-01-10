@@ -69,11 +69,12 @@ class MainWindow(QMainWindow):
             return False
 
         # Validation des identifiants
-        is_valid = username and password
+        is_valid = username and password and password == passwordConfirmation
         if not is_valid:
             text_error = ""
             if not username: text_error += "Saisissez un nom d'utilisateur\n"
-            if not password: text_error += "Saisissez un mot de passe"
+            if not password: text_error += "Saisissez un mot de passe\n"
+            if not password == passwordConfirmation: text_error += "Le mot de passe et la confirmation sont différent"
             self.ui.createAccountErrorsLabel.setText(text_error)
             self.ui.connectErrorsLabel.clear()
             return False
@@ -103,6 +104,9 @@ if __name__ == "__main__":
     os.system("pyside6-uic views/MainWindow.ui -o src/ui/MainWindow.py")
     os.system("pyside6-uic views/UserMenuWindow.ui -o src/ui/UserMenuWindow.py")
 
+    os.system("pyside6-rcc resources/resources.qrc -o resources_rc.py")
+
     #Page principale
     window = MainWindow()
     sys.exit(app.exec())
+

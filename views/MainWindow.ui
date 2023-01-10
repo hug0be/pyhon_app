@@ -133,6 +133,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QLineEdit" name="accountPasswordConfirmation">
+        <property name="text">
+         <string>Confirmez votre mot de passe</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="createAccountButton">
         <property name="text">
          <string>Créer un compte</string>

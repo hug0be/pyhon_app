@@ -1,0 +1,129 @@
+# Resource object code (Python 3)
+# Created by: object code
+# Created by: The Resource Compiler for Qt version 6.4.1
+# WARNING! All changes made in this file will be lost!
+
+from PySide6 import QtCore
+
+qt_resource_data = b"\
+\x00\x00\x01a\
+<\
+svg xmlns=\x22http:\
+//www.w3.org/200\
+0/svg\x22 width=\x2224\
+\x22 height=\x2224\x22 vi\
+ewBox=\x220 0 24 24\
+\x22 fill=\x22none\x22 st\
+roke=\x22#FFF\x22 stro\
+ke-width=\x222\x22 str\
+oke-linecap=\x22rou\
+nd\x22 stroke-linej\
+oin=\x22round\x22 clas\
+s=\x22feather feath\
+er-archive\x22><pol\
+yline points=\x2221\
+ 8 21 21 3 21 3 \
+8\x22></polyline><r\
+ect x=\x221\x22 y=\x223\x22 \
+width=\x2222\x22 heigh\
+t=\x225\x22></rect><li\
+ne x1=\x2210\x22 y1=\x221\
+2\x22 x2=\x2214\x22 y2=\x221\
+2\x22></line></svg>\
+\
+\x00\x00\x01g\
+<\
+svg xmlns=\x22http:\
+//www.w3.org/200\
+0/svg\x22 width=\x2224\
+\x22 height=\x2224\x22 vi\
+ewBox=\x220 0 24 24\
+\x22 fill=\x22none\x22 st\
+roke=\x22#FFF\x22 stro\
+ke-width=\x222\x22 str\
+oke-linecap=\x22rou\
+nd\x22 stroke-linej\
+oin=\x22round\x22 clas\
+s=\x22feather feath\
+er-log-out\x22><pat\
+h d=\x22M9 21H5a2 2\
+ 0 0 1-2-2V5a2 2\
+ 0 0 1 2-2h4\x22></\
+path><polyline p\
+oints=\x2216 17 21 \
+12 16 7\x22></polyl\
+ine><line x1=\x2221\
+\x22 y1=\x2212\x22 x2=\x229\x22\
+ y2=\x2212\x22></line>\
+</svg>\
+\x00\x00\x01R\
+<\
+svg xmlns=\x22http:\
+//www.w3.org/200\
+0/svg\x22 width=\x2224\
+\x22 height=\x2224\x22 vi\
+ewBox=\x220 0 24 24\
+\x22 fill=\x22none\x22 st\
+roke=\x22#FFF\x22 stro\
+ke-width=\x222\x22 str\
+oke-linecap=\x22rou\
+nd\x22 stroke-linej\
+oin=\x22round\x22 clas\
+s=\x22feather feath\
+er-menu\x22><line x\
+1=\x223\x22 y1=\x2212\x22 x2\
+=\x2221\x22 y2=\x2212\x22></\
+line><line x1=\x223\
+\x22 y1=\x226\x22 x2=\x2221\x22\
+ y2=\x226\x22></line><\
+line x1=\x223\x22 y1=\x22\
+18\x22 x2=\x2221\x22 y2=\x22\
+18\x22></line></svg\
+>\
+"
+
+qt_resource_name = b"\
+\x00\x05\
+\x00o\xa6S\
+\x00i\
+\x00c\x00o\x00n\x00s\
+\x00\x06\
+\x07\x03}\xc3\
+\x00i\
+\x00m\x00a\x00g\x00e\x00s\
+\x00\x0b\
+\x00\x19I'\
+\x00a\
+\x00r\x00c\x00h\x00i\x00v\x00e\x00.\x00s\x00v\x00g\
+\x00\x0b\
+\x06!\xeeG\
+\x00l\
+\x00o\x00g\x00-\x00o\x00u\x00t\x00.\x00s\x00v\x00g\
+\x00\x08\
+\x0cXT\xa7\
+\x00m\
+\x00e\x00n\x00u\x00.\x00s\x00v\x00g\
+"
+
+qt_resource_struct = b"\
+\x00\x00\x00\x00\x00\x02\x00\x00\x00\x01\x00\x00\x00\x01\
+\x00\x00\x00\x00\x00\x00\x00\x00\
+\x00\x00\x00\x00\x00\x02\x00\x00\x00\x01\x00\x00\x00\x02\
+\x00\x00\x00\x00\x00\x00\x00\x00\
+\x00\x00\x00\x10\x00\x02\x00\x00\x00\x03\x00\x00\x00\x03\
+\x00\x00\x00\x00\x00\x00\x00\x00\
+\x00\x00\x00\x22\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\
+\x00\x00\x01\x85\x93\x14\x05\xd2\
+\x00\x00\x00>\x00\x00\x00\x00\x00\x01\x00\x00\x01e\
+\x00\x00\x01\x85\x95\x8e\x9c\x8d\
+\x00\x00\x00Z\x00\x00\x00\x00\x00\x01\x00\x00\x02\xd0\
+\x00\x00\x01\x85\x95\x8ew\xef\
+"
+
+def qInitResources():
+    QtCore.qRegisterResourceData(0x03, qt_resource_struct, qt_resource_name, qt_resource_data)
+
+def qCleanupResources():
+    QtCore.qUnregisterResourceData(0x03, qt_resource_struct, qt_resource_name, qt_resource_data)
+
+qInitResources()

@@ -107,6 +107,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addWidget(self.accountPassword)
 
+        self.accountPasswordConfirmation = QLineEdit(self.centralwidget)
+        self.accountPasswordConfirmation.setObjectName(u"accountPasswordConfirmation")
+
+        self.verticalLayout_2.addWidget(self.accountPasswordConfirmation)
+
         self.createAccountButton = QPushButton(self.centralwidget)
         self.createAccountButton.setObjectName(u"createAccountButton")
 
