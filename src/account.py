@@ -12,7 +12,7 @@ class Account:
         """Sauvegarde un compte"""
         with open('data/accounts.json', 'r+') as accounts_file:
             accounts = json.load(accounts_file)
-            accounts.append({'username': self.username, 'password': self.password})
+            accounts.append({'username': self.username, 'password': self.password, 'admin': False})
             accounts_file.seek(0)
             json.dump(accounts, accounts_file)
     @staticmethod
