@@ -1,6 +1,20 @@
 # -*- coding: utf-8 -*-
 import json
+import random
 
+class Answers:
+    def __init__(self, realAnswer:str, falseAnswers:[str]):
+        self.realAnswer = realAnswer
+        self.falseAnswer = falseAnswers
+
+    def is_answer(self, answer):
+        """Retourne si la réponse est vraie ou fausse"""
+        return answer == self.realAnswer
+    def answers_to_list(self):
+        """Renvoi la liste de question dans un ordre aléatoire (pour l'affichage)"""
+        shuffledAnswer = self.falseAnswer + [self.realAnswer]
+        random.shuffle(shuffledAnswer)
+        return shuffledAnswer
 
 class Quizz:
     def __init__(self, title:str):

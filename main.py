@@ -6,7 +6,7 @@ from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtUiTools import QUiLoader
 
 from src.account import Account, WrongPasswordException, UnknownAccountException
-from src.quizz import Quizz
+from src.quizz import Quizz, Answers
 from src.ui import Ui_MainWindow, Ui_userMenu
 
 def change_page(name):
