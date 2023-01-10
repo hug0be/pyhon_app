@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>779</width>
-    <height>661</height>
+    <width>640</width>
+    <height>678</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -129,6 +129,13 @@
         </property>
         <property name="placeholderText">
          <string>Mot de passe</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="accountPasswordConfirmation">
+        <property name="text">
+         <string>Confirmez votre mot de passe</string>
         </property>
        </widget>
       </item>

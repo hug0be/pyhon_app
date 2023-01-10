@@ -62,6 +62,7 @@ class MainWindow(QMainWindow):
         # Obtention des identifiants
         username = self.ui.accountUsername.text()
         password = self.ui.accountPassword.text()
+        passwordConfirmation = self.ui.accountPasswordConfirmation.text()
 
         # Check si le compte existe
         if Account.exists(username):
@@ -69,11 +70,12 @@ class MainWindow(QMainWindow):
             return False
 
         # Validation des identifiants
-        is_valid = username and password
+        is_valid = username and password and password == passwordConfirmation
         if not is_valid:
             text_error = ""
             if not username: text_error += "Saisissez un nom d'utilisateur\n"
-            if not password: text_error += "Saisissez un mot de passe"
+            if not password: text_error += "Saisissez un mot de passe\n"
+            if not password == passwordConfirmation: text_error += "Le mot de passe et la confirmation sont différent"
             self.ui.createAccountErrorsLabel.setText(text_error)
             self.ui.connectErrorsLabel.clear()
             return False
