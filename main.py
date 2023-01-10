@@ -8,7 +8,7 @@ from PySide6.QtUiTools import QUiLoader
 from src.account import Account, WrongPasswordException, UnknownAccountException
 from src.ui import Ui_MainWindow, Ui_userMenu
 
-def change_page(name):
+def change_page():
     """Change de page selon le nom donné"""
     global window
     window = UserMenuWindow()
@@ -25,8 +25,24 @@ class MainWindow(QMainWindow):
         #Binding
         self.ui.connectButton.clicked.connect(self.connect_attempt)
         self.ui.createAccountButton.clicked.connect(self.create_account_attempt)
+
+        #Binding changements de page
+        self.ui.chooseConnectButton.clicked.connect(self.show_connect_page)
+        self.ui.chooseCreateAccountButton.clicked.connect(self.show_create_account_page)
+        self.ui.backButton.clicked.connect(self.show_home)
+        self.ui.backButton2.clicked.connect(self.show_home)
+
         self.show()
 
+    def show_home(self):
+        self.ui.pagesList.setCurrentWidget(self.ui.Acceuil_site)
+        #Quand l'user reviendra les erreurs auront disparu.
+        self.ui.createAccountErrorsLabel.clear()
+        self.ui.connectErrorsLabel.clear()
+    def show_create_account_page(self):
+        self.ui.pagesList.setCurrentWidget(self.ui.Creer_compte)
+    def show_connect_page(self):
+        self.ui.pagesList.setCurrentWidget(self.ui.Se_connecter)
     def connect_attempt(self):
         """Méthode appeler pour une tentative de connexion"""
         # Obtention des identifiants
@@ -54,8 +70,7 @@ class MainWindow(QMainWindow):
             return False
 
         # All good !
-        print("Authentification terminé")
-        change_page("userMenuWindow")
+        change_page()
 
     def create_account_attempt(self):
         """Méthode appeler pour une tentative de création de compte"""
@@ -80,7 +95,7 @@ class MainWindow(QMainWindow):
 
         # All good !
         Account(username, password).save()
-        change_page("userMenuWindow")
+        change_page()
 
 class UserMenuWindow(QMainWindow):
     def __init__(self):
@@ -96,7 +111,6 @@ if __name__ == "__main__":
     #Convert file .ui -> .py
     os.system("pyside6-uic views/MainWindow.ui -o src/ui/MainWindow.py")
     os.system("pyside6-uic views/UserMenuWindow.ui -o src/ui/UserMenuWindow.py")
-
     os.system("pyside6-rcc resources/resources.qrc -o resources_rc.py")
 
     #Page principale
