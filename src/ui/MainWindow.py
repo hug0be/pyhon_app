@@ -23,7 +23,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(779, 661)
+        MainWindow.resize(640, 678)
         MainWindow.setStyleSheet(u"* {\n"
 "	border: none;\n"
 "	background-color: transparent;\n"
@@ -149,6 +149,7 @@ class Ui_MainWindow(object):
         self.createAccountSecondaryButton.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er un compte", None))
         self.accountUsername.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Nom d'utilisateur", None))
         self.accountPassword.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Mot de passe", None))
+        self.accountPasswordConfirmation.setText(QCoreApplication.translate("MainWindow", u"Confirmez votre mot de passe", None))
         self.createAccountButton.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er un compte", None))
         self.createAccountErrorsLabel.setText("")
     # retranslateUi

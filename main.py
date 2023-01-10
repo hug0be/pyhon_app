@@ -62,6 +62,7 @@ class MainWindow(QMainWindow):
         # Obtention des identifiants
         username = self.ui.accountUsername.text()
         password = self.ui.accountPassword.text()
+        passwordConfirmation = self.ui.accountPasswordConfirmation.text()
 
         # Check si le compte existe
         if Account.exists(username):
@@ -97,8 +98,6 @@ class UserMenuWindow(QMainWindow):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     loader = QUiLoader()
-
-    print(os.getcwd())
 
     #Convert file .ui -> .py
     os.system("pyside6-uic views/MainWindow.ui -o src/ui/MainWindow.py")
