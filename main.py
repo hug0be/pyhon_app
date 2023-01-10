@@ -87,6 +87,10 @@ class UserMenuWindow(QMainWindow):
         QMainWindow.__init__(self)
         self.ui = Ui_userMenu()
         self.ui.setupUi(self)
+        self.ui.showQuizzListButton.clicked.connect(self.showQuizzList)
+
+    def showQuizzList(self):
+        self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
 
 
 if __name__ == "__main__":

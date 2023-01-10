@@ -17,17 +17,14 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
     QMainWindow, QPushButton, QSizePolicy, QSpacerItem,
-    QVBoxLayout, QWidget)
-
-import resources_rc
+    QStackedWidget, QVBoxLayout, QWidget)
 
 class Ui_userMenu(object):
     def setupUi(self, userMenu):
         if not userMenu.objectName():
             userMenu.setObjectName(u"userMenu")
-        userMenu.resize(800, 600)
+        userMenu.resize(917, 600)
         font = QFont()
-        font.setPointSize(8)
         userMenu.setFont(font)
         userMenu.setStyleSheet(u"* {\n"
 "	border: none;\n"
@@ -36,6 +33,7 @@ class Ui_userMenu(object):
 "	padding: 0;\n"
 "	margin: 0;\n"
 "	color: #FFF;\n"
+"	font-size: 12px;\n"
 "}\n"
 "\n"
 "#centralwidget  {\n"
@@ -46,9 +44,16 @@ class Ui_userMenu(object):
 "	background-color: #2B4790;\n"
 "}\n"
 "\n"
-"QPushButton {\n"
+"#sidebar QPushButton {\n"
 "	text-align: left;\n"
-"	padding: 2px 5px;\n"
+"}\n"
+"\n"
+"#pagesList QPushButton {\n"
+"	background-color: #F26DF9;\n"
+"	padding: 5px 10px;\n"
+"}\n"
+"#pagesList > QWidget  {\n"
+"	background-color: #5158BB;\n"
 "}")
         self.centralwidget = QWidget(userMenu)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -136,27 +141,34 @@ class Ui_userMenu(object):
 
         self.horizontalLayout_2.addWidget(self.sidebar)
 
-        self.label = QLabel(self.centralwidget)
+        self.pagesList = QStackedWidget(self.centralwidget)
+        self.pagesList.setObjectName(u"pagesList")
+        self.homePage = QWidget()
+        self.homePage.setObjectName(u"homePage")
+        self.homePage.setStyleSheet(u"")
+        self.showQuizzListButton = QPushButton(self.homePage)
+        self.showQuizzListButton.setObjectName(u"showQuizzListButton")
+        self.showQuizzListButton.setGeometry(QRect(130, 250, 375, 31))
+        self.label = QLabel(self.homePage)
         self.label.setObjectName(u"label")
-        sizePolicy1.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
-        self.label.setSizePolicy(sizePolicy1)
-        self.label.setMinimumSize(QSize(321, 41))
-        self.label.setBaseSize(QSize(322, 42))
-        self.label.setCursor(QCursor(Qt.ArrowCursor))
-        self.label.setMouseTracking(True)
-        self.label.setAcceptDrops(False)
-        self.label.setFrameShadow(QFrame.Plain)
-        self.label.setTextFormat(Qt.AutoText)
-        self.label.setScaledContents(False)
-        self.label.setAlignment(Qt.AlignCenter)
-        self.label.setWordWrap(True)
-        self.label.setIndent(-1)
+        self.label.setGeometry(QRect(140, 100, 371, 71))
+        self.pagesList.addWidget(self.homePage)
+        self.quizzListPage = QWidget()
+        self.quizzListPage.setObjectName(u"quizzListPage")
+        self.quizzListPage.setEnabled(True)
+        self.label_3 = QLabel(self.quizzListPage)
+        self.label_3.setObjectName(u"label_3")
+        self.label_3.setGeometry(QRect(160, 110, 211, 39))
+        self.pagesList.addWidget(self.quizzListPage)
 
-        self.horizontalLayout_2.addWidget(self.label)
+        self.horizontalLayout_2.addWidget(self.pagesList)
 
         userMenu.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(userMenu)
+
+        self.pagesList.setCurrentIndex(0)
+
 
         QMetaObject.connectSlotsByName(userMenu)
     # setupUi
@@ -175,6 +187,8 @@ class Ui_userMenu(object):
         self.pushButton_2.setToolTip(QCoreApplication.translate("userMenu", u"Se d\u00e9connecter", None))
 #endif // QT_CONFIG(tooltip)
         self.pushButton_2.setText(QCoreApplication.translate("userMenu", u"Se d\u00e9connecter", None))
-        self.label.setText(QCoreApplication.translate("userMenu", u"<html><head/><body><p><span style=\" font-size:22pt;\">Bienvenu sur WinQuest !</span></p></body></html>", None))
+        self.showQuizzListButton.setText(QCoreApplication.translate("userMenu", u"Liste des quizz", None))
+        self.label.setText(QCoreApplication.translate("userMenu", u"<html><head/><body><p><span style=\" font-size:24pt;\">Bienvenue sur WinQuest !</span></p></body></html>", None))
+        self.label_3.setText(QCoreApplication.translate("userMenu", u"<html><head/><body><p><span style=\" font-size:24pt;\">Liste des quizz</span></p></body></html>", None))
     # retranslateUi
 
