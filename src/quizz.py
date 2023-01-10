@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
 
-class WrongPasswordException(Exception): pass
-class UnknownAccountException(Exception): pass
 
 class Quizz:
     def __init__(self, title:str):
