@@ -127,19 +127,19 @@ class Ui_userMenu(object):
 
         self.verticalLayout_4.addWidget(self.pushButton_3)
 
-        self.pushButton_2 = QPushButton(self.frame_2)
-        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.logoutButton = QPushButton(self.frame_2)
+        self.logoutButton.setObjectName(u"logoutButton")
         sizePolicy2 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.pushButton_2.sizePolicy().hasHeightForWidth())
-        self.pushButton_2.setSizePolicy(sizePolicy2)
+        sizePolicy2.setHeightForWidth(self.logoutButton.sizePolicy().hasHeightForWidth())
+        self.logoutButton.setSizePolicy(sizePolicy2)
         icon2 = QIcon()
         icon2.addFile(u":/icons/images/log-out.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton_2.setIcon(icon2)
-        self.pushButton_2.setIconSize(QSize(24, 24))
+        self.logoutButton.setIcon(icon2)
+        self.logoutButton.setIconSize(QSize(24, 24))
 
-        self.verticalLayout_4.addWidget(self.pushButton_2)
+        self.verticalLayout_4.addWidget(self.logoutButton)
 
 
         self.verticalLayout_3.addWidget(self.frame_2, 0, Qt.AlignTop)
@@ -349,9 +349,9 @@ class Ui_userMenu(object):
 #endif // QT_CONFIG(tooltip)
         self.pushButton_3.setText(QCoreApplication.translate("userMenu", u"Historique", None))
 #if QT_CONFIG(tooltip)
-        self.pushButton_2.setToolTip(QCoreApplication.translate("userMenu", u"Se d\u00e9connecter", None))
+        self.logoutButton.setToolTip(QCoreApplication.translate("userMenu", u"Se d\u00e9connecter", None))
 #endif // QT_CONFIG(tooltip)
-        self.pushButton_2.setText(QCoreApplication.translate("userMenu", u"Se d\u00e9connecter", None))
+        self.logoutButton.setText(QCoreApplication.translate("userMenu", u"Se d\u00e9connecter", None))
         self.showQuizzListButton.setText(QCoreApplication.translate("userMenu", u"Liste des quizz", None))
         self.label.setText(QCoreApplication.translate("userMenu", u"<html><head/><body><p><span style=\" font-size:24pt; font-weight:600;\">Bienvenue sur WinQuest !</span></p></body></html>", None))
         self.createQuizzButton.setText(QCoreApplication.translate("userMenu", u"Cr\u00e9er un quizz", None))

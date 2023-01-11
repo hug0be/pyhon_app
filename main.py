@@ -10,10 +10,14 @@ from src.account import Account, WrongPasswordException, UnknownAccountException
 from src.quizz import Quizz, Question, InvalidQuestionException, InvalidNbToDisplayException
 from src.ui import Ui_MainWindow, Ui_userMenu
 
-def change_page():
+def change_page(name:str="userMenu"):
     """Change de page selon le nom donné"""
     global window
-    window = UserMenuWindow()
+    window.close()
+    if name == "userMenu":
+        window = UserMenuWindow()
+    if name == "home":
+        window = MainWindow()
     window.show()
 
 class MainWindow(QMainWindow):
@@ -33,8 +37,6 @@ class MainWindow(QMainWindow):
         self.ui.chooseCreateAccountButton.clicked.connect(self.show_create_account_page)
         self.ui.backButton.clicked.connect(self.show_home)
         self.ui.backButton2.clicked.connect(self.show_home)
-
-        self.show()
 
     def show_home(self):
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
@@ -111,6 +113,7 @@ class UserMenuWindow(QMainWindow):
         # TODO: Retour arrière pour les pages "quizzListPage" et "createQuizzPage"
         self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
         self.ui.createQuizzButton.clicked.connect(self.show_quizz_creation_page)
+        self.ui.logoutButton.clicked.connect(lambda: change_page("home"))
 
         #Les 3 étapes/pages de création d'un quizz
         self.ui.addQuestionsButton.clicked.connect(self.create_quizz1)
@@ -255,5 +258,6 @@ if __name__ == "__main__":
 
     #Page principale
     window = MainWindow()
+    window.show()
     sys.exit(app.exec())
 
