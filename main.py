@@ -11,6 +11,7 @@ from PySide6.QtUiTools import QUiLoader
 from src.account import Account, WrongPasswordException, UnknownAccountException
 from src.quizz import Quizz, Question, InvalidQuestionException, InvalidNbToDisplayException
 from src.ui import Ui_MainWindow, Ui_userMenu
+from src.history import HistoryCase, History
 
 def change_page(name:str="userMenu"):
     """Change de page selon le nom donné"""
@@ -261,6 +262,20 @@ class UserMenuWindow(QMainWindow):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     loader = QUiLoader()
+
+# TODO supprimer la zone de travaux
+# zone en travaux \/
+
+    file = open('data/quizzes.json', 'r')
+    quizz = Quizz(json.load(file)[0]["title"])
+
+    historycase = HistoryCase(quizz, 30, 55.1)
+    print(str(historycase))
+    #print(historycase)
+    history = History([historycase])
+    history.save()
+
+# zone en travaux /\
 
     #Check si le fichier accounts.json existe
     if not os.path.exists("data/accounts.json"):
