@@ -115,3 +115,18 @@ class Quizz:
             for quizz in json.load(file):
                 if title == quizz['title']: return True
             return False
+
+    @staticmethod
+    def get_list_quizzes():
+        """Récupérer la liste de tous les quizzes"""
+        with open('data/quizzes.json', 'r+') as quizzes_file:
+            quizzes = json.load(quizzes_file)
+            list_quizzes = []
+
+            for idQuizz, aQuizz in enumerate(quizzes):
+                list_quizzes.append({
+                    "idQuizz": idQuizz,
+                    "title": aQuizz["title"]
+                })
+
+        return list_quizzes

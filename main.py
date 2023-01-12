@@ -5,7 +5,7 @@ import os
 from PySide6 import QtCore
 from PySide6.QtCore import QPropertyAnimation
 from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QGroupBox, QLabel
 from PySide6.QtUiTools import QUiLoader
 
 from src.account import Account, WrongPasswordException, UnknownAccountException
@@ -113,6 +113,7 @@ class UserMenuWindow(QMainWindow):
         self.ui.toggleButton.clicked.connect(lambda : self.toggleBtn(200))
         self.pendingQuizz = None
 
+
         #Binding changements de pages
         # TODO: Retour arrière pour les pages "quizzListPage" et "createQuizzPage"
         self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
@@ -130,7 +131,9 @@ class UserMenuWindow(QMainWindow):
     def show_home_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
     def show_quizz_list_page(self):
+        self.create_page_list_quiz()
         self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
+
     def show_quizz_creation_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.createQuizzPage)
     def create_quizz1(self):
@@ -256,7 +259,37 @@ class UserMenuWindow(QMainWindow):
     def save_quizz(self):
         """Enregistre le quizz après toutes les étapes terminées"""
         self.pendingQuizz.save()
+        self.create_page_list_quiz()
         self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
+
+    def create_page_list_quiz(self):
+        """Créer les boutons sur la page Liste des Quizz"""
+        # GET THE LIST OF ALL QUIZZES
+        list_quizzes = Quizz.get_list_quizzes()
+
+        # GET THE LIST QUIZZES PAGE
+        page = self.ui.pagesList.widget(2)
+
+        # Créer les layout pour page
+        layout = QVBoxLayout()
+
+        # Ajouter title à la layoutTop
+        title = QLabel("Liste des Quizz")
+        layout.addWidget(title)
+
+        for aQuizz in list_quizzes:
+            # Créer un bouton
+            button = QPushButton(aQuizz["title"])
+            # TODO Add the link to go on the quizz avec la methode button.clicked.connect()
+
+            # Ajouter le bouton au layout
+            layout.addWidget(button)
+
+        # Créer un groupbox et y ajouter la layout
+        group_box = QGroupBox(page)
+        group_box.setFixedWidth(200)
+
+        group_box.setLayout(layout)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
