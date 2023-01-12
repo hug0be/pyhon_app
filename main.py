@@ -4,7 +4,7 @@ import os
 
 from PySide6 import QtCore
 from PySide6.QtCore import QPropertyAnimation
-from PySide6.QtGui import QIcon
+from PySide6.QtGui import QIcon, Qt
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QGroupBox, QLabel
 from PySide6.QtUiTools import QUiLoader
 
@@ -109,6 +109,7 @@ class UserMenuWindow(QMainWindow):
         QMainWindow.__init__(self)
         self.ui = Ui_userMenu()
         self.ui.setupUi(self)
+        self.ui.pagesList.setCurrentIndex(0)
         self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
         self.ui.toggleButton.clicked.connect(lambda : self.toggleBtn(200))
         self.pendingQuizz = None
@@ -131,9 +132,8 @@ class UserMenuWindow(QMainWindow):
     def show_home_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
     def show_quizz_list_page(self):
-        self.create_page_list_quiz()
+        self.create_btns_page_list_quizz()
         self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
-
     def show_quizz_creation_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.createQuizzPage)
     def create_quizz1(self):
@@ -186,7 +186,6 @@ class UserMenuWindow(QMainWindow):
         # On incrémente le numéro de question affiché
         self.ui.questionNumberLabel.setText(f"Question {self.pendingQuizz.nb_questions() + 1}")
         return True
-
     def end_questions(self):
         """
         Méthode qui passe à la troisième étape si les questions ont bien été faites.
@@ -210,7 +209,6 @@ class UserMenuWindow(QMainWindow):
         # Il y a plus d'une question, on passe à la prochaine étape
         self.ui.quizzCreationSteps.setCurrentWidget(self.ui.chooseOrderPage)
         return True
-
     def toggleBtn(self, maxWidth):
 
         # GET WIDTH
@@ -233,7 +231,6 @@ class UserMenuWindow(QMainWindow):
         self.animation.setEndValue(widthExtended)
         self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
         self.animation.start()
-
     def create_quizz3(self, useRandomOrder:bool):
         """Méthode qui constitue la troisième étape de création d'un quizz : l'ordre des questions"""
         self.pendingQuizz.useRandomOrder = useRandomOrder
@@ -262,34 +259,28 @@ class UserMenuWindow(QMainWindow):
         self.create_page_list_quiz()
         self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
 
-    def create_page_list_quiz(self):
+    def create_btns_page_list_quizz(self):
         """Créer les boutons sur la page Liste des Quizz"""
         # GET THE LIST OF ALL QUIZZES
         list_quizzes = Quizz.get_list_quizzes()
 
         # GET THE LIST QUIZZES PAGE
-        page = self.ui.pagesList.widget(2)
+        page_list_quizz_container_bot = self.ui.page_list_quizz_container_bot
 
         # Créer les layout pour page
         layout = QVBoxLayout()
 
-        # Ajouter title à la layoutTop
-        title = QLabel("Liste des Quizz")
-        layout.addWidget(title)
-
         for aQuizz in list_quizzes:
             # Créer un bouton
             button = QPushButton(aQuizz["title"])
-            # TODO Add the link to go on the quizz avec la methode button.clicked.connect()
+            # TODO Add the link to go on the quizz avec la methode button.clicked.connect(display_quizz(aQuizz["idQuizz"]) )
 
             # Ajouter le bouton au layout
             layout.addWidget(button)
 
-        # Créer un groupbox et y ajouter la layout
-        group_box = QGroupBox(page)
-        group_box.setFixedWidth(200)
+        # Mettre la layout contenant les boutons dans le container page_list_quizz_container_bot
+        page_list_quizz_container_bot.setLayout(layout)
 
-        group_box.setLayout(layout)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

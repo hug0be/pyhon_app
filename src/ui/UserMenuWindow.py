@@ -15,10 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QButtonGroup, QFrame, QHBoxLayout,
-    QLabel, QLineEdit, QMainWindow, QPushButton,
-    QRadioButton, QSizePolicy, QSpacerItem, QStackedWidget,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QButtonGroup, QFrame, QGroupBox,
+    QHBoxLayout, QLabel, QLineEdit, QMainWindow,
+    QPushButton, QRadioButton, QSizePolicy, QSpacerItem,
+    QStackedWidget, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_userMenu(object):
@@ -26,6 +26,8 @@ class Ui_userMenu(object):
         if not userMenu.objectName():
             userMenu.setObjectName(u"userMenu")
         userMenu.resize(917, 600)
+        userMenu.setMinimumSize(QSize(917, 600))
+        userMenu.setMaximumSize(QSize(917, 600))
         font = QFont()
         userMenu.setFont(font)
         userMenu.setStyleSheet(u"* {\n"
@@ -335,7 +337,15 @@ class Ui_userMenu(object):
         self.quizzListPage.setEnabled(True)
         self.label_3 = QLabel(self.quizzListPage)
         self.label_3.setObjectName(u"label_3")
-        self.label_3.setGeometry(QRect(160, 110, 211, 39))
+        self.label_3.setGeometry(QRect(0, 110, 841, 39))
+        self.label_3.setAlignment(Qt.AlignCenter)
+        self.groupBox = QGroupBox(self.quizzListPage)
+        self.groupBox.setObjectName(u"groupBox")
+        self.groupBox.setGeometry(QRect(0, 210, 841, 381))
+        self.groupBox.setAlignment(Qt.AlignCenter)
+        self.page_list_quizz_container_bot = QWidget(self.groupBox)
+        self.page_list_quizz_container_bot.setObjectName(u"page_list_quizz_container_bot")
+        self.page_list_quizz_container_bot.setGeometry(QRect(190, 30, 450, 241))
         self.pagesList.addWidget(self.quizzListPage)
 
         self.horizontalLayout_2.addWidget(self.pagesList)
@@ -344,7 +354,7 @@ class Ui_userMenu(object):
 
         self.retranslateUi(userMenu)
 
-        self.pagesList.setCurrentIndex(0)
+        self.pagesList.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(userMenu)
@@ -393,5 +403,6 @@ class Ui_userMenu(object):
         self.nbToDisplay.setPlaceholderText(QCoreApplication.translate("userMenu", u"Ins\u00e9rez un nombre", None))
         self.nbToDisplayErrorsLabel.setText("")
         self.label_3.setText(QCoreApplication.translate("userMenu", u"<html><head/><body><p><span style=\" font-size:24pt;\">Liste des quizz</span></p></body></html>", None))
+        self.groupBox.setTitle("")
     # retranslateUi
 
