@@ -94,12 +94,17 @@
 	text-align: left;
 }
 
-#pagesList QPushButton {
+#pagesList QPushButton{
 	background-color: #F26DF9;
 	padding: 5px 10px;
     qproperty-cursor:PointingHandCursor;
 }
-#pagesList &gt; QWidget  {
+
+#quizzListPage #backButton, #chooseNbToDisplayPage #backButton_2, #chooseOrderPage #backButton_3, #createQuestionsPage #backButton_4, #nameQuizzPage #backButton_5 {
+	background-color: transparent ;
+}
+
+#pagesList &gt; QWidget{
 	background-color: #5158BB;
 }
 
@@ -357,7 +362,7 @@ QRadioButton::indicator::checked {
     <item>
      <widget class="QStackedWidget" name="pagesList">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="questionsPage">
        <widget class="QStackedWidget" name="questions">
@@ -863,6 +868,29 @@ QRadioButton::indicator::checked {
            <string>Ajouter les questions &gt;</string>
           </property>
          </widget>
+         <widget class="QPushButton" name="backButton_5">
+          <property name="geometry">
+           <rect>
+            <x>90</x>
+            <y>90</y>
+            <width>75</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources/resources.qrc">
+            <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
         </widget>
         <widget class="QWidget" name="createQuestionsPage">
          <widget class="QLineEdit" name="titleQuestion">
@@ -1163,6 +1191,29 @@ QRadioButton::indicator::checked {
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Question 1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
+         <widget class="QPushButton" name="backButton_4">
+          <property name="geometry">
+           <rect>
+            <x>50</x>
+            <y>80</y>
+            <width>75</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources/resources.qrc">
+            <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
         </widget>
         <widget class="QWidget" name="chooseOrderPage">
          <widget class="QLabel" name="questionNumberLabel_3">
@@ -1217,6 +1268,29 @@ QRadioButton::indicator::checked {
           </property>
           <property name="text">
            <string>Non</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="backButton_3">
+          <property name="geometry">
+           <rect>
+            <x>50</x>
+            <y>80</y>
+            <width>75</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources/resources.qrc">
+            <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
           </property>
          </widget>
         </widget>
@@ -1304,6 +1378,29 @@ QRadioButton::indicator::checked {
            <string/>
           </property>
          </widget>
+         <widget class="QPushButton" name="backButton_2">
+          <property name="geometry">
+           <rect>
+            <x>50</x>
+            <y>80</y>
+            <width>75</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources/resources.qrc">
+            <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
         </widget>
        </widget>
       </widget>
@@ -1349,6 +1446,29 @@ QRadioButton::indicator::checked {
           </rect>
          </property>
         </widget>
+       </widget>
+       <widget class="QPushButton" name="backButton">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>80</y>
+          <width>75</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources/resources.qrc">
+          <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
        </widget>
       </widget>
      </widget>
