@@ -12,23 +12,23 @@ Les identifiants par défaut sont `admin` et `foobar2` pour un compte admin, `us
 
 # Tutoriel
 ## Importer un quizz
-Commencez par créer un fichier `.txt`, puis commencez à écrire : 
-- Pour donner un titre, saisissez `quizz: Le sens de l'existence`
+Commencez par créer un fichier `.txt` : 
+- Pour donner un titre à votre quizz, saisissez `quizz: Le sens de l'existence`
 
 - Pour ajouter une question : 
   - Saisissez `question: Qu'elle est la réponse à la vie, l'univers et le reste ?`
-  - Puis saisissez les réponses, `reponse: J'en sais rien gros`
-  - Vous devez saisir **une** bonne réponse, `bonne_reponse: 42`
-  - Vous pouvez saisir jusqu'à **4 questions maximum**
+  - Saisissez les réponses, `reponse: J'en sais rien gros`
+  - Saisissez **une** bonne réponse, `bonne_reponse: 42`
+  - Vous pouvez saisir jusqu'à **4 réponses maximum** (bonne réponse incluse)
   
-- Si vous avez saisi plus d'une question, vous pouvez :
-  - Choisir l'ordre d'affichage des questions : 
+- Si vous avez saisi **plus d'une question**, vous pouvez :
+  - Choisir leur ordre d'affichage : 
     - `ordre: normal` (par défaut)
     - `ordre: aléatoire`
   - Choisir le nombre de questions à afficher, par exemple : 
     - `nombre_questions: 2` (1 par défaut)
 
-Pour importer ce quizz, cliquer sur le boutton ![img.png](resources/images tuto/import_button.png)
-Sélectionner votre fichier `.txt`, puis valider
+Pour importer ce quizz, cliquer sur le boutton ![img.png](resources/images tuto/import_button.png), 
+sélectionner votre fichier `.txt`, puis valider
 
 [WIP 🛠️]

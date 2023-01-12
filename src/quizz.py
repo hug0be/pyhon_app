@@ -82,25 +82,32 @@ class Question:
         return res
 
 class Quizz:
-    def __init__(self, title:str="", nbQuestionsToDisplay:int|None=1):
+    def __init__(self, title:str="", nbQuestionsToDisplay:int|None=1, questions:[Question]=None):
         self.title = title
-        self.questions = []
+        self.questions = questions
         self.useRandomOrder = False
         self.nbQuestionsToDisplay = nbQuestionsToDisplay
-    def save(self):
-        """Sauvegarde un quizz"""
-        with open('data/quizzes.json', 'r+') as quizzes_file:
-            quizzes = json.load(quizzes_file)
-            quizzes.append({
+
+    def to_json(self):
+        return {
                 'title': self.title,
                 'questions': [question.to_json() for question in self.questions],
                 'userRandomOrder': self.useRandomOrder,
                 'nbQuestionsToDisplay': self.nbQuestionsToDisplay
-            })
+            }
+
+
+    def save(self):
+        """Sauvegarde un quizz"""
+        with open('data/quizzes.json', 'r+') as quizzes_file:
+            quizzes = json.load(quizzes_file)
+            quizzes.append(self.to_json())
             quizzes_file.seek(0)
             json.dump(quizzes, quizzes_file, indent=4)
+
     def nb_questions(self)->int:
         return len(self.questions)
+
     def has_no_question(self)->bool:
         return self.nb_questions() == 0
 
@@ -164,7 +171,6 @@ class Quizz:
     def import_txt(filepath: str):
         def attempt_create_question(title, rightAnswer, wrongAnswers)->Question:
             """Check si la creation d'une question est possible, renvoie cette question si oui"""
-            i
             # Check s'il y a une bonne réponse
             if rightAnswer is None: raise InvalidQuestionException(f"la question n'a pas de bonne réponse")
             # Check le nombre de réponses

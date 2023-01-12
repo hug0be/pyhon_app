@@ -4,10 +4,9 @@ import os
 
 from PySide6 import QtCore
 from PySide6.QtCore import QPropertyAnimation
+from PySide6.QtWidgets import QFileDialog
 from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
-from PySide6.QtGui import QIcon, Qt
-from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QGroupBox, QLabel
+from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout
 from PySide6.QtUiTools import QUiLoader
 
 from src.account import Account, WrongPasswordException, UnknownAccountException
@@ -113,7 +112,7 @@ class UserMenuWindow(QMainWindow):
         self.ui.setupUi(self)
         self.ui.pagesList.setCurrentIndex(0)
         self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
-        self.ui.toggleButton.clicked.connect(lambda : self.toggleBtn(200))
+        self.ui.toggleButton.clicked.connect(lambda : self.toggle_menu(200))
         self.pendingQuizz = None
 
 
@@ -140,7 +139,7 @@ class UserMenuWindow(QMainWindow):
     def show_home_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
     def show_quizz_list_page(self):
-        self.create_btns_page_list_quizz()
+        self.create_bouttons_page_list_quizz()
         self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
     def show_quizz_creation_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.createQuizzPage)
@@ -219,7 +218,7 @@ class UserMenuWindow(QMainWindow):
         self.ui.quizzCreationSteps.setCurrentWidget(self.ui.chooseOrderPage)
         return True
 
-    def toggleBtn(self, maxWidth):
+    def toggle_menu(self, maxWidth):
 
         # GET WIDTH
         width = self.ui.leftMenu.width()
@@ -270,10 +269,10 @@ class UserMenuWindow(QMainWindow):
         """Enregistre le quizz après toutes les étapes terminées"""
         self.pendingQuizz.save()
         # Ajout dynamique des boutons
-        self.create_btns_page_list_quizz()
+        self.create_bouttons_page_list_quizz()
         self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
 
-    def create_btns_page_list_quizz(self):
+    def create_bouttons_page_list_quizz(self):
         """Créer les boutons sur la page Liste des Quizz"""
         # GET THE LIST OF ALL QUIZZES
         list_quizzes = Quizz.get_list_quizzes()
@@ -292,7 +291,7 @@ class UserMenuWindow(QMainWindow):
             # Ajouter le bouton au layout
             layout.addWidget(button)
 
-        # Mettre la layout contenant les boutons dans le container page_list_quizz_container_bot
+        # Mettre la layout contenant les boutons dans le conteneur page_list_quizz_container_bot
         page_list_quizz_container_bot.setLayout(layout)
 
 
@@ -336,10 +335,20 @@ if __name__ == "__main__":
             quizzes_file.write(json.dumps([]))
         print("Fichier quizzes.json créé")
 
+    # Test historique
+    # TODO : Supprimer ce test quand il devient obsolète
+    # question = Question("Salut ça va ?", "Oui et toi", ["Non"])
+    # quizz = Quizz("SuperQuizz", 1, [question])
+    # history_item = HistoryItem(quizz, 10, 50)
+    # history = History([history_item])
+    # history.add_item(HistoryItem(quizz, 10, 40))
+    # history.add_item(HistoryItem(quizz, 5, 40))
+    # history.save("admin")
+    # print(history)
+
     #Convert file .ui -> .py
     os.system("pyside6-uic views/MainWindow.ui -o src/ui/MainWindow.py")
     os.system("pyside6-uic views/UserMenuWindow.ui -o src/ui/UserMenuWindow.py")
-
     os.system("pyside6-rcc resources/resources.qrc -o resources_rc.py")
 
     #Page principale
