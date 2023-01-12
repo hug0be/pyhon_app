@@ -12,7 +12,7 @@ Les identifiants par défaut sont `admin` et `foobar2` pour un compte admin, `us
 
 # Tutoriel
 ## Importer un quizz
-Commencez par créer un fichier `.txt`, puis commencez à écrire : 
+Commencez par créer un fichier `.txt`, puis commencez à écrire : 
 - Pour donner un titre, saisissez `quizz: Le sens de l'existence`
 
 - Pour ajouter une question : 
