@@ -28,7 +28,7 @@ Commencez par créer un fichier `.txt` :
   - Choisir le nombre de questions à afficher, par exemple : 
     - `nombre_questions: 2` (1 par défaut)
 
-Pour importer ce quizz, cliquer sur le boutton ![img.png](resources/images tuto/import_button.png), 
-sélectionner votre fichier `.txt`, puis valider
+Pour importer ce quizz, cliquer sur le boutton ![img.png](resources/images tuto/import_button.png?raw=true "Bouton import"), 
+sélectionnez votre fichier `.txt`, puis validez.
 
 [WIP 🛠️]
