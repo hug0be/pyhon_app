@@ -260,7 +260,13 @@ class UserMenuWindow(QMainWindow):
         self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
 
     def import_quizz(self):
-        file = QFileDialog.getOpenFileName(self, 'Importer un quizz', "", "Text files (*.txt)")
+        # Tentative d'ouverture du fichier
+        try:
+            file = QFileDialog.getOpenFileName(self, 'Importer un quizz', "", "Text files (*.txt)")
+        except FileNotFoundError:
+            return False
+
+        # Tentative d'ajout du quizz
         try:
             Quizz.import_txt(file[0]).save()
         except ImportQuizzException as ex:
