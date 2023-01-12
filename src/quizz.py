@@ -108,6 +108,7 @@ class Quizz:
         """Méthode qui check si un titre et un nombre de questions à afficher sont valides"""
         # Check si le titre est vide
         if not title: raise InvalidQuizzException("Le Quizz n'a pas de titre")
+        # Check si le Quizz existe déjà
         if Quizz.exists(title): raise InvalidQuizzException(f"Le Quizz \"{title}\" existe déjà")
 
         # Check si le quizz a au moins une question
@@ -163,6 +164,7 @@ class Quizz:
     def import_txt(filepath: str):
         def attempt_create_question(title, rightAnswer, wrongAnswers)->Question:
             """Check si la creation d'une question est possible, renvoie cette question si oui"""
+            i
             # Check s'il y a une bonne réponse
             if rightAnswer is None: raise InvalidQuestionException(f"la question n'a pas de bonne réponse")
             # Check le nombre de réponses
