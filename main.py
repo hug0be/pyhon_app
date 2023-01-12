@@ -5,11 +5,11 @@ import os
 from PySide6 import QtCore
 from PySide6.QtCore import QPropertyAnimation
 from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PySide6.QtUiTools import QUiLoader
 
 from src.account import Account, WrongPasswordException, UnknownAccountException
-from src.quizz import Quizz, Question, InvalidQuestionException, InvalidNbToDisplayException
+from src.quizz import Quizz, Question, InvalidQuestionException, InvalidNbToDisplayException, ImportQuizzException
 from src.ui import Ui_MainWindow, Ui_userMenu
 
 def change_page(name:str="userMenu"):
@@ -117,6 +117,7 @@ class UserMenuWindow(QMainWindow):
         # TODO: Retour arrière pour les pages "quizzListPage" et "createQuizzPage"
         self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
         self.ui.createQuizzButton.clicked.connect(self.show_quizz_creation_page)
+        self.ui.importQuizzButton.clicked.connect(self.import_quizz)
         self.ui.logoutButton.clicked.connect(lambda: change_page("home"))
 
         #Les 3 étapes/pages de création d'un quizz
@@ -258,6 +259,18 @@ class UserMenuWindow(QMainWindow):
         self.pendingQuizz.save()
         self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
 
+    def import_quizz(self):
+        file = QFileDialog.getOpenFileName(self, 'Importer un quizz', "", "Text files (*.txt)")
+        try:
+            Quizz.import_txt(file[0]).save()
+        except ImportQuizzException as ex:
+            self.ui.importQuizzErrorsLabel.setText(ex.__str__())
+            return False
+
+        #All good !
+        self.ui.importQuizzErrorsLabel.clear()
+        self.show_quizz_list_page()
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     loader = QUiLoader()
@@ -287,7 +300,7 @@ if __name__ == "__main__":
     os.system("pyside6-rcc resources/resources.qrc -o resources_rc.py")
 
     #Page principale
-    window = MainWindow()
+    window = UserMenuWindow()
     window.show()
     sys.exit(app.exec())
 
