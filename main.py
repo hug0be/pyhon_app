@@ -1,6 +1,8 @@
 import sys
 import os
 
+from PySide6 import QtCore
+from PySide6.QtCore import QPropertyAnimation
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtUiTools import QUiLoader
@@ -90,9 +92,33 @@ class UserMenuWindow(QMainWindow):
         self.ui = Ui_userMenu()
         self.ui.setupUi(self)
         self.ui.showQuizzListButton.clicked.connect(self.showQuizzList)
+        self.ui.toggleButton.clicked.connect(lambda : self.toggleBtn(200))
 
     def showQuizzList(self):
         self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
+
+    def toggleBtn(self, maxWidth):
+
+        # GET WIDTH
+        width = self.ui.leftMenu.width()
+        maxExtend = maxWidth # 300
+        standard = 75
+
+        # SET MAX WIDTH
+        if width == 75:
+            widthExtended = maxExtend
+        else:
+            widthExtended = standard
+
+
+        # ANIMATION
+        # -- TOGGLE
+        self.animation = QPropertyAnimation(self.ui.leftMenu, b"minimumWidth")
+        self.animation.setDuration(400)
+        self.animation.setStartValue(width)
+        self.animation.setEndValue(widthExtended)
+        self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
+        self.animation.start()
 
 
 if __name__ == "__main__":

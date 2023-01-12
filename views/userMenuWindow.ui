@@ -33,7 +33,7 @@
 	background-color: #5158BB;
 }
 
-#menu {
+#leftMenu {
 	background-color: #2B4790;
 }
 
@@ -47,7 +47,8 @@
 }
 #pagesList &gt; QWidget  {
 	background-color: #5158BB;
-}</string>
+}
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -85,7 +86,19 @@
         <number>0</number>
        </property>
        <item alignment="Qt::AlignLeft">
-        <widget class="QWidget" name="menu" native="true">
+        <widget class="QWidget" name="leftMenu" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>70</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>75</width>
+           <height>16777215</height>
+          </size>
+         </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
            <widget class="QFrame" name="frame">
@@ -106,7 +119,13 @@
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <item>
-              <widget class="QPushButton" name="pushButton">
+              <widget class="QPushButton" name="toggleButton">
+               <property name="layoutDirection">
+                <enum>Qt::LeftToRight</enum>
+               </property>
+               <property name="autoFillBackground">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -141,12 +160,12 @@
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_4">
              <item>
-              <widget class="QPushButton" name="pushButton_3">
+              <widget class="QPushButton" name="historyButton">
                <property name="toolTip">
                 <string>Consulter votre historique</string>
                </property>
                <property name="text">
-                <string>Historique</string>
+                <string>     Historique</string>
                </property>
                <property name="icon">
                 <iconset resource="../resources/resources.qrc">
@@ -161,7 +180,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_2">
+              <widget class="QPushButton" name="disconnectButton">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -172,7 +191,7 @@
                 <string>Se déconnecter</string>
                </property>
                <property name="text">
-                <string>Se déconnecter</string>
+                <string>     Se déconnecter</string>
                </property>
                <property name="icon">
                 <iconset resource="../resources/resources.qrc">
