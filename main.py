@@ -338,7 +338,7 @@ if __name__ == "__main__":
     os.system("pyside6-rcc resources/resources.qrc -o resources_rc.py")
 
     #Page principale
-    window = UserMenuWindow()
+    window = MainWindow()
     window.show()
     sys.exit(app.exec())
 
