@@ -100,9 +100,6 @@ class Ui_userMenu(object):
                         "    qproperty-cursor: PointingHandCursor;\n"
 "}\n"
 "\n"
-"#pagesList > QWidget{\n"
-"	background-color: #5158BB;\n"
-"}\n"
 "\n"
 "#createQuizzPage QLineEdit, #questionsPage QLineEdit{\n"
 "	background: transparent;\n"
@@ -272,6 +269,7 @@ class Ui_userMenu(object):
         self.backButton1.setObjectName(u"backButton1")
         self.backButton1.setGeometry(QRect(60, 70, 121, 31))
         self.backButton1.setCursor(QCursor(Qt.PointingHandCursor))
+        self.backButton1.setStyleSheet(u"background: transparent")
         icon4 = QIcon()
         icon4.addFile(u":/icons/images/back.png", QSize(), QIcon.Normal, QIcon.Off)
         self.backButton1.setIcon(icon4)
@@ -299,6 +297,7 @@ class Ui_userMenu(object):
         self.backButton2.setObjectName(u"backButton2")
         self.backButton2.setGeometry(QRect(70, 60, 121, 31))
         self.backButton2.setCursor(QCursor(Qt.PointingHandCursor))
+        self.backButton2.setStyleSheet(u"background: transparent")
         self.backButton2.setIcon(icon4)
         self.backButton2.setAutoDefault(False)
         self.quizzCreationSteps.addWidget(self.nameQuizzPage)
@@ -396,6 +395,7 @@ class Ui_userMenu(object):
         self.backButton3.setObjectName(u"backButton3")
         self.backButton3.setGeometry(QRect(70, 40, 121, 31))
         self.backButton3.setCursor(QCursor(Qt.PointingHandCursor))
+        self.backButton3.setStyleSheet(u"background: transparent")
         self.backButton3.setIcon(icon4)
         self.backButton3.setAutoDefault(False)
         self.quizzCreationSteps.addWidget(self.createQuestionsPage)
@@ -417,6 +417,7 @@ class Ui_userMenu(object):
         self.backButton4.setObjectName(u"backButton4")
         self.backButton4.setGeometry(QRect(60, 60, 121, 31))
         self.backButton4.setCursor(QCursor(Qt.PointingHandCursor))
+        self.backButton4.setStyleSheet(u"background: transparent")
         self.backButton4.setIcon(icon4)
         self.backButton4.setAutoDefault(False)
         self.quizzCreationSteps.addWidget(self.chooseOrderPage)
@@ -446,6 +447,7 @@ class Ui_userMenu(object):
         self.backButton5.setObjectName(u"backButton5")
         self.backButton5.setGeometry(QRect(70, 60, 121, 31))
         self.backButton5.setCursor(QCursor(Qt.PointingHandCursor))
+        self.backButton5.setStyleSheet(u"background: transparent")
         self.backButton5.setIcon(icon4)
         self.backButton5.setAutoDefault(False)
         self.quizzCreationSteps.addWidget(self.chooseNbToDisplayPage)
@@ -591,7 +593,7 @@ class Ui_userMenu(object):
 
         self.retranslateUi(userMenu)
 
-        self.pagesList.setCurrentIndex(3)
+        self.pagesList.setCurrentIndex(1)
         self.backButton1.setDefault(False)
         self.quizzCreationSteps.setCurrentIndex(0)
         self.backButton2.setDefault(False)

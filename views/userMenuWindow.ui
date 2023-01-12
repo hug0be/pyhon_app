@@ -100,9 +100,6 @@
     qproperty-cursor: PointingHandCursor;
 }
 
-#pagesList &gt; QWidget{
-	background-color: #5158BB;
-}
 
 #createQuizzPage QLineEdit, #questionsPage QLineEdit{
 	background: transparent;
@@ -358,7 +355,7 @@ QRadioButton::indicator::checked {
     <item>
      <widget class="QStackedWidget" name="pagesList">
       <property name="currentIndex">
-       <number>3</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="homePage">
        <property name="styleSheet">
@@ -465,6 +462,9 @@ QRadioButton::indicator::checked {
         <property name="cursor">
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
+        <property name="styleSheet">
+         <string notr="true">background: transparent</string>
+        </property>
         <property name="text">
          <string>Retour accueil</string>
         </property>
@@ -550,6 +550,9 @@ QRadioButton::indicator::checked {
           </property>
           <property name="cursor">
            <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: transparent</string>
           </property>
           <property name="text">
            <string>Retour accueil</string>
@@ -877,6 +880,9 @@ QRadioButton::indicator::checked {
           <property name="cursor">
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
+          <property name="styleSheet">
+           <string notr="true">background: transparent</string>
+          </property>
           <property name="text">
            <string>Retour accueil</string>
           </property>
@@ -958,6 +964,9 @@ QRadioButton::indicator::checked {
           </property>
           <property name="cursor">
            <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: transparent</string>
           </property>
           <property name="text">
            <string>Retour accueil</string>
@@ -1069,6 +1078,9 @@ QRadioButton::indicator::checked {
           </property>
           <property name="cursor">
            <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background: transparent</string>
           </property>
           <property name="text">
            <string>Retour accueil</string>
