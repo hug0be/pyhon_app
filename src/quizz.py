@@ -250,3 +250,18 @@ class Quizz:
                     # Préparation pour la prochaine question
                     questionTitle, questionWrongAnswers, questionRightAnswer = Question.default_values()
                 iLine += 1
+
+    @staticmethod
+    def get_list_quizzes():
+        """Récupérer la liste de tous les Quizz"""
+        with open('data/quizzes.json', 'r+') as quizzes_file:
+            quizzes = json.load(quizzes_file)
+            list_quizzes = []
+
+            for idQuizz, aQuizz in enumerate(quizzes):
+                list_quizzes.append({
+                    "idQuizz": idQuizz,
+                    "title": aQuizz["title"]
+                })
+
+        return list_quizzes

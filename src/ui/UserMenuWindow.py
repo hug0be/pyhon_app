@@ -15,10 +15,10 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QButtonGroup, QFrame, QHBoxLayout,
-    QLabel, QLineEdit, QMainWindow, QPushButton,
-    QRadioButton, QSizePolicy, QSpacerItem, QStackedWidget,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QButtonGroup, QFrame, QGroupBox,
+    QHBoxLayout, QLabel, QLineEdit, QMainWindow,
+    QPushButton, QRadioButton, QSizePolicy, QSpacerItem,
+    QStackedWidget, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_userMenu(object):
@@ -26,6 +26,8 @@ class Ui_userMenu(object):
         if not userMenu.objectName():
             userMenu.setObjectName(u"userMenu")
         userMenu.resize(917, 600)
+        userMenu.setMinimumSize(QSize(917, 600))
+        userMenu.setMaximumSize(QSize(917, 600))
         font = QFont()
         userMenu.setFont(font)
         userMenu.setStyleSheet(u"* {\n"
@@ -136,41 +138,23 @@ class Ui_userMenu(object):
 
         self.verticalLayout_4.addWidget(self.historyButton)
 
-        self.importQuizzButton = QPushButton(self.frame_2)
-        self.importQuizzButton.setObjectName(u"importQuizzButton")
+        self.logoutButton = QPushButton(self.frame_2)
+        self.logoutButton.setObjectName(u"logoutButton")
         sizePolicy2 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         sizePolicy2.setHorizontalStretch(0)
         sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.importQuizzButton.sizePolicy().hasHeightForWidth())
-        self.importQuizzButton.setSizePolicy(sizePolicy2)
-        icon2 = QIcon()
-        icon2.addFile(u":/icons/images/download.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.importQuizzButton.setIcon(icon2)
-        self.importQuizzButton.setIconSize(QSize(24, 24))
-
-        self.verticalLayout_4.addWidget(self.importQuizzButton)
-
-        self.logoutButton = QPushButton(self.frame_2)
-        self.logoutButton.setObjectName(u"logoutButton")
         sizePolicy2.setHeightForWidth(self.logoutButton.sizePolicy().hasHeightForWidth())
         self.logoutButton.setSizePolicy(sizePolicy2)
         self.logoutButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon3 = QIcon()
-        icon3.addFile(u":/icons/images/log-out.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.logoutButton.setIcon(icon3)
+        icon2 = QIcon()
+        icon2.addFile(u":/icons/images/log-out.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.logoutButton.setIcon(icon2)
         self.logoutButton.setIconSize(QSize(24, 24))
 
         self.verticalLayout_4.addWidget(self.logoutButton)
 
 
         self.verticalLayout_3.addWidget(self.frame_2, 0, Qt.AlignTop)
-
-        self.importQuizzErrorsLabel = QLabel(self.leftMenu)
-        self.importQuizzErrorsLabel.setObjectName(u"importQuizzErrorsLabel")
-        self.importQuizzErrorsLabel.setStyleSheet(u"color: #F3A917")
-        self.importQuizzErrorsLabel.setWordWrap(True)
-
-        self.verticalLayout_3.addWidget(self.importQuizzErrorsLabel)
 
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
@@ -353,7 +337,15 @@ class Ui_userMenu(object):
         self.quizzListPage.setEnabled(True)
         self.label_3 = QLabel(self.quizzListPage)
         self.label_3.setObjectName(u"label_3")
-        self.label_3.setGeometry(QRect(160, 110, 211, 39))
+        self.label_3.setGeometry(QRect(0, 110, 841, 39))
+        self.label_3.setAlignment(Qt.AlignCenter)
+        self.groupBox = QGroupBox(self.quizzListPage)
+        self.groupBox.setObjectName(u"groupBox")
+        self.groupBox.setGeometry(QRect(0, 210, 841, 381))
+        self.groupBox.setAlignment(Qt.AlignCenter)
+        self.page_list_quizz_container_bot = QWidget(self.groupBox)
+        self.page_list_quizz_container_bot.setObjectName(u"page_list_quizz_container_bot")
+        self.page_list_quizz_container_bot.setGeometry(QRect(190, 30, 450, 241))
         self.pagesList.addWidget(self.quizzListPage)
 
         self.horizontalLayout_2.addWidget(self.pagesList)
@@ -362,7 +354,7 @@ class Ui_userMenu(object):
 
         self.retranslateUi(userMenu)
 
-        self.pagesList.setCurrentIndex(1)
+        self.pagesList.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(userMenu)
@@ -379,14 +371,9 @@ class Ui_userMenu(object):
 #endif // QT_CONFIG(tooltip)
         self.historyButton.setText(QCoreApplication.translate("userMenu", u"     Historique", None))
 #if QT_CONFIG(tooltip)
-        self.importQuizzButton.setToolTip(QCoreApplication.translate("userMenu", u"Se d\u00e9connecter", None))
-#endif // QT_CONFIG(tooltip)
-        self.importQuizzButton.setText(QCoreApplication.translate("userMenu", u"     Importer un Quizz", None))
-#if QT_CONFIG(tooltip)
         self.logoutButton.setToolTip(QCoreApplication.translate("userMenu", u"Se d\u00e9connecter", None))
 #endif // QT_CONFIG(tooltip)
         self.logoutButton.setText(QCoreApplication.translate("userMenu", u"     Se d\u00e9connecter", None))
-        self.importQuizzErrorsLabel.setText("")
         self.showQuizzListButton.setText(QCoreApplication.translate("userMenu", u"Liste des quizz", None))
         self.label.setText(QCoreApplication.translate("userMenu", u"<html><head/><body><p><span style=\" font-size:24pt; font-weight:600;\">Bienvenue sur WinQuest !</span></p></body></html>", None))
         self.createQuizzButton.setText(QCoreApplication.translate("userMenu", u"Cr\u00e9er un quizz", None))
@@ -416,5 +403,6 @@ class Ui_userMenu(object):
         self.nbToDisplay.setPlaceholderText(QCoreApplication.translate("userMenu", u"Ins\u00e9rez un nombre", None))
         self.nbToDisplayErrorsLabel.setText("")
         self.label_3.setText(QCoreApplication.translate("userMenu", u"<html><head/><body><p><span style=\" font-size:24pt;\">Liste des quizz</span></p></body></html>", None))
+        self.groupBox.setTitle("")
     # retranslateUi
 

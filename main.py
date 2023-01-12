@@ -6,6 +6,8 @@ from PySide6 import QtCore
 from PySide6.QtCore import QPropertyAnimation
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
+from PySide6.QtGui import QIcon, Qt
+from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QGroupBox, QLabel
 from PySide6.QtUiTools import QUiLoader
 
 from src.account import Account, WrongPasswordException, UnknownAccountException
@@ -109,9 +111,11 @@ class UserMenuWindow(QMainWindow):
         QMainWindow.__init__(self)
         self.ui = Ui_userMenu()
         self.ui.setupUi(self)
+        self.ui.pagesList.setCurrentIndex(0)
         self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
         self.ui.toggleButton.clicked.connect(lambda : self.toggleBtn(200))
         self.pendingQuizz = None
+
 
         #Binding changements de pages
         # TODO: Retour arrière pour les pages "quizzListPage" et "createQuizzPage"
@@ -131,6 +135,7 @@ class UserMenuWindow(QMainWindow):
     def show_home_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
     def show_quizz_list_page(self):
+        self.create_btns_page_list_quizz()
         self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
     def show_quizz_creation_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.createQuizzPage)
@@ -240,6 +245,7 @@ class UserMenuWindow(QMainWindow):
         nbMaxToDisplay = self.pendingQuizz.nb_questions()
         self.ui.nbQuestionsLabel.setText(f"Vous avez écrit {nbMaxToDisplay} questions")
         self.ui.quizzCreationSteps.setCurrentWidget(self.ui.chooseNbToDisplayPage)
+
     def create_quizz4(self):
         """Méthode qui constitue la quatrième et dernière étape de création d'un quizz : le choix du nombre de questions à afficher"""
         nbToDisplay = self.ui.nbToDisplay.text()
@@ -254,10 +260,36 @@ class UserMenuWindow(QMainWindow):
         #All good !
         self.pendingQuizz.nbQuestionsToDisplay = nbToDisplay
         self.save_quizz()
+
     def save_quizz(self):
         """Enregistre le quizz après toutes les étapes terminées"""
         self.pendingQuizz.save()
+        # Ajout dynamique des boutons
+        self.create_btns_page_list_quizz()
         self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
+
+    def create_btns_page_list_quizz(self):
+        """Créer les boutons sur la page Liste des Quizz"""
+        # GET THE LIST OF ALL QUIZZES
+        list_quizzes = Quizz.get_list_quizzes()
+
+        # GET THE LIST QUIZZES PAGE
+        page_list_quizz_container_bot = self.ui.page_list_quizz_container_bot
+
+        # Créer les layout pour page
+        layout = QVBoxLayout()
+
+        for aQuizz in list_quizzes:
+            # Créer un bouton
+            button = QPushButton(aQuizz["title"])
+            # TODO Add the link to go on the quizz avec la methode button.clicked.connect(display_quizz(aQuizz["idQuizz"]) )
+
+            # Ajouter le bouton au layout
+            layout.addWidget(button)
+
+        # Mettre la layout contenant les boutons dans le container page_list_quizz_container_bot
+        page_list_quizz_container_bot.setLayout(layout)
+
 
     def import_quizz(self):
         # Tentative d'ouverture du fichier
