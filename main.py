@@ -111,10 +111,12 @@ class UserMenuWindow(QMainWindow):
         QMainWindow.__init__(self)
         self.ui = Ui_userMenu()
         self.ui.setupUi(self)
-        self.ui.pagesList.setCurrentIndex(0)
+        self.ui.pagesList.setCurrentIndex(1)
         self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
         self.ui.toggleButton.clicked.connect(lambda : self.toggleBtn(200))
         self.pendingQuizz = None
+
+        Quizz.get_quizz_by_id(0)
 
 
         #Binding changements de pages
@@ -139,6 +141,35 @@ class UserMenuWindow(QMainWindow):
         self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
     def show_quizz_creation_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.createQuizzPage)
+    def show_quizz_questions_page(self, aQuizz):
+        self.build_question_page(aQuizz["title"], aQuizz["questions"][0])
+        self.ui.pagesList.setCurrentWidget(self.ui.questionsPage)
+
+    def build_question_page(self, titleQuizz, aQuestion):
+        """Méthode qui SET tous les champs (titre, titre question, ...) d'une page question"""
+        self.ui.label_titre.setText( titleQuizz )
+        self.ui.label_Question.setText( aQuestion["title"] )
+
+        # -- SET the answers on the radio buttons
+        # GET All radio buttons
+        listRadioButtons = [
+            self.ui.radioButton1_Quiz,
+            self.ui.radioButton2_Quiz,
+            self.ui.radioButton3_Quiz,
+            self.ui.radioButton4_Quiz
+        ]
+
+        # List of all answers of the current question
+        listAnswers = Question.get_shuffled_answers_question( aQuestion )
+
+        # SET the label of all radio buttons (and test to avoid the out of range)
+        cpt = 0
+        for radioButton in listRadioButtons:
+            radioButton.setText( listAnswers[cpt] ) if len(listAnswers) > cpt is not None else listRadioButtons[cpt].setText( "" )
+            cpt += 1
+
+
+
     def create_quizz1(self):
         """Méthode qui constitue la première étape de création d'un quizz : choisir un titre"""
         # Obtention des données
@@ -284,6 +315,9 @@ class UserMenuWindow(QMainWindow):
             button = QPushButton(aQuizz["title"])
             # TODO Add the link to go on the quizz avec la methode button.clicked.connect(display_quizz(aQuizz["idQuizz"]) )
 
+            # Link le bouton avec la page de quizz au clique
+            button.clicked.connect(lambda: self.show_quizz_questions_page( Quizz.get_quizz_by_id( aQuizz["idQuizz"] ) ) )
+
             # Ajouter le bouton au layout
             layout.addWidget(button)
 
@@ -338,7 +372,7 @@ if __name__ == "__main__":
     os.system("pyside6-rcc resources/resources.qrc -o resources_rc.py")
 
     #Page principale
-    window = MainWindow()
+    window = UserMenuWindow()
     window.show()
     sys.exit(app.exec())
 
