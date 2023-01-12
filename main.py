@@ -264,6 +264,8 @@ if __name__ == "__main__":
 
     #Check si le fichier accounts.json existe
     if not os.path.exists("data/accounts.json"):
+        if not os.path.exists("data"):
+            os.mkdir("data")
         with open('data/accounts.json', 'w') as accounts_file:
             accounts = [
                 {"username": "admin", "password": "foobar2", "admin": True},
