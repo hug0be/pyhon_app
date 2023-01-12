@@ -41,6 +41,14 @@
 	font-size : 20px
 }
 
+#label_titre{
+	font-size : 30px
+}
+
+#label_titre_2{
+	font-size : 20px
+}
+
 #label_Fin_Quiz{
 	font-size : 55px;
 }
@@ -295,7 +303,7 @@ QRadioButton::indicator::checked {
     <item>
      <widget class="QStackedWidget" name="pagesList">
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="homePage">
        <property name="styleSheet">
@@ -352,7 +360,7 @@ QRadioButton::indicator::checked {
          </rect>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="nameQuizzPage">
          <widget class="QLabel" name="nameQuizzErrorsLabel">
@@ -1104,6 +1112,27 @@ QRadioButton::indicator::checked {
            <string>Question</string>
           </property>
          </widget>
+         <widget class="QLabel" name="label_titre">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>10</y>
+            <width>841</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>-1</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Nom du Quiz</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
         </widget>
         <widget class="QWidget" name="FinQuestionPage">
          <widget class="QLabel" name="label_Fin_Quiz">
@@ -1212,6 +1241,27 @@ QRadioButton::indicator::checked {
           </property>
           <property name="text">
            <string>9min10sec</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_titre_2">
+          <property name="geometry">
+           <rect>
+            <x>280</x>
+            <y>150</y>
+            <width>521</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>-1</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Nom du Quiz</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </widget>
