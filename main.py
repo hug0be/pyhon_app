@@ -1,6 +1,7 @@
 import json
 import sys
 import os
+import time
 
 from PySide6 import QtCore
 from PySide6.QtCore import QPropertyAnimation
@@ -11,7 +12,8 @@ from PySide6.QtUiTools import QUiLoader
 from src.account import Account, WrongPasswordException, UnknownAccountException
 from src.quizz import Quizz, Question, InvalidQuestionException, InvalidNbToDisplayException
 from src.ui import Ui_MainWindow, Ui_userMenu
-from src.history import HistoryCase, History
+from src.history import HistoryItem, History
+from time import sleep
 
 def change_page(name:str="userMenu"):
     """Change de page selon le nom donné"""
@@ -281,19 +283,23 @@ if __name__ == "__main__":
             quizzes_file.write(json.dumps([]))
         print("Fichier quizzes.json créé")
 
-    # [{"username": "admin", "password": "foobar2", "admin": true}, {"username": "user", "password": "foobar2", "admin": false}]
     # TODO supprimer la zone de travaux
     # zone en travaux \/
 
-    file = open('data/quizzes.json', 'r')
-    quizz = Quizz(json.load(file)[0]["title"])
+    with open('data/quizzes.json', 'r') as file:
+        list_quizz = json.load(file)
+    quizz = Quizz(list_quizz[0]["title"])
+    quizz2 = Quizz(list_quizz[1]["title"])
 
-    historycase = HistoryCase(quizz, 30, 55.1)
-    print(str(historycase))
+    historyitem = HistoryItem(quizz, 30, 55.1)
+    print(str(historyitem))
     # print(historycase)
-    history = History([historycase])
+    history = History([historyitem])
     history.save("user")
     history.save("admin")
+    history.add_item(HistoryItem(quizz, 30, 50))
+    history.add_item(HistoryItem(quizz2, 15, 57))
+    history.save("user")
 
     # zone en travaux /\
 
