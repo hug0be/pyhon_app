@@ -21,7 +21,7 @@ class HistoryItem:
 
 
 class History:
-    def __init__(self, items:[HistoryItem]):
+    def __init__(self, items:[HistoryItem]=[]):
         self.items = items
 
     def to_json(self):

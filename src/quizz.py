@@ -82,9 +82,9 @@ class Question:
         return res
 
 class Quizz:
-    def __init__(self, title:str="", nbQuestionsToDisplay:int|None=1):
+    def __init__(self, title:str="", nbQuestionsToDisplay:int|None=1, questions:[Question]=None):
         self.title = title
-        self.questions = []
+        self.questions = questions
         self.useRandomOrder = False
         self.nbQuestionsToDisplay = nbQuestionsToDisplay
 
@@ -171,7 +171,6 @@ class Quizz:
     def import_txt(filepath: str):
         def attempt_create_question(title, rightAnswer, wrongAnswers)->Question:
             """Check si la creation d'une question est possible, renvoie cette question si oui"""
-            i
             # Check s'il y a une bonne réponse
             if rightAnswer is None: raise InvalidQuestionException(f"la question n'a pas de bonne réponse")
             # Check le nombre de réponses
