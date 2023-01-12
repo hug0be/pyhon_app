@@ -50,6 +50,14 @@ class Ui_userMenu(object):
 "	font-size : 20px\n"
 "}\n"
 "\n"
+"#label_titre{\n"
+"	font-size : 30px\n"
+"}\n"
+"\n"
+"#label_titre_2{\n"
+"	font-size : 20px\n"
+"}\n"
+"\n"
 "#label_Fin_Quiz{\n"
 "	font-size : 55px;\n"
 "}\n"
@@ -86,11 +94,11 @@ class Ui_userMenu(object):
 "#pagesList QPushButton {\n"
 "	background-color: #F26DF9;\n"
 "	padding: 5px 10px;\n"
-"qproperty-cursor:PointingHandCursor;\n"
+""
+                        "qproperty-cursor:PointingHandCursor;\n"
 "}\n"
 "#pagesList > QWidget  {\n"
-"	background-color: #5158BB"
-                        ";\n"
+"	background-color: #5158BB;\n"
 "}\n"
 "\n"
 "#createQuizzPage QLineEdit, #questionsPage QLineEdit{\n"
@@ -381,12 +389,12 @@ class Ui_userMenu(object):
         self.pagesList.addWidget(self.quizzListPage)
         self.questionsPage = QWidget()
         self.questionsPage.setObjectName(u"questionsPage")
-        self.questionsPage_2 = QStackedWidget(self.questionsPage)
-        self.questionsPage_2.setObjectName(u"questionsPage_2")
-        self.questionsPage_2.setGeometry(QRect(0, -1, 841, 601))
-        self.BaseQuestionPage = QWidget()
-        self.BaseQuestionPage.setObjectName(u"BaseQuestionPage")
-        self.verticalLayoutWidget_5 = QWidget(self.BaseQuestionPage)
+        self.questions = QStackedWidget(self.questionsPage)
+        self.questions.setObjectName(u"questions")
+        self.questions.setGeometry(QRect(0, -1, 841, 601))
+        self.questionPage = QWidget()
+        self.questionPage.setObjectName(u"questionPage")
+        self.verticalLayoutWidget_5 = QWidget(self.questionPage)
         self.verticalLayoutWidget_5.setObjectName(u"verticalLayoutWidget_5")
         self.verticalLayoutWidget_5.setGeometry(QRect(220, 210, 421, 231))
         self.answers_6 = QVBoxLayout(self.verticalLayoutWidget_5)
@@ -436,44 +444,49 @@ class Ui_userMenu(object):
 
         self.answers_6.addWidget(self.radioButton4_Quiz)
 
-        self.label_VotreReponse = QLabel(self.BaseQuestionPage)
+        self.label_VotreReponse = QLabel(self.questionPage)
         self.label_VotreReponse.setObjectName(u"label_VotreReponse")
         self.label_VotreReponse.setGeometry(QRect(190, 190, 101, 16))
-        self.questionErrorsLabel = QLabel(self.BaseQuestionPage)
+        self.questionErrorsLabel = QLabel(self.questionPage)
         self.questionErrorsLabel.setObjectName(u"questionErrorsLabel")
         self.questionErrorsLabel.setGeometry(QRect(150, 470, 391, 41))
         self.questionErrorsLabel.setStyleSheet(u"color: #F3A917")
-        self.label_Points = QLabel(self.BaseQuestionPage)
+        self.label_Points = QLabel(self.questionPage)
         self.label_Points.setObjectName(u"label_Points")
         self.label_Points.setGeometry(QRect(690, 120, 61, 20))
-        self.label_Nb_Points = QLabel(self.BaseQuestionPage)
+        self.label_Nb_Points = QLabel(self.questionPage)
         self.label_Nb_Points.setObjectName(u"label_Nb_Points")
         self.label_Nb_Points.setGeometry(QRect(690, 70, 61, 51))
         self.label_Nb_Points.setFont(font)
-        self.label_NB_Question = QLabel(self.BaseQuestionPage)
+        self.label_NB_Question = QLabel(self.questionPage)
         self.label_NB_Question.setObjectName(u"label_NB_Question")
         self.label_NB_Question.setGeometry(QRect(690, 480, 61, 16))
-        self.validerButton_Quiz = QPushButton(self.BaseQuestionPage)
+        self.validerButton_Quiz = QPushButton(self.questionPage)
         self.validerButton_Quiz.setObjectName(u"validerButton_Quiz")
         self.validerButton_Quiz.setGeometry(QRect(290, 470, 251, 30))
         self.validerButton_Quiz.setMinimumSize(QSize(0, 30))
-        self.label_Question = QLabel(self.BaseQuestionPage)
+        self.label_Question = QLabel(self.questionPage)
         self.label_Question.setObjectName(u"label_Question")
         self.label_Question.setGeometry(QRect(220, 110, 391, 51))
-        self.questionsPage_2.addWidget(self.BaseQuestionPage)
-        self.FinQuestionPage = QWidget()
-        self.FinQuestionPage.setObjectName(u"FinQuestionPage")
-        self.label_Fin_Quiz = QLabel(self.FinQuestionPage)
+        self.label_titre = QLabel(self.questionPage)
+        self.label_titre.setObjectName(u"label_titre")
+        self.label_titre.setGeometry(QRect(0, 10, 841, 51))
+        self.label_titre.setFont(font)
+        self.label_titre.setAlignment(Qt.AlignCenter)
+        self.questions.addWidget(self.questionPage)
+        self.endQuestionPage = QWidget()
+        self.endQuestionPage.setObjectName(u"endQuestionPage")
+        self.label_Fin_Quiz = QLabel(self.endQuestionPage)
         self.label_Fin_Quiz.setObjectName(u"label_Fin_Quiz")
         self.label_Fin_Quiz.setGeometry(QRect(-10, 40, 841, 71))
         self.label_Fin_Quiz.setAlignment(Qt.AlignCenter)
-        self.label_Fin_VotreScore = QLabel(self.FinQuestionPage)
+        self.label_Fin_VotreScore = QLabel(self.endQuestionPage)
         self.label_Fin_VotreScore.setObjectName(u"label_Fin_VotreScore")
         self.label_Fin_VotreScore.setGeometry(QRect(110, 180, 151, 51))
-        self.label_Fin_Score = QLabel(self.FinQuestionPage)
+        self.label_Fin_Score = QLabel(self.endQuestionPage)
         self.label_Fin_Score.setObjectName(u"label_Fin_Score")
         self.label_Fin_Score.setGeometry(QRect(110, 210, 141, 121))
-        self.gridLayoutWidget = QWidget(self.FinQuestionPage)
+        self.gridLayoutWidget = QWidget(self.endQuestionPage)
         self.gridLayoutWidget.setObjectName(u"gridLayoutWidget")
         self.gridLayoutWidget.setGeometry(QRect(310, 210, 461, 241))
         self.finQuestionLayout = QGridLayout(self.gridLayoutWidget)
@@ -499,13 +512,21 @@ class Ui_userMenu(object):
 
         self.finQuestionLayout.addWidget(self.shareButton, 1, 1, 1, 1)
 
-        self.label_Fin_VotreTemps = QLabel(self.FinQuestionPage)
+        self.label_Fin_VotreTemps = QLabel(self.endQuestionPage)
         self.label_Fin_VotreTemps.setObjectName(u"label_Fin_VotreTemps")
         self.label_Fin_VotreTemps.setGeometry(QRect(100, 350, 171, 51))
-        self.label_Fin_Temps = QLabel(self.FinQuestionPage)
+        self.label_Fin_Temps = QLabel(self.endQuestionPage)
         self.label_Fin_Temps.setObjectName(u"label_Fin_Temps")
         self.label_Fin_Temps.setGeometry(QRect(130, 400, 111, 51))
-        self.questionsPage_2.addWidget(self.FinQuestionPage)
+        self.label_titre_2 = QLabel(self.endQuestionPage)
+        self.label_titre_2.setObjectName(u"label_titre_2")
+        self.label_titre_2.setGeometry(QRect(280, 150, 521, 51))
+        self.label_titre_2.setFont(font)
+        self.label_titre_2.setAlignment(Qt.AlignCenter)
+        self.questions.addWidget(self.endQuestionPage)
+        self.endQuizzPage = QWidget()
+        self.endQuizzPage.setObjectName(u"endQuizzPage")
+        self.questions.addWidget(self.endQuizzPage)
         self.pagesList.addWidget(self.questionsPage)
 
         self.horizontalLayout_2.addWidget(self.pagesList)
@@ -515,7 +536,7 @@ class Ui_userMenu(object):
         self.retranslateUi(userMenu)
 
         self.pagesList.setCurrentIndex(3)
-        self.quizzCreationSteps.setCurrentIndex(0)
+        self.quizzCreationSteps.setCurrentIndex(3)
 
 
         QMetaObject.connectSlotsByName(userMenu)
@@ -575,6 +596,7 @@ class Ui_userMenu(object):
         self.label_NB_Question.setText(QCoreApplication.translate("userMenu", u"23/30", None))
         self.validerButton_Quiz.setText(QCoreApplication.translate("userMenu", u"Valider", None))
         self.label_Question.setText(QCoreApplication.translate("userMenu", u"Question", None))
+        self.label_titre.setText(QCoreApplication.translate("userMenu", u"Nom du Quiz", None))
         self.label_Fin_Quiz.setText(QCoreApplication.translate("userMenu", u"Le Quiz est termin\u00e9e", None))
         self.label_Fin_VotreScore.setText(QCoreApplication.translate("userMenu", u"Votre score", None))
         self.label_Fin_Score.setText(QCoreApplication.translate("userMenu", u"28/30", None))
@@ -584,5 +606,6 @@ class Ui_userMenu(object):
         self.shareButton.setText(QCoreApplication.translate("userMenu", u"Partager", None))
         self.label_Fin_VotreTemps.setText(QCoreApplication.translate("userMenu", u"Votre temps", None))
         self.label_Fin_Temps.setText(QCoreApplication.translate("userMenu", u"9min10sec", None))
+        self.label_titre_2.setText(QCoreApplication.translate("userMenu", u"Nom du Quiz", None))
     # retranslateUi
 

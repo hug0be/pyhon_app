@@ -303,7 +303,7 @@ QRadioButton::indicator::checked {
     <item>
      <widget class="QStackedWidget" name="pagesList">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="homePage">
        <property name="styleSheet">
@@ -871,7 +871,7 @@ QRadioButton::indicator::checked {
        </widget>
       </widget>
       <widget class="QWidget" name="questionsPage">
-       <widget class="QStackedWidget" name="questionsPage_2">
+       <widget class="QStackedWidget" name="questions">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -880,7 +880,7 @@ QRadioButton::indicator::checked {
           <height>601</height>
          </rect>
         </property>
-        <widget class="QWidget" name="BaseQuestionPage">
+        <widget class="QWidget" name="questionPage">
          <widget class="QWidget" name="verticalLayoutWidget_5">
           <property name="geometry">
            <rect>
@@ -1134,7 +1134,7 @@ QRadioButton::indicator::checked {
           </property>
          </widget>
         </widget>
-        <widget class="QWidget" name="FinQuestionPage">
+        <widget class="QWidget" name="endQuestionPage">
          <widget class="QLabel" name="label_Fin_Quiz">
           <property name="geometry">
            <rect>
@@ -1265,6 +1265,7 @@ QRadioButton::indicator::checked {
           </property>
          </widget>
         </widget>
+        <widget class="QWidget" name="endQuizzPage"/>
        </widget>
       </widget>
      </widget>
