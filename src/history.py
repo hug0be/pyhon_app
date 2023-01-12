@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 import json
-from src import Account, UnknownAccountException
+
 from src.quizz import Quizz
 
 class HistoryItem:
@@ -25,12 +26,13 @@ class History:
 
     def to_json(self):
         return {'items': [item.to_json() for item in self.items]}
-    def compare_item(self, item, itemToEdit: HistoryItem)->HistoryItem:
+    @staticmethod
+    def compare_item(item, itemToEdit: HistoryItem)->HistoryItem:
         """Renvoie l'item avec les meilleurs stats"""
         mustBeReplaced = item.best_score < itemToEdit.best_score or (item.best_score == item.best_score and item.time > item.time)
         return itemToEdit if mustBeReplaced else item
 
-    def add_item(self, itemToAdd: HistoryItem)->None:
+    def add_item(self, itemToAdd: HistoryItem)->bool:
         """
         Ajoute un item à la liste de l'historique, 4 cas :
             - le quizz n'a jamais été fait : on l'ajoute à la liste
@@ -38,17 +40,18 @@ class History:
             - le quizz a déjà été fait et on a battu le meilleur score : on remplace l'item
             - le quizz a déjà été réalisé au même score : si le temps est meilleur on remplace l'item, sinon on ne fait rien
         """
-        itemsCopy = self.items.copy()
         for i_item, item in enumerate(self.items):
-            if item.quizz.title == item.quizz.title:
-                itemsCopy[i_item] = self.compare_item(itemToAdd, item)
-            else:
-                itemsCopy.append(item)
-        self.items = itemsCopy
+            if item.quizz.title == itemToAdd.quizz.title:
+                self.items[i_item] = History.compare_item(itemToAdd, item)
+                return True
+        self.items.append(itemToAdd)
+        return True
+
     def save(self, user):
         """Sauvegarde un historique"""
-        if not Account.exists(user):
-            raise UnknownAccountException(f"Le compte '{user}' n'existe pas")
+        # TODO : vérifier si le compte existe
+        # if not Account.exists(user):
+        #     raise UnknownAccountException(f"Le compte '{user}' n'existe pas")
 
         with open('data/accounts.json', 'r+') as account_file:
             accounts = json.load(account_file)
@@ -59,3 +62,6 @@ class History:
             account_file.seek(0)
         with open('data/accounts.json', 'w') as account_file:
             json.dump(accounts, account_file, indent=4)
+
+    def __str__(self):
+        return "\n".join(item.__str__() for item in self.items)

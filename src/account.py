@@ -3,7 +3,6 @@ import json
 
 from src.history import History
 
-
 class WrongPasswordException(Exception): pass
 class UnknownAccountException(Exception): pass
 

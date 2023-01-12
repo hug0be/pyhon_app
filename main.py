@@ -283,26 +283,6 @@ if __name__ == "__main__":
             quizzes_file.write(json.dumps([]))
         print("Fichier quizzes.json créé")
 
-    # TODO supprimer la zone de travaux
-    # zone en travaux \/
-
-    with open('data/quizzes.json', 'r') as file:
-        list_quizz = json.load(file)
-    quizz = Quizz(list_quizz[0]["title"])
-    quizz2 = Quizz(list_quizz[1]["title"])
-
-    historyitem = HistoryItem(quizz, 30, 55.1)
-    print(str(historyitem))
-    # print(historycase)
-    history = History([historyitem])
-    history.save("user")
-    history.save("admin")
-    history.add_item(HistoryItem(quizz, 30, 50))
-    history.add_item(HistoryItem(quizz2, 15, 57))
-    history.save("user")
-
-    # zone en travaux /\
-
     #Convert file .ui -> .py
     os.system("pyside6-uic views/MainWindow.ui -o src/ui/MainWindow.py")
     os.system("pyside6-uic views/UserMenuWindow.ui -o src/ui/UserMenuWindow.py")
