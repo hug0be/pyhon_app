@@ -1,11 +1,11 @@
 import json
 
-from src import Quizz
+from src.quizz import Quizz
 
 
 class HistoryCase:
 
-    def __init__(self, quizz:Quizz, best_score:int, time:float):
+    def __init__(self, quizz:Quizz = None, best_score:int = None, time:float = None):
         self.quizz = quizz
         self.best_score = best_score
         self.time = time
@@ -17,16 +17,25 @@ class HistoryCase:
         return res
 
     def to_json(self):
-        return {'quizz': self.quizz.title, 'best_score': self.best_score, 'time': self.time}
+        return {'quizz': self.quizz.to_json(), 'best_score': self.best_score, 'time': self.time}
 
 
 class History:
     def __init__(self, cases:[HistoryCase]):
         self.cases = cases
-    def save(self):
+
+    def to_json(self):
+        return {'cases': [case.to_json() for case in self.cases]}
+
+    def save(self, user):
         """Sauvegarde un historique"""
-        with open('data/history.json', 'r+') as history_file:
-            history = json.load(history_file)
-            history.append({'cases': [case.to_json() for case in self.cases]})
-            history_file.seek(0)
-            json.dump(history, history_file)
+        with open('data/accounts.json', 'r+') as account_file:
+            # history = json.load(history_file)
+            # history.append(self.to_json()) # bof bof (pas le bon fichier)
+            accounts = json.load(account_file)
+            for account in accounts:
+                if account['username'] == user:
+                    account['history'] = self.to_json()
+                    break
+            account_file.seek(0)
+            json.dump(accounts, account_file, indent=4)

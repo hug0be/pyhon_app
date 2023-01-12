@@ -263,20 +263,6 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     loader = QUiLoader()
 
-# TODO supprimer la zone de travaux
-# zone en travaux \/
-
-    file = open('data/quizzes.json', 'r')
-    quizz = Quizz(json.load(file)[0]["title"])
-
-    historycase = HistoryCase(quizz, 30, 55.1)
-    print(str(historycase))
-    #print(historycase)
-    history = History([historycase])
-    history.save()
-
-# zone en travaux /\
-
     #Check si le fichier accounts.json existe
     if not os.path.exists("data/accounts.json"):
         if not os.path.exists("data"):
@@ -294,6 +280,22 @@ if __name__ == "__main__":
         with open('data/quizzes.json', 'w') as quizzes_file:
             quizzes_file.write(json.dumps([]))
         print("Fichier quizzes.json créé")
+
+    # [{"username": "admin", "password": "foobar2", "admin": true}, {"username": "user", "password": "foobar2", "admin": false}]
+    # TODO supprimer la zone de travaux
+    # zone en travaux \/
+
+    file = open('data/quizzes.json', 'r')
+    quizz = Quizz(json.load(file)[0]["title"])
+
+    historycase = HistoryCase(quizz, 30, 55.1)
+    print(str(historycase))
+    # print(historycase)
+    history = History([historycase])
+    history.save("user")
+    history.save("admin")
+
+    # zone en travaux /\
 
     #Convert file .ui -> .py
     os.system("pyside6-uic views/MainWindow.ui -o src/ui/MainWindow.py")

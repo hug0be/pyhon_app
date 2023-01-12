@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 import json
 
+from src.history import History
+
+
 class WrongPasswordException(Exception): pass
 class UnknownAccountException(Exception): pass
 
@@ -8,11 +11,12 @@ class Account:
     def __init__(self, username:str, password:str):
         self.username = username
         self.password = password
+        self.history = History()
     def save(self):
         """Sauvegarde un compte"""
         with open('data/accounts.json', 'r+') as accounts_file:
             accounts = json.load(accounts_file)
-            accounts.append({'username': self.username, 'password': self.password, 'admin': False})
+            accounts.append({'username': self.username, 'password': self.password, 'admin': False, 'history': self.history.to_json()})
             accounts_file.seek(0)
             json.dump(accounts, accounts_file)
     @staticmethod
