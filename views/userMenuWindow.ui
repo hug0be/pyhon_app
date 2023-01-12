@@ -49,6 +49,7 @@
 	font-size : 30px;
 }
 
+
 #label_Fin_Score{
 	font-size : 55px;
 }
@@ -61,7 +62,7 @@
 	font-size : 30px;
 }
 
-#centralwidget  {
+#centralwidget, QStackedWidget &gt; QWidget  {
 	background-color: #5158BB;
 }
 
