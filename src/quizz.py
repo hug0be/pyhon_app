@@ -70,16 +70,20 @@ class Quizz:
         self.questions = []
         self.useRandomOrder = False
         self.nbQuestionsToDisplay = 1
-    def save(self):
-        """Sauvegarde un quizz"""
-        with open('data/quizzes.json', 'r+') as quizzes_file:
-            quizzes = json.load(quizzes_file)
-            quizzes.append({
+
+    def to_json(self):
+        return {
                 'title': self.title,
                 'questions': [question.to_json() for question in self.questions],
                 'userRandomOrder': self.useRandomOrder,
                 'nbQuestionsToDisplay': self.nbQuestionsToDisplay
-            })
+            }
+
+    def save(self):
+        """Sauvegarde un quizz"""
+        with open('data/quizzes.json', 'r+') as quizzes_file:
+            quizzes = json.load(quizzes_file)
+            quizzes.append(self.to_json())
             quizzes_file.seek(0)
             json.dump(quizzes, quizzes_file, indent=4)
     def nb_questions(self)->int:
