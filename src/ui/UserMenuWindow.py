@@ -38,7 +38,11 @@ class Ui_userMenu(object):
 "	font-size: 12px;\n"
 "}\n"
 "\n"
-"#menu {\n"
+"#centralwidget  {\n"
+"	background-color: #5158BB;\n"
+"}\n"
+"\n"
+"#leftMenu {\n"
 "	background-color: #2B4790;\n"
 "}\n"
 "\n"
@@ -50,8 +54,7 @@ class Ui_userMenu(object):
 "	background-color: #F26DF9;\n"
 "	padding: 5px 10px;\n"
 "}\n"
-"\n"
-"QStackedWidget > QWidget  {\n"
+"#pagesList > QWidget  {\n"
 "	background-color: #5158BB;\n"
 "}\n"
 "\n"
@@ -80,11 +83,13 @@ class Ui_userMenu(object):
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.menu = QWidget(self.sidebar)
-        self.menu.setObjectName(u"menu")
-        self.verticalLayout_3 = QVBoxLayout(self.menu)
+        self.leftMenu = QWidget(self.sidebar)
+        self.leftMenu.setObjectName(u"leftMenu")
+        self.leftMenu.setMinimumSize(QSize(70, 0))
+        self.leftMenu.setMaximumSize(QSize(75, 16777215))
+        self.verticalLayout_3 = QVBoxLayout(self.leftMenu)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.frame = QFrame(self.menu)
+        self.frame = QFrame(self.leftMenu)
         self.frame.setObjectName(u"frame")
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
@@ -95,19 +100,21 @@ class Ui_userMenu(object):
         self.frame.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_3 = QHBoxLayout(self.frame)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.pushButton = QPushButton(self.frame)
-        self.pushButton.setObjectName(u"pushButton")
+        self.toggleButton = QPushButton(self.frame)
+        self.toggleButton.setObjectName(u"toggleButton")
+        self.toggleButton.setLayoutDirection(Qt.LeftToRight)
+        self.toggleButton.setAutoFillBackground(False)
         icon = QIcon()
         icon.addFile(u":/icons/images/menu.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton.setIcon(icon)
-        self.pushButton.setIconSize(QSize(24, 24))
+        self.toggleButton.setIcon(icon)
+        self.toggleButton.setIconSize(QSize(24, 24))
 
-        self.horizontalLayout_3.addWidget(self.pushButton)
+        self.horizontalLayout_3.addWidget(self.toggleButton)
 
 
         self.verticalLayout_3.addWidget(self.frame)
 
-        self.frame_2 = QFrame(self.menu)
+        self.frame_2 = QFrame(self.leftMenu)
         self.frame_2.setObjectName(u"frame_2")
         sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy1.setHorizontalStretch(0)
@@ -118,14 +125,14 @@ class Ui_userMenu(object):
         self.frame_2.setFrameShadow(QFrame.Raised)
         self.verticalLayout_4 = QVBoxLayout(self.frame_2)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.pushButton_3 = QPushButton(self.frame_2)
-        self.pushButton_3.setObjectName(u"pushButton_3")
+        self.historyButton = QPushButton(self.frame_2)
+        self.historyButton.setObjectName(u"historyButton")
         icon1 = QIcon()
         icon1.addFile(u":/icons/images/archive.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton_3.setIcon(icon1)
-        self.pushButton_3.setIconSize(QSize(24, 24))
+        self.historyButton.setIcon(icon1)
+        self.historyButton.setIconSize(QSize(24, 24))
 
-        self.verticalLayout_4.addWidget(self.pushButton_3)
+        self.verticalLayout_4.addWidget(self.historyButton)
 
         self.logoutButton = QPushButton(self.frame_2)
         self.logoutButton.setObjectName(u"logoutButton")
@@ -149,7 +156,7 @@ class Ui_userMenu(object):
         self.verticalLayout_3.addItem(self.verticalSpacer)
 
 
-        self.verticalLayout_2.addWidget(self.menu, 0, Qt.AlignLeft)
+        self.verticalLayout_2.addWidget(self.leftMenu, 0, Qt.AlignLeft)
 
 
         self.horizontalLayout_2.addWidget(self.sidebar)
@@ -343,15 +350,15 @@ class Ui_userMenu(object):
 #if QT_CONFIG(tooltip)
         self.frame.setToolTip(QCoreApplication.translate("userMenu", u"Menu", None))
 #endif // QT_CONFIG(tooltip)
-        self.pushButton.setText("")
+        self.toggleButton.setText("")
 #if QT_CONFIG(tooltip)
-        self.pushButton_3.setToolTip(QCoreApplication.translate("userMenu", u"Consulter votre historique", None))
+        self.historyButton.setToolTip(QCoreApplication.translate("userMenu", u"Consulter votre historique", None))
 #endif // QT_CONFIG(tooltip)
-        self.pushButton_3.setText(QCoreApplication.translate("userMenu", u"Historique", None))
+        self.historyButton.setText(QCoreApplication.translate("userMenu", u"     Historique", None))
 #if QT_CONFIG(tooltip)
         self.logoutButton.setToolTip(QCoreApplication.translate("userMenu", u"Se d\u00e9connecter", None))
 #endif // QT_CONFIG(tooltip)
-        self.logoutButton.setText(QCoreApplication.translate("userMenu", u"Se d\u00e9connecter", None))
+        self.logoutButton.setText(QCoreApplication.translate("userMenu", u"     Se d\u00e9connecter", None))
         self.showQuizzListButton.setText(QCoreApplication.translate("userMenu", u"Liste des quizz", None))
         self.label.setText(QCoreApplication.translate("userMenu", u"<html><head/><body><p><span style=\" font-size:24pt; font-weight:600;\">Bienvenue sur WinQuest !</span></p></body></html>", None))
         self.createQuizzButton.setText(QCoreApplication.translate("userMenu", u"Cr\u00e9er un quizz", None))

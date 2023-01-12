@@ -2,6 +2,8 @@ import json
 import sys
 import os
 
+from PySide6 import QtCore
+from PySide6.QtCore import QPropertyAnimation
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QMainWindow
 from PySide6.QtUiTools import QUiLoader
@@ -107,6 +109,8 @@ class UserMenuWindow(QMainWindow):
         QMainWindow.__init__(self)
         self.ui = Ui_userMenu()
         self.ui.setupUi(self)
+        self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
+        self.ui.toggleButton.clicked.connect(lambda : self.toggleBtn(200))
         self.pendingQuizz = None
 
         #Binding changements de pages
@@ -204,6 +208,29 @@ class UserMenuWindow(QMainWindow):
         self.ui.quizzCreationSteps.setCurrentWidget(self.ui.chooseOrderPage)
         return True
 
+    def toggleBtn(self, maxWidth):
+
+        # GET WIDTH
+        width = self.ui.leftMenu.width()
+        maxExtend = maxWidth # 300
+        standard = 75
+
+        # SET MAX WIDTH
+        if width == 75:
+            widthExtended = maxExtend
+        else:
+            widthExtended = standard
+
+
+        # ANIMATION
+        # -- TOGGLE
+        self.animation = QPropertyAnimation(self.ui.leftMenu, b"minimumWidth")
+        self.animation.setDuration(400)
+        self.animation.setStartValue(width)
+        self.animation.setEndValue(widthExtended)
+        self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
+        self.animation.start()
+
     def create_quizz3(self, useRandomOrder:bool):
         """Méthode qui constitue la troisième étape de création d'un quizz : l'ordre des questions"""
         self.pendingQuizz.useRandomOrder = useRandomOrder
@@ -254,6 +281,7 @@ if __name__ == "__main__":
     #Convert file .ui -> .py
     os.system("pyside6-uic views/MainWindow.ui -o src/ui/MainWindow.py")
     os.system("pyside6-uic views/UserMenuWindow.ui -o src/ui/UserMenuWindow.py")
+
     os.system("pyside6-rcc resources/resources.qrc -o resources_rc.py")
 
     #Page principale

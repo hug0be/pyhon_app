@@ -29,7 +29,11 @@
 	font-size: 12px;
 }
 
-#menu {
+#centralwidget  {
+	background-color: #5158BB;
+}
+
+#leftMenu {
 	background-color: #2B4790;
 }
 
@@ -41,8 +45,7 @@
 	background-color: #F26DF9;
 	padding: 5px 10px;
 }
-
-QStackedWidget &gt; QWidget  {
+#pagesList &gt; QWidget  {
 	background-color: #5158BB;
 }
 
@@ -96,7 +99,19 @@ QRadioButton::indicator::checked {
         <number>0</number>
        </property>
        <item alignment="Qt::AlignLeft">
-        <widget class="QWidget" name="menu" native="true">
+        <widget class="QWidget" name="leftMenu" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>70</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>75</width>
+           <height>16777215</height>
+          </size>
+         </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
            <widget class="QFrame" name="frame">
@@ -117,7 +132,13 @@ QRadioButton::indicator::checked {
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <item>
-              <widget class="QPushButton" name="pushButton">
+              <widget class="QPushButton" name="toggleButton">
+               <property name="layoutDirection">
+                <enum>Qt::LeftToRight</enum>
+               </property>
+               <property name="autoFillBackground">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -152,12 +173,12 @@ QRadioButton::indicator::checked {
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_4">
              <item>
-              <widget class="QPushButton" name="pushButton_3">
+              <widget class="QPushButton" name="historyButton">
                <property name="toolTip">
                 <string>Consulter votre historique</string>
                </property>
                <property name="text">
-                <string>Historique</string>
+                <string>     Historique</string>
                </property>
                <property name="icon">
                 <iconset resource="../resources/resources.qrc">
@@ -183,7 +204,7 @@ QRadioButton::indicator::checked {
                 <string>Se déconnecter</string>
                </property>
                <property name="text">
-                <string>Se déconnecter</string>
+                <string>     Se déconnecter</string>
                </property>
                <property name="icon">
                 <iconset resource="../resources/resources.qrc">
