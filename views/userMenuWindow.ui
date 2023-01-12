@@ -133,6 +133,9 @@ QRadioButton::indicator::checked {
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <item>
               <widget class="QPushButton" name="toggleButton">
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
                <property name="layoutDirection">
                 <enum>Qt::LeftToRight</enum>
                </property>
@@ -174,6 +177,9 @@ QRadioButton::indicator::checked {
             <layout class="QVBoxLayout" name="verticalLayout_4">
              <item>
               <widget class="QPushButton" name="historyButton">
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
+               </property>
                <property name="toolTip">
                 <string>Consulter votre historique</string>
                </property>
@@ -199,6 +205,9 @@ QRadioButton::indicator::checked {
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="cursor">
+                <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="toolTip">
                 <string>Se déconnecter</string>
@@ -258,6 +267,9 @@ QRadioButton::indicator::checked {
           <height>31</height>
          </rect>
         </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
         <property name="text">
          <string>Liste des quizz</string>
         </property>
@@ -283,6 +295,9 @@ QRadioButton::indicator::checked {
           <width>375</width>
           <height>31</height>
          </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="text">
          <string>Créer un quizz</string>
@@ -562,7 +577,7 @@ QRadioButton::indicator::checked {
             <x>160</x>
             <y>190</y>
             <width>160</width>
-            <height>220</height>
+            <height>232</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="answers">
