@@ -116,8 +116,6 @@ class UserMenuWindow(QMainWindow):
         self.ui.toggleButton.clicked.connect(lambda : self.toggleBtn(200))
         self.pendingQuizz = None
 
-        Quizz.get_quizz_by_id(0)
-
 
         #Binding changements de pages
         # TODO: Retour arrière pour les pages "quizzListPage" et "createQuizzPage"
@@ -134,6 +132,7 @@ class UserMenuWindow(QMainWindow):
         self.ui.noRandomOrderButton.clicked.connect(lambda : self.create_quizz3(False))
         self.ui.saveQuizzButton.clicked.connect(self.create_quizz4)
 
+
     def show_home_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
     def show_quizz_list_page(self):
@@ -148,7 +147,12 @@ class UserMenuWindow(QMainWindow):
     def build_question_page(self, titleQuizz, aQuestion):
         """Méthode qui SET tous les champs (titre, titre question, ...) d'une page question"""
         self.ui.label_titre.setText( titleQuizz )
-        self.ui.label_Question.setText( aQuestion["title"] )
+
+        # CREATE Objet Question
+        currentQuestion = Question(aQuestion["title"], aQuestion["rightAnswer"], aQuestion["wrongAnswers"])
+
+        # SET the title of current question
+        self.ui.label_Question.setText( currentQuestion.title )
 
         # -- SET the answers on the radio buttons
         # GET All radio buttons
@@ -160,7 +164,7 @@ class UserMenuWindow(QMainWindow):
         ]
 
         # List of all answers of the current question
-        listAnswers = Question.get_shuffled_answers_question( aQuestion )
+        listAnswers = currentQuestion.get_shuffled_answers()
 
         # SET the label of all radio buttons (and test to avoid the out of range)
         cpt = 0
@@ -168,6 +172,30 @@ class UserMenuWindow(QMainWindow):
             radioButton.setText( listAnswers[cpt] ) if len(listAnswers) > cpt is not None else listRadioButtons[cpt].setText( "" )
             cpt += 1
 
+        # # SET Method Button Validate
+        self.ui.validerButton_Quiz.clicked.connect(lambda: self.show_answer(currentQuestion))
+
+    def show_answer(self, currentQuestion):
+        # Si un bouton est selectionné
+        if self.ui.choiceRightAnswerQuizz.checkedId() != -1:
+            # Si ce n'est pas la bonne réponse on met la réponse sélectionnée en ROUGE
+            if not self.is_right_answer_selected(currentQuestion):
+                self.ui.choiceRightAnswerQuizz.checkedButton().setStyleSheet("QRadioButton {color: red}")
+
+            # Affichage de la réponse en VERT
+            for aButton in self.ui.choiceRightAnswerQuizz.buttons():
+                if currentQuestion.is_right_answer( aButton.text() ):
+                    aButton.setStyleSheet("QRadioButton {color: green}")
+
+        else:
+            # TODO Mettre error aucune réponse selectionée
+            print("Aucune réponse sélectionée")
+    def is_right_answer_selected(self, currentQuestion):
+        """Return TRUE si la réponse sélectionnée est Bonne sinon FALSE"""
+        # GET Selected radio Button
+        selectedButtonText = self.ui.choiceRightAnswerQuizz.checkedButton().text()
+
+        return currentQuestion.is_right_answer(selectedButtonText)
 
 
     def create_quizz1(self):

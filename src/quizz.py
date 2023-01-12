@@ -75,9 +75,8 @@ class Question:
             raise InvalidNbAnswersException(f"la question ne peux pas avoir plus de {Question.nbAnswersMax} réponses")
         return True
 
-    @staticmethod
-    def get_shuffled_answers_question(aQuestion):
-        listAnswers = [aQuestion["rightAnswer"]] + [ wrongAnswer for wrongAnswer in aQuestion["wrongAnswers"] ]
+    def get_shuffled_answers(self):
+        listAnswers = [self.rightAnswer] + [ wrongAnswer for wrongAnswer in self.wrongAnswers ]
         random.shuffle(listAnswers)
         return listAnswers
 

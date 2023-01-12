@@ -253,6 +253,9 @@ class Ui_userMenu(object):
         self.answers_6.setObjectName(u"answers_6")
         self.answers_6.setContentsMargins(0, 0, 0, 0)
         self.radioButton1_Quiz = QRadioButton(self.verticalLayoutWidget_5)
+        self.choiceRightAnswerQuizz = QButtonGroup(userMenu)
+        self.choiceRightAnswerQuizz.setObjectName(u"choiceRightAnswerQuizz")
+        self.choiceRightAnswerQuizz.addButton(self.radioButton1_Quiz)
         self.radioButton1_Quiz.setObjectName(u"radioButton1_Quiz")
         sizePolicy3 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Expanding)
         sizePolicy3.setHorizontalStretch(0)
@@ -267,6 +270,7 @@ class Ui_userMenu(object):
         self.answers_6.addWidget(self.radioButton1_Quiz)
 
         self.radioButton2_Quiz = QRadioButton(self.verticalLayoutWidget_5)
+        self.choiceRightAnswerQuizz.addButton(self.radioButton2_Quiz)
         self.radioButton2_Quiz.setObjectName(u"radioButton2_Quiz")
         sizePolicy3.setHeightForWidth(self.radioButton2_Quiz.sizePolicy().hasHeightForWidth())
         self.radioButton2_Quiz.setSizePolicy(sizePolicy3)
@@ -277,6 +281,7 @@ class Ui_userMenu(object):
         self.answers_6.addWidget(self.radioButton2_Quiz)
 
         self.radioButton3_Quiz = QRadioButton(self.verticalLayoutWidget_5)
+        self.choiceRightAnswerQuizz.addButton(self.radioButton3_Quiz)
         self.radioButton3_Quiz.setObjectName(u"radioButton3_Quiz")
         sizePolicy3.setHeightForWidth(self.radioButton3_Quiz.sizePolicy().hasHeightForWidth())
         self.radioButton3_Quiz.setSizePolicy(sizePolicy3)
@@ -287,6 +292,7 @@ class Ui_userMenu(object):
         self.answers_6.addWidget(self.radioButton3_Quiz)
 
         self.radioButton4_Quiz = QRadioButton(self.verticalLayoutWidget_5)
+        self.choiceRightAnswerQuizz.addButton(self.radioButton4_Quiz)
         self.radioButton4_Quiz.setObjectName(u"radioButton4_Quiz")
         sizePolicy3.setHeightForWidth(self.radioButton4_Quiz.sizePolicy().hasHeightForWidth())
         self.radioButton4_Quiz.setSizePolicy(sizePolicy3)
