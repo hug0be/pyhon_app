@@ -1,6 +1,7 @@
 import json
 import sys
 import os
+import time
 
 from PySide6 import QtCore
 from PySide6.QtCore import QPropertyAnimation
@@ -13,6 +14,8 @@ from PySide6.QtUiTools import QUiLoader
 from src.account import Account, WrongPasswordException, UnknownAccountException
 from src.quizz import Quizz, Question, InvalidQuestionException, InvalidNbToDisplayException, ImportQuizzException
 from src.ui import Ui_MainWindow, Ui_userMenu
+from src.history import HistoryItem, History
+from time import sleep
 
 def change_page(name:str="userMenu"):
     """Change de page selon le nom donné"""
