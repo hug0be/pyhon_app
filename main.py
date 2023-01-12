@@ -235,13 +235,14 @@ class UserMenuWindow(QMainWindow):
     def import_quizz(self):
         file = QFileDialog.getOpenFileName(self, 'Importer un quizz', "", "Text files (*.txt)")
         try:
-            Quizz.import_txt(file[0])
+            Quizz.import_txt(file[0]).save()
         except ImportQuizzException as ex:
             self.ui.importQuizzErrorsLabel.setText(ex.__str__())
             return False
 
         #All good !
         self.ui.importQuizzErrorsLabel.clear()
+        self.show_quizz_list_page()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

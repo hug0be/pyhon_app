@@ -25,12 +25,7 @@ class Account:
 
     @staticmethod
     def access(username:str, password:str):
-        """
-        Test si un compte existe et si le mot de passe est juste
-        Renvoie une UnknownAccountException s'il n'existe pas
-        Renvoie une WrongPasswordException si le mot de passe est incorrecte
-        Renvoie True s'il existe
-        """
+        """Check compte existe et si le mot de passe est correct"""
         with open('data/accounts.json', 'r') as file:
             accounts = json.load(file)
             for account in accounts:
