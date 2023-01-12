@@ -82,7 +82,7 @@ class Question:
         return res
 
 class Quizz:
-    def __init__(self, title:str="", nbQuestionsToDisplay:int|None=1, questions:[Question]=None):
+    def __init__(self, title:str="", nbQuestionsToDisplay:int|None=1, questions:[Question]=[]):
         self.title = title
         self.questions = questions
         self.useRandomOrder = False
@@ -95,7 +95,6 @@ class Quizz:
                 'userRandomOrder': self.useRandomOrder,
                 'nbQuestionsToDisplay': self.nbQuestionsToDisplay
             }
-
 
     def save(self):
         """Sauvegarde un quizz"""
@@ -164,8 +163,8 @@ class Quizz:
 
     @staticmethod
     def default_values():
-        """Retourne les valeurs par défaut de title, userRandomOrder et nbQuestionsToDisplay"""
-        return None, False, 1
+        """Retourne les valeurs par défaut d'userRandomOrder et nbQuestionsToDisplay"""
+        return False, 1
 
     @staticmethod
     def import_txt(filepath: str):
@@ -186,11 +185,13 @@ class Quizz:
 
             questionTitle, questionWrongAnswers, questionRightAnswer = Question.default_values()
             nbAnswers = 0
-            quizzTitle, questionOrder, nbQuestionsToDisplay  = Quizz.default_values()
+            questionOrder, nbQuestionsToDisplay  = Quizz.default_values()
             quizz = Quizz()
 
             while True:
                 line = f.readline().strip().split()
+                print(line)
+
                 # Fin de fichier et une question est en cours, on l'ajoute
                 if not line and nbAnswers > 0:
                     # Check les autres données
@@ -205,7 +206,7 @@ class Quizz:
                 if not line:
                     # Check du titre et du nombre de questions à afficher
                     try:
-                        quizz.valid_inputs(quizzTitle, nbQuestionsToDisplay)
+                        quizz.valid_inputs(quizz.title, nbQuestionsToDisplay)
                     except InvalidQuizzException as ex:
                         raise ImportQuizzException(f"A la ligne {iLine}, {ex}")
 
@@ -218,7 +219,7 @@ class Quizz:
                     # All good !
                     quizz.useRandomOrder = questionOrder
                     quizz.nbQuestionsToDisplay = nbQuestionsToDisplay
-                    quizz.title = quizzTitle
+                    print(quizz.useRandomOrder, quizz.nbQuestionsToDisplay, quizz.title)
                     return quizz
 
                 # Récupération des données
@@ -229,13 +230,13 @@ class Quizz:
                 if not keyword in keywords: raise ImportQuizzException(f"Le mot clé \"{keyword}\" n'existe pas")
 
                 # TODO : On autorise que le ces valeurs soient affectés plusieurs fois ?
-                if keyword == "quizz:": quizzTitle = rest
-                if keyword == "question": questionTitle = rest
+                if keyword == "quizz:": quizz.title = rest
                 if keyword == "ordre:": questionOrder = rest
                 if keyword == "nombre_questions:": nbQuestionsToDisplay = rest
 
                 # Gestion des mots-clés reponse et bonne_reponse
                 if keyword in ["reponse:", "bonne_reponse:"]:
+                    questionTitle = rest
                     if rest == "": raise ImportQuizzException(f"A la ligne {iLine - nbAnswers}, la réponse est vide")
                     nbAnswers += 1
                     if nbAnswers > Question.nbAnswersMax: raise ImportQuizzException(f"A la ligne {iLine - nbAnswers}, la question ne peux pas avoir plus de {Question.nbAnswersMax} réponses")
@@ -254,7 +255,8 @@ class Quizz:
                         raise ImportQuizzException(f"A la ligne {iLine - nbAnswers}, {ex}")
 
                     # Préparation pour la prochaine question
-                    questionTitle, questionWrongAnswers, questionRightAnswer = Question.default_values()
+                    _, questionWrongAnswers, questionRightAnswer = Question.default_values()
+                    nbAnswers = 0
                 iLine += 1
 
     @staticmethod
