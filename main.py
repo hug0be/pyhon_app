@@ -132,6 +132,11 @@ class UserMenuWindow(QMainWindow):
         self.ui.noRandomOrderButton.clicked.connect(lambda : self.create_quizz3(False))
         self.ui.saveQuizzButton.clicked.connect(self.create_quizz4)
 
+        # Binding des back buttons
+        backButtons = [self.ui.backButton1, self.ui.backButton2, self.ui.backButton3, self.ui.backButton4, self.ui.backButton5]
+        for backButton in backButtons:
+            backButton.clicked.connect(self.show_home_page)
+
     def show_home_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
     def show_quizz_list_page(self):

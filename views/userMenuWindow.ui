@@ -94,14 +94,10 @@
 	text-align: left;
 }
 
-#pagesList QPushButton{
+#pagesList QPushButton {
 	background-color: #F26DF9;
 	padding: 5px 10px;
-    qproperty-cursor:PointingHandCursor;
-}
-
-#quizzListPage #backButton, #chooseNbToDisplayPage #backButton_2, #chooseOrderPage #backButton_3, #createQuestionsPage #backButton_4, #nameQuizzPage #backButton_5 {
-	background-color: transparent ;
+    qproperty-cursor: PointingHandCursor;
 }
 
 #pagesList &gt; QWidget{
@@ -362,8 +358,735 @@ QRadioButton::indicator::checked {
     <item>
      <widget class="QStackedWidget" name="pagesList">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
+      <widget class="QWidget" name="homePage">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <widget class="QPushButton" name="showQuizzListButton">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>250</y>
+          <width>375</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="text">
+         <string>Liste des quizz</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>140</x>
+          <y>100</y>
+          <width>401</width>
+          <height>71</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:24pt; font-weight:600;&quot;&gt;Bienvenue sur WinQuest !&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="createQuizzButton">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>290</y>
+          <width>375</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="text">
+         <string>Créer un quizz</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="createQuizzPage">
+       <widget class="QStackedWidget" name="quizzCreationSteps">
+        <property name="geometry">
+         <rect>
+          <x>-1</x>
+          <y>-1</y>
+          <width>791</width>
+          <height>601</height>
+         </rect>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="nameQuizzPage">
+         <widget class="QLabel" name="nameQuizzErrorsLabel">
+          <property name="geometry">
+           <rect>
+            <x>180</x>
+            <y>260</y>
+            <width>306</width>
+            <height>37</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: #F3A917</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="quizzTitle">
+          <property name="geometry">
+           <rect>
+            <x>180</x>
+            <y>310</y>
+            <width>306</width>
+            <height>18</height>
+           </rect>
+          </property>
+          <property name="echoMode">
+           <enum>QLineEdit::Normal</enum>
+          </property>
+          <property name="placeholderText">
+           <string>Titre du Quizz</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="addQuestionsButton">
+          <property name="geometry">
+           <rect>
+            <x>180</x>
+            <y>340</y>
+            <width>311</width>
+            <height>24</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Ajouter les questions &gt;</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="backButton2">
+          <property name="geometry">
+           <rect>
+            <x>70</x>
+            <y>60</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="text">
+           <string>Retour accueil</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources/resources.qrc">
+            <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="createQuestionsPage">
+         <widget class="QLineEdit" name="titleQuestion">
+          <property name="geometry">
+           <rect>
+            <x>160</x>
+            <y>90</y>
+            <width>391</width>
+            <height>50</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="echoMode">
+           <enum>QLineEdit::Normal</enum>
+          </property>
+          <property name="placeholderText">
+           <string>Intitulé de la question</string>
+          </property>
+         </widget>
+         <widget class="QRadioButton" name="radioButton0">
+          <property name="geometry">
+           <rect>
+            <x>340</x>
+            <y>200</y>
+            <width>21</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>-1</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">choiceRightAnswer</string>
+          </attribute>
+         </widget>
+         <widget class="QRadioButton" name="radioButton2">
+          <property name="geometry">
+           <rect>
+            <x>340</x>
+            <y>260</y>
+            <width>21</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>-1</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">choiceRightAnswer</string>
+          </attribute>
+         </widget>
+         <widget class="QRadioButton" name="radioButton3">
+          <property name="geometry">
+           <rect>
+            <x>340</x>
+            <y>320</y>
+            <width>21</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>-1</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">choiceRightAnswer</string>
+          </attribute>
+         </widget>
+         <widget class="QRadioButton" name="radioButton4">
+          <property name="geometry">
+           <rect>
+            <x>340</x>
+            <y>380</y>
+            <width>21</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>-1</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <attribute name="buttonGroup">
+           <string notr="true">choiceRightAnswer</string>
+          </attribute>
+         </widget>
+         <widget class="QLabel" name="label_2">
+          <property name="geometry">
+           <rect>
+            <x>340</x>
+            <y>170</y>
+            <width>101</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Bonne réponse&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="nextQuestionButton">
+          <property name="geometry">
+           <rect>
+            <x>160</x>
+            <y>430</y>
+            <width>251</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Prochaine question</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="endQuestionsButton">
+          <property name="geometry">
+           <rect>
+            <x>430</x>
+            <y>430</y>
+            <width>121</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Terminer</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="questionCreationErrorsLabel">
+          <property name="geometry">
+           <rect>
+            <x>160</x>
+            <y>480</y>
+            <width>391</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: #F3A917</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QWidget" name="verticalLayoutWidget">
+          <property name="geometry">
+           <rect>
+            <x>160</x>
+            <y>190</y>
+            <width>160</width>
+            <height>232</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="answers">
+           <item>
+            <widget class="QLineEdit" name="answer1">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="echoMode">
+              <enum>QLineEdit::Normal</enum>
+             </property>
+             <property name="placeholderText">
+              <string>Réponse 1</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="answer2">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="echoMode">
+              <enum>QLineEdit::Normal</enum>
+             </property>
+             <property name="placeholderText">
+              <string>Réponse 2</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="answer3">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="echoMode">
+              <enum>QLineEdit::Normal</enum>
+             </property>
+             <property name="placeholderText">
+              <string>Réponse 3</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="answer4">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>50</height>
+              </size>
+             </property>
+             <property name="echoMode">
+              <enum>QLineEdit::Normal</enum>
+             </property>
+             <property name="placeholderText">
+              <string>Réponse 4</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QLabel" name="questionNumberLabel">
+          <property name="geometry">
+           <rect>
+            <x>160</x>
+            <y>80</y>
+            <width>101</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Question 1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="backButton3">
+          <property name="geometry">
+           <rect>
+            <x>70</x>
+            <y>40</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="text">
+           <string>Retour accueil</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources/resources.qrc">
+            <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="chooseOrderPage">
+         <widget class="QLabel" name="questionNumberLabel_3">
+          <property name="geometry">
+           <rect>
+            <x>190</x>
+            <y>113</y>
+            <width>381</width>
+            <height>61</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Afficher les questions dans un ordre aléatoire ?&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="doRandomOrderButton">
+          <property name="geometry">
+           <rect>
+            <x>220</x>
+            <y>190</y>
+            <width>116</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Oui</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="noRandomOrderButton">
+          <property name="geometry">
+           <rect>
+            <x>420</x>
+            <y>190</y>
+            <width>116</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Non</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="backButton4">
+          <property name="geometry">
+           <rect>
+            <x>60</x>
+            <y>60</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="text">
+           <string>Retour accueil</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources/resources.qrc">
+            <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="chooseNbToDisplayPage">
+         <widget class="QPushButton" name="saveQuizzButton">
+          <property name="geometry">
+           <rect>
+            <x>230</x>
+            <y>320</y>
+            <width>306</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Valider</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_5">
+          <property name="geometry">
+           <rect>
+            <x>222</x>
+            <y>140</y>
+            <width>321</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Combien voulez-vous afficher de questions ?&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLabel" name="nbQuestionsLabel">
+          <property name="geometry">
+           <rect>
+            <x>220</x>
+            <y>169</y>
+            <width>321</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vous avez écrit 1 questions&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="nbToDisplay">
+          <property name="geometry">
+           <rect>
+            <x>270</x>
+            <y>230</y>
+            <width>234</width>
+            <height>50</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="echoMode">
+           <enum>QLineEdit::Normal</enum>
+          </property>
+          <property name="placeholderText">
+           <string>Insérez un nombre</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="nbToDisplayErrorsLabel">
+          <property name="geometry">
+           <rect>
+            <x>270</x>
+            <y>370</y>
+            <width>234</width>
+            <height>13</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: #F3A917</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="backButton5">
+          <property name="geometry">
+           <rect>
+            <x>70</x>
+            <y>60</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="text">
+           <string>Retour accueil</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../resources/resources.qrc">
+            <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="quizzListPage">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <widget class="QLabel" name="label_3">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>110</y>
+          <width>841</width>
+          <height>39</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;Liste des quizz&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_3">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>173</y>
+          <width>841</width>
+          <height>421</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <widget class="QWidget" name="page_list_quizz_container_bot" native="true">
+         <property name="geometry">
+          <rect>
+           <x>190</x>
+           <y>30</y>
+           <width>450</width>
+           <height>241</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QPushButton" name="backButton1">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>70</y>
+          <width>131</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="text">
+         <string>Retour accueil</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources/resources.qrc">
+          <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </widget>
       <widget class="QWidget" name="questionsPage">
        <widget class="QStackedWidget" name="questions">
         <property name="geometry">
@@ -760,715 +1483,6 @@ QRadioButton::indicator::checked {
          </widget>
         </widget>
         <widget class="QWidget" name="endQuizzPage"/>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="homePage">
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <widget class="QPushButton" name="showQuizzListButton">
-        <property name="geometry">
-         <rect>
-          <x>150</x>
-          <y>250</y>
-          <width>375</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
-        <property name="text">
-         <string>Liste des quizz</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label">
-        <property name="geometry">
-         <rect>
-          <x>140</x>
-          <y>100</y>
-          <width>401</width>
-          <height>71</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:24pt; font-weight:600;&quot;&gt;Bienvenue sur WinQuest !&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="createQuizzButton">
-        <property name="geometry">
-         <rect>
-          <x>150</x>
-          <y>290</y>
-          <width>375</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
-        <property name="text">
-         <string>Créer un quizz</string>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="createQuizzPage">
-       <widget class="QStackedWidget" name="quizzCreationSteps">
-        <property name="geometry">
-         <rect>
-          <x>-1</x>
-          <y>-1</y>
-          <width>771</width>
-          <height>601</height>
-         </rect>
-        </property>
-        <widget class="QWidget" name="nameQuizzPage">
-         <widget class="QLabel" name="nameQuizzErrorsLabel">
-          <property name="geometry">
-           <rect>
-            <x>180</x>
-            <y>260</y>
-            <width>306</width>
-            <height>37</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: #F3A917</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="quizzTitle">
-          <property name="geometry">
-           <rect>
-            <x>180</x>
-            <y>310</y>
-            <width>306</width>
-            <height>18</height>
-           </rect>
-          </property>
-          <property name="echoMode">
-           <enum>QLineEdit::Normal</enum>
-          </property>
-          <property name="placeholderText">
-           <string>Titre du Quizz</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="addQuestionsButton">
-          <property name="geometry">
-           <rect>
-            <x>180</x>
-            <y>340</y>
-            <width>311</width>
-            <height>24</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Ajouter les questions &gt;</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="backButton_5">
-          <property name="geometry">
-           <rect>
-            <x>90</x>
-            <y>90</y>
-            <width>75</width>
-            <height>24</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset resource="../resources/resources.qrc">
-            <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
-          </property>
-          <property name="autoDefault">
-           <bool>false</bool>
-          </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </widget>
-        <widget class="QWidget" name="createQuestionsPage">
-         <widget class="QLineEdit" name="titleQuestion">
-          <property name="geometry">
-           <rect>
-            <x>160</x>
-            <y>90</y>
-            <width>391</width>
-            <height>50</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>50</height>
-           </size>
-          </property>
-          <property name="echoMode">
-           <enum>QLineEdit::Normal</enum>
-          </property>
-          <property name="placeholderText">
-           <string>Intitulé de la question</string>
-          </property>
-         </widget>
-         <widget class="QRadioButton" name="radioButton0">
-          <property name="geometry">
-           <rect>
-            <x>340</x>
-            <y>200</y>
-            <width>21</width>
-            <height>21</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">choiceRightAnswer</string>
-          </attribute>
-         </widget>
-         <widget class="QRadioButton" name="radioButton2">
-          <property name="geometry">
-           <rect>
-            <x>340</x>
-            <y>260</y>
-            <width>21</width>
-            <height>21</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">choiceRightAnswer</string>
-          </attribute>
-         </widget>
-         <widget class="QRadioButton" name="radioButton3">
-          <property name="geometry">
-           <rect>
-            <x>340</x>
-            <y>320</y>
-            <width>21</width>
-            <height>21</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">choiceRightAnswer</string>
-          </attribute>
-         </widget>
-         <widget class="QRadioButton" name="radioButton4">
-          <property name="geometry">
-           <rect>
-            <x>340</x>
-            <y>380</y>
-            <width>21</width>
-            <height>21</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-          <attribute name="buttonGroup">
-           <string notr="true">choiceRightAnswer</string>
-          </attribute>
-         </widget>
-         <widget class="QLabel" name="label_2">
-          <property name="geometry">
-           <rect>
-            <x>340</x>
-            <y>170</y>
-            <width>101</width>
-            <height>16</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Bonne réponse&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="nextQuestionButton">
-          <property name="geometry">
-           <rect>
-            <x>160</x>
-            <y>430</y>
-            <width>251</width>
-            <height>30</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>30</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Prochaine question</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="endQuestionsButton">
-          <property name="geometry">
-           <rect>
-            <x>430</x>
-            <y>430</y>
-            <width>121</width>
-            <height>30</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>30</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Terminer</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="questionCreationErrorsLabel">
-          <property name="geometry">
-           <rect>
-            <x>160</x>
-            <y>480</y>
-            <width>391</width>
-            <height>41</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: #F3A917</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-         <widget class="QWidget" name="verticalLayoutWidget">
-          <property name="geometry">
-           <rect>
-            <x>160</x>
-            <y>190</y>
-            <width>160</width>
-            <height>232</height>
-           </rect>
-          </property>
-          <layout class="QVBoxLayout" name="answers">
-           <item>
-            <widget class="QLineEdit" name="answer1">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="echoMode">
-              <enum>QLineEdit::Normal</enum>
-             </property>
-             <property name="placeholderText">
-              <string>Réponse 1</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="answer2">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="echoMode">
-              <enum>QLineEdit::Normal</enum>
-             </property>
-             <property name="placeholderText">
-              <string>Réponse 2</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="answer3">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="echoMode">
-              <enum>QLineEdit::Normal</enum>
-             </property>
-             <property name="placeholderText">
-              <string>Réponse 3</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="answer4">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>50</height>
-              </size>
-             </property>
-             <property name="echoMode">
-              <enum>QLineEdit::Normal</enum>
-             </property>
-             <property name="placeholderText">
-              <string>Réponse 4</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QLabel" name="questionNumberLabel">
-          <property name="geometry">
-           <rect>
-            <x>160</x>
-            <y>80</y>
-            <width>101</width>
-            <height>16</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Question 1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="backButton_4">
-          <property name="geometry">
-           <rect>
-            <x>50</x>
-            <y>80</y>
-            <width>75</width>
-            <height>24</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset resource="../resources/resources.qrc">
-            <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
-          </property>
-          <property name="autoDefault">
-           <bool>false</bool>
-          </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </widget>
-        <widget class="QWidget" name="chooseOrderPage">
-         <widget class="QLabel" name="questionNumberLabel_3">
-          <property name="geometry">
-           <rect>
-            <x>190</x>
-            <y>113</y>
-            <width>381</width>
-            <height>61</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Afficher les questions dans un ordre aléatoire ?&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="doRandomOrderButton">
-          <property name="geometry">
-           <rect>
-            <x>220</x>
-            <y>190</y>
-            <width>116</width>
-            <height>30</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>30</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Oui</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="noRandomOrderButton">
-          <property name="geometry">
-           <rect>
-            <x>420</x>
-            <y>190</y>
-            <width>116</width>
-            <height>30</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>30</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Non</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="backButton_3">
-          <property name="geometry">
-           <rect>
-            <x>50</x>
-            <y>80</y>
-            <width>75</width>
-            <height>24</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset resource="../resources/resources.qrc">
-            <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
-          </property>
-          <property name="autoDefault">
-           <bool>false</bool>
-          </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </widget>
-        <widget class="QWidget" name="chooseNbToDisplayPage">
-         <widget class="QPushButton" name="saveQuizzButton">
-          <property name="geometry">
-           <rect>
-            <x>230</x>
-            <y>320</y>
-            <width>306</width>
-            <height>31</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Valider</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_5">
-          <property name="geometry">
-           <rect>
-            <x>222</x>
-            <y>140</y>
-            <width>321</width>
-            <height>20</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Combien voulez-vous afficher de questions ?&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-         <widget class="QLabel" name="nbQuestionsLabel">
-          <property name="geometry">
-           <rect>
-            <x>220</x>
-            <y>169</y>
-            <width>321</width>
-            <height>31</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vous avez écrit 1 questions&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="nbToDisplay">
-          <property name="geometry">
-           <rect>
-            <x>270</x>
-            <y>230</y>
-            <width>234</width>
-            <height>50</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>50</height>
-           </size>
-          </property>
-          <property name="echoMode">
-           <enum>QLineEdit::Normal</enum>
-          </property>
-          <property name="placeholderText">
-           <string>Insérez un nombre</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="nbToDisplayErrorsLabel">
-          <property name="geometry">
-           <rect>
-            <x>270</x>
-            <y>370</y>
-            <width>234</width>
-            <height>13</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: #F3A917</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="backButton_2">
-          <property name="geometry">
-           <rect>
-            <x>50</x>
-            <y>80</y>
-            <width>75</width>
-            <height>24</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset resource="../resources/resources.qrc">
-            <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
-          </property>
-          <property name="autoDefault">
-           <bool>false</bool>
-          </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </widget>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="quizzListPage">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <widget class="QLabel" name="label_3">
-        <property name="geometry">
-         <rect>
-          <x>160</x>
-          <y>110</y>
-          <width>841</width>
-          <height>39</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;Liste des quizz&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-       </widget>
-       <widget class="QGroupBox" name="groupBox_3">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>173</y>
-          <width>841</width>
-          <height>421</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string/>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <widget class="QWidget" name="page_list_quizz_container_bot" native="true">
-         <property name="geometry">
-          <rect>
-           <x>190</x>
-           <y>30</y>
-           <width>450</width>
-           <height>241</height>
-          </rect>
-         </property>
-        </widget>
-       </widget>
-       <widget class="QPushButton" name="backButton">
-        <property name="geometry">
-         <rect>
-          <x>50</x>
-          <y>80</y>
-          <width>75</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../resources/resources.qrc">
-          <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
-        </property>
-        <property name="autoDefault">
-         <bool>false</bool>
-        </property>
-        <property name="default">
-         <bool>false</bool>
-        </property>
        </widget>
       </widget>
      </widget>
