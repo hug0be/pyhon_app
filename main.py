@@ -136,7 +136,7 @@ class UserMenuWindow(QMainWindow):
         self.ui.saveQuizzButton.clicked.connect(self.create_quizz4)
 
         # Binding des back buttons
-        backButtons = [self.ui.backButton1, self.ui.backButton2, self.ui.backButton3, self.ui.backButton4, self.ui.backButton5]
+        backButtons = [self.ui.backButton1, self.ui.backButton2, self.ui.backButton3, self.ui.backButton4, self.ui.backButton5, self.ui.backButton6]
         for backButton in backButtons:
             backButton.clicked.connect(self.show_home_page)
 
