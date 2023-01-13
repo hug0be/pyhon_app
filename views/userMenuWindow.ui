@@ -479,7 +479,7 @@ QRadioButton::indicator::checked {
        </widget>
       </widget>
       <widget class="QWidget" name="questionsPage">
-       <widget class="QStackedWidget" name="questions">
+       <widget class="QStackedWidget" name="questionPages">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -487,6 +487,12 @@ QRadioButton::indicator::checked {
           <width>841</width>
           <height>601</height>
          </rect>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
         <widget class="QWidget" name="questionPage">
          <widget class="QWidget" name="verticalLayoutWidget_5">
@@ -754,7 +760,7 @@ QRadioButton::indicator::checked {
           </property>
          </widget>
         </widget>
-        <widget class="QWidget" name="endQuestionPage">
+        <widget class="QWidget" name="endQuizzPage">
          <widget class="QLabel" name="label_Fin_Quiz">
           <property name="geometry">
            <rect>
@@ -885,7 +891,6 @@ QRadioButton::indicator::checked {
           </property>
          </widget>
         </widget>
-        <widget class="QWidget" name="endQuizzPage"/>
        </widget>
       </widget>
       <widget class="QWidget" name="createQuizzPage">

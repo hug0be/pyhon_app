@@ -115,8 +115,10 @@ class UserMenuWindow(QMainWindow):
         self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
         self.ui.toggleButton.clicked.connect(lambda : self.toggle_menu(200))
         self.pendingQuizz = None
-        # Variable qui permet de savoir si l'user à répondu (pendant le quizz)
+
+        # Variables utilisés pendant le quizz
         self.hasAnswered = False
+        self.indexQuestion = 0
 
         #Binding changements de pages
         # TODO: Retour arrière pour les pages "quizzListPage" et "createQuizzPage"
@@ -148,10 +150,11 @@ class UserMenuWindow(QMainWindow):
         self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
     def show_quizz_creation_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.createQuizzPage)
+
     def init_quizz(self, quizz:Quizz):
-        self.update_question_page(quizz.title, quizz.questions[0])
-        self.ui.pagesList.setCurrentWidget(self.ui.questionsPage)
         self.pendingQuizz = quizz
+        self.update_question_page(quizz.title, self.next_question())
+        self.ui.pagesList.setCurrentWidget(self.ui.questionsPage)
 
     def update_question_page(self, titleQuizz:str, question:Question):
         """Initialise les champs (titre, titre question, ...) d'une page question"""
@@ -168,6 +171,7 @@ class UserMenuWindow(QMainWindow):
         for radioButton in radioButtons:
             radioButton.setText(None)
             radioButton.setChecked(False)
+            radioButton.setStyleSheet("background: transparent")
 
         # Obtention des réponses
         answers = question.get_shuffled_answers()
@@ -196,12 +200,20 @@ class UserMenuWindow(QMainWindow):
 
     def choose_question_page(self):
         self.hasAnswered = not self.hasAnswered
-        currentQuestion = self.pendingQuizz.questions[0]
+        print("Actual question:", self.indexQuestion)
         if self.hasAnswered:
-            self.show_answer(currentQuestion)
+            self.show_answer(self.pendingQuizz.questions[self.indexQuestion-1])
         else:
-            # TODO : Choose next question
-            self.update_question_page(self.pendingQuizz.title, currentQuestion)
+            self.update_question_page(self.pendingQuizz.title, self.next_question())
+
+    def next_question(self)->Question:
+        print("Next question:", self.indexQuestion)
+        if self.indexQuestion < self.pendingQuizz.nb_questions():
+            self.indexQuestion += 1
+            return self.pendingQuizz.questions[self.indexQuestion-1]
+        else:
+            self.ui.questionPages.setCurrentWidget(self.ui.endQuizzPage)
+            raise Exception("Plus de question")
 
     def show_answer(self, currentQuestion):
         """Affiche la bonne réponse et les mauvaises réponses"""
