@@ -9,7 +9,7 @@ from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout
 from PySide6.QtUiTools import QUiLoader
 
-from src import History, HistoryItem
+from src import History
 from src.account import Account, WrongPasswordException, UnknownAccountException
 from src.quizz import Quizz, Question, InvalidQuestionException, InvalidNbToDisplayException, ImportQuizzException
 from src.ui import Ui_MainWindow, Ui_userMenu
@@ -153,7 +153,6 @@ class UserMenuWindow(QMainWindow):
         for backButton in backButtons:
             backButton.clicked.connect(self.show_home_page)
 
-
     def show_home_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
 
@@ -241,7 +240,6 @@ class UserMenuWindow(QMainWindow):
             self.update_question_page(self.pendingQuizz.title, self.next_question())
 
     def next_question(self)->Question:
-        print("Next question:", self.indexQuestion)
         if self.indexQuestion < self.pendingQuizz.nb_questions():
             self.indexQuestion += 1
             return self.pendingQuizz.questions[self.indexQuestion-1]
@@ -399,27 +397,27 @@ class UserMenuWindow(QMainWindow):
         self.pendingQuizz.save()
         self.show_quizz_list_page()
 
-    def create_bouttons_page_list_quizz(self):
-        """Créer les boutons sur la page Liste des Quizz"""
-        # Tous les quizz
-        quizzes = Quizz.get_list_quizzes()
-        # Conteneur des quizz
-        quizzContainer = self.ui.page_list_quizz_container_bot
-        # Créer le layout pour page
-        layout = QVBoxLayout()
-
-        for quizz in quizzes:
-            # Créer un bouton
-            button = QPushButton(quizz["title"])
-            # Binding du bouton avec sa page de quizz
-            button.clicked.connect(
-                lambda: self.show_quizz_questions_page(Quizz.get(quizz["title"]))
-            )
-            # Ajout du bouton au layout
-            layout.addWidget(button)
-
-        # Ajout du layout dans le conteneur des quizz
-        quizzContainer.setLayout(layout)
+    # def create_bouttons_page_list_quizz(self):
+    #     """Créer les boutons sur la page Liste des Quizz"""
+    #     # Tous les quizz
+    #     quizzes = Quizz.get_list_quizzes()
+    #     # Conteneur des quizz
+    #     quizzContainer = self.ui.page_list_quizz_container_bot
+    #     # Créer le layout pour page
+    #     layout = QVBoxLayout()
+    #
+    #     for quizz in quizzes:
+    #         # Créer un bouton
+    #         button = QPushButton(quizz["title"])
+    #         # Binding du bouton avec sa page de quizz
+    #         button.clicked.connect(
+    #             lambda: self.show_quizz_questions_page(Quizz.get(quizz["title"]))
+    #         )
+    #         # Ajout du bouton au layout
+    #         layout.addWidget(button)
+    #
+    #     # Ajout du layout dans le conteneur des quizz
+    #     quizzContainer.setLayout(layout)
 
     def create_buttons_page_history(self):
         """Créer les boutons sur la page Historique"""
@@ -442,16 +440,14 @@ class UserMenuWindow(QMainWindow):
 
     def import_quizz(self):
         # Tentative d'ouverture du fichier
-        try:
-            file = QFileDialog.getOpenFileName(self, 'Importer un quizz', "", "Text files (*.txt)")
-        except FileNotFoundError:
-            return False
-
         # Tentative d'ajout du quizz
         try:
+            file = QFileDialog.getOpenFileName(self, 'Importer un quizz', "", "Text files (*.txt)")
             Quizz.import_txt(file[0]).save()
         except ImportQuizzException as ex:
             self.ui.importQuizzErrorsLabel.setText(ex.__str__())
+            return False
+        except FileNotFoundError:
             return False
 
         # All good !
