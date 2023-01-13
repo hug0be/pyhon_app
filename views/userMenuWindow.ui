@@ -94,12 +94,19 @@
 	text-align: left;
 }
 
-#pagesList QPushButton {
+#pagesList QPushButton{
 	background-color: #F26DF9;
 	padding: 5px 10px;
-    qproperty-cursor: PointingHandCursor;
+    qproperty-cursor:PointingHandCursor;
 }
 
+#quizzListPage #backButton, #chooseNbToDisplayPage #backButton_2, #chooseOrderPage #backButton_3, #createQuestionsPage #backButton_4, #nameQuizzPage #backButton_5, #history #backButton_6 {
+	background-color: transparent ;
+}
+
+#pagesList &gt; QWidget{
+	background-color: #5158BB;
+}
 
 #createQuizzPage QLineEdit, #questionsPage QLineEdit{
 	background: transparent;
@@ -322,25 +329,29 @@ QRadioButton::indicator::checked {
           </item>
           <item>
            <widget class="QLabel" name="importQuizzErrorsLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
             <property name="styleSheet">
              <string notr="true">color: #F3A917</string>
             </property>
             <property name="text">
              <string/>
             </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-            </property>
             <property name="wordWrap">
              <bool>true</bool>
             </property>
            </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>
@@ -351,8 +362,406 @@ QRadioButton::indicator::checked {
     <item>
      <widget class="QStackedWidget" name="pagesList">
       <property name="currentIndex">
-       <number>1</number>
+       <number>4</number>
       </property>
+      <widget class="QWidget" name="questionsPage">
+       <widget class="QStackedWidget" name="questions">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>-1</y>
+          <width>841</width>
+          <height>601</height>
+         </rect>
+        </property>
+        <widget class="QWidget" name="questionPage">
+         <widget class="QWidget" name="verticalLayoutWidget_5">
+          <property name="geometry">
+           <rect>
+            <x>220</x>
+            <y>210</y>
+            <width>421</width>
+            <height>231</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="answers_6">
+           <item>
+            <widget class="QRadioButton" name="radioButton1_Quiz">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>-1</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>          Réponse 1</string>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>16</width>
+               <height>16</height>
+              </size>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButton2_Quiz">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>-1</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>          Réponse 2</string>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButton3_Quiz">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>-1</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>          Réponse 3</string>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="radioButton4_Quiz">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>-1</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>          Réponse 4</string>
+             </property>
+             <property name="checked">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QLabel" name="label_VotreReponse">
+          <property name="geometry">
+           <rect>
+            <x>190</x>
+            <y>190</y>
+            <width>101</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Votre réponse&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="questionErrorsLabel">
+          <property name="geometry">
+           <rect>
+            <x>150</x>
+            <y>470</y>
+            <width>391</width>
+            <height>41</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: #F3A917</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_Points">
+          <property name="geometry">
+           <rect>
+            <x>690</x>
+            <y>120</y>
+            <width>61</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Points</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_Nb_Points">
+          <property name="geometry">
+           <rect>
+            <x>690</x>
+            <y>70</y>
+            <width>61</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>-1</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>20</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_NB_Question">
+          <property name="geometry">
+           <rect>
+            <x>690</x>
+            <y>480</y>
+            <width>61</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>23/30</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="validerButton_Quiz">
+          <property name="geometry">
+           <rect>
+            <x>290</x>
+            <y>470</y>
+            <width>251</width>
+            <height>30</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Valider</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_Question">
+          <property name="geometry">
+           <rect>
+            <x>220</x>
+            <y>110</y>
+            <width>391</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Question</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_titre">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>10</y>
+            <width>841</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>-1</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Nom du Quiz</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="endQuestionPage">
+         <widget class="QLabel" name="label_Fin_Quiz">
+          <property name="geometry">
+           <rect>
+            <x>-10</x>
+            <y>40</y>
+            <width>841</width>
+            <height>71</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Le Quiz est terminée</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_Fin_VotreScore">
+          <property name="geometry">
+           <rect>
+            <x>110</x>
+            <y>180</y>
+            <width>151</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Votre score</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_Fin_Score">
+          <property name="geometry">
+           <rect>
+            <x>110</x>
+            <y>210</y>
+            <width>141</width>
+            <height>121</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>28/30</string>
+          </property>
+         </widget>
+         <widget class="QWidget" name="gridLayoutWidget">
+          <property name="geometry">
+           <rect>
+            <x>310</x>
+            <y>210</y>
+            <width>461</width>
+            <height>241</height>
+           </rect>
+          </property>
+          <layout class="QGridLayout" name="finQuestionLayout">
+           <item row="0" column="0">
+            <widget class="QPushButton" name="retryButton">
+             <property name="text">
+              <string>Recommencer</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QPushButton" name="homeButton">
+             <property name="text">
+              <string>Acceuil</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="listButton">
+             <property name="text">
+              <string>Liste des quizz</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="shareButton">
+             <property name="text">
+              <string>Partager</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QLabel" name="label_Fin_VotreTemps">
+          <property name="geometry">
+           <rect>
+            <x>100</x>
+            <y>350</y>
+            <width>171</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Votre temps</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_Fin_Temps">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>400</y>
+            <width>111</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>9min10sec</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_titre_2">
+          <property name="geometry">
+           <rect>
+            <x>280</x>
+            <y>150</y>
+            <width>521</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>-1</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Nom du Quiz</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="endQuizzPage"/>
+       </widget>
+      </widget>
       <widget class="QWidget" name="homePage">
        <property name="styleSheet">
         <string notr="true"/>
@@ -403,91 +812,15 @@ QRadioButton::indicator::checked {
         </property>
        </widget>
       </widget>
-      <widget class="QWidget" name="quizzListPage">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <widget class="QLabel" name="label_3">
-        <property name="geometry">
-         <rect>
-          <x>160</x>
-          <y>110</y>
-          <width>841</width>
-          <height>39</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;Liste des quizz&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-       </widget>
-       <widget class="QGroupBox" name="groupBox_3">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>173</y>
-          <width>841</width>
-          <height>421</height>
-         </rect>
-        </property>
-        <property name="title">
-         <string/>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <widget class="QWidget" name="page_list_quizz_container_bot" native="true">
-         <property name="geometry">
-          <rect>
-           <x>190</x>
-           <y>30</y>
-           <width>450</width>
-           <height>241</height>
-          </rect>
-         </property>
-        </widget>
-       </widget>
-       <widget class="QPushButton" name="backButton1">
-        <property name="geometry">
-         <rect>
-          <x>60</x>
-          <y>70</y>
-          <width>121</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background: transparent</string>
-        </property>
-        <property name="text">
-         <string>Retour accueil</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../resources/resources.qrc">
-          <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
-        </property>
-        <property name="autoDefault">
-         <bool>false</bool>
-        </property>
-        <property name="default">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </widget>
       <widget class="QWidget" name="createQuizzPage">
        <widget class="QStackedWidget" name="quizzCreationSteps">
         <property name="geometry">
          <rect>
           <x>-1</x>
           <y>-1</y>
-          <width>791</width>
+          <width>771</width>
           <height>601</height>
          </rect>
-        </property>
-        <property name="currentIndex">
-         <number>0</number>
         </property>
         <widget class="QWidget" name="nameQuizzPage">
          <widget class="QLabel" name="nameQuizzErrorsLabel">
@@ -535,23 +868,17 @@ QRadioButton::indicator::checked {
            <string>Ajouter les questions &gt;</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="backButton2">
+         <widget class="QPushButton" name="backButton_5">
           <property name="geometry">
            <rect>
-            <x>70</x>
-            <y>60</y>
-            <width>121</width>
-            <height>31</height>
+            <x>90</x>
+            <y>90</y>
+            <width>75</width>
+            <height>24</height>
            </rect>
           </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background: transparent</string>
-          </property>
           <property name="text">
-           <string>Retour accueil</string>
+           <string/>
           </property>
           <property name="icon">
            <iconset resource="../resources/resources.qrc">
@@ -864,23 +1191,17 @@ QRadioButton::indicator::checked {
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Question 1&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="backButton3">
+         <widget class="QPushButton" name="backButton_4">
           <property name="geometry">
            <rect>
-            <x>70</x>
-            <y>40</y>
-            <width>121</width>
-            <height>31</height>
+            <x>50</x>
+            <y>80</y>
+            <width>75</width>
+            <height>24</height>
            </rect>
           </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background: transparent</string>
-          </property>
           <property name="text">
-           <string>Retour accueil</string>
+           <string/>
           </property>
           <property name="icon">
            <iconset resource="../resources/resources.qrc">
@@ -949,23 +1270,17 @@ QRadioButton::indicator::checked {
            <string>Non</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="backButton4">
+         <widget class="QPushButton" name="backButton_3">
           <property name="geometry">
            <rect>
-            <x>60</x>
-            <y>60</y>
-            <width>121</width>
-            <height>31</height>
+            <x>50</x>
+            <y>80</y>
+            <width>75</width>
+            <height>24</height>
            </rect>
           </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background: transparent</string>
-          </property>
           <property name="text">
-           <string>Retour accueil</string>
+           <string/>
           </property>
           <property name="icon">
            <iconset resource="../resources/resources.qrc">
@@ -1063,23 +1378,17 @@ QRadioButton::indicator::checked {
            <string/>
           </property>
          </widget>
-         <widget class="QPushButton" name="backButton5">
+         <widget class="QPushButton" name="backButton_2">
           <property name="geometry">
            <rect>
-            <x>70</x>
-            <y>60</y>
-            <width>121</width>
-            <height>31</height>
+            <x>50</x>
+            <y>80</y>
+            <width>75</width>
+            <height>24</height>
            </rect>
           </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background: transparent</string>
-          </property>
           <property name="text">
-           <string>Retour accueil</string>
+           <string/>
           </property>
           <property name="icon">
            <iconset resource="../resources/resources.qrc">
@@ -1095,385 +1404,138 @@ QRadioButton::indicator::checked {
         </widget>
        </widget>
       </widget>
-      <widget class="QWidget" name="quizzPages">
-       <widget class="QStackedWidget" name="questions">
+      <widget class="QWidget" name="quizzListPage">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <widget class="QLabel" name="label_3">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>110</y>
+          <width>841</width>
+          <height>39</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;Liste des quizz&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_3">
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>-1</y>
+          <y>173</y>
           <width>841</width>
-          <height>601</height>
+          <height>421</height>
          </rect>
         </property>
-        <widget class="QWidget" name="questionPage">
-         <widget class="QWidget" name="verticalLayoutWidget_5">
-          <property name="geometry">
-           <rect>
-            <x>220</x>
-            <y>210</y>
-            <width>421</width>
-            <height>231</height>
-           </rect>
-          </property>
-          <layout class="QVBoxLayout" name="answers_6">
-           <item>
-            <widget class="QRadioButton" name="answerQuestion1">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>-1</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>          Réponse 1</string>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>16</width>
-               <height>16</height>
-              </size>
-             </property>
-             <property name="checked">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QRadioButton" name="answerQuestion2">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>-1</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>          Réponse 2</string>
-             </property>
-             <property name="checked">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QRadioButton" name="answerQuestion3">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>-1</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>          Réponse 3</string>
-             </property>
-             <property name="checked">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QRadioButton" name="answerQuestion4">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>-1</pointsize>
-              </font>
-             </property>
-             <property name="text">
-              <string>          Réponse 4</string>
-             </property>
-             <property name="checked">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QLabel" name="label_4">
-          <property name="geometry">
-           <rect>
-            <x>190</x>
-            <y>190</y>
-            <width>101</width>
-            <height>16</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Votre réponse&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_6">
-          <property name="geometry">
-           <rect>
-            <x>690</x>
-            <y>120</y>
-            <width>61</width>
-            <height>20</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Points</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="pointsLabel">
-          <property name="geometry">
-           <rect>
-            <x>690</x>
-            <y>70</y>
-            <width>61</width>
-            <height>51</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>20</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="nbQuestionLabel">
-          <property name="geometry">
-           <rect>
-            <x>690</x>
-            <y>480</y>
-            <width>61</width>
-            <height>16</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>23/30</string>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="validateAnswerButton">
-          <property name="geometry">
-           <rect>
-            <x>290</x>
-            <y>470</y>
-            <width>251</width>
-            <height>30</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>30</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Valider</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="questionLabel">
-          <property name="geometry">
-           <rect>
-            <x>220</x>
-            <y>110</y>
-            <width>391</width>
-            <height>51</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Question</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="titleLabel">
-          <property name="geometry">
-           <rect>
-            <x>0</x>
-            <y>10</y>
-            <width>841</width>
-            <height>51</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Nom du Quiz</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
+        <property name="title">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <widget class="QWidget" name="page_list_quizz_container_bot" native="true">
+         <property name="geometry">
+          <rect>
+           <x>190</x>
+           <y>30</y>
+           <width>450</width>
+           <height>241</height>
+          </rect>
+         </property>
         </widget>
-        <widget class="QWidget" name="endQuestionPage">
-         <widget class="QLabel" name="label_Fin_Quiz">
-          <property name="geometry">
-           <rect>
-            <x>-10</x>
-            <y>40</y>
-            <width>841</width>
-            <height>71</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Le Quiz est terminée</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_Fin_VotreScore">
-          <property name="geometry">
-           <rect>
-            <x>110</x>
-            <y>180</y>
-            <width>151</width>
-            <height>51</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Votre score</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_Fin_Score">
-          <property name="geometry">
-           <rect>
-            <x>110</x>
-            <y>210</y>
-            <width>141</width>
-            <height>121</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>28/30</string>
-          </property>
-         </widget>
-         <widget class="QWidget" name="gridLayoutWidget">
-          <property name="geometry">
-           <rect>
-            <x>310</x>
-            <y>210</y>
-            <width>461</width>
-            <height>241</height>
-           </rect>
-          </property>
-          <layout class="QGridLayout" name="finQuestionLayout">
-           <item row="0" column="0">
-            <widget class="QPushButton" name="retryButton">
-             <property name="text">
-              <string>Recommencer</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QPushButton" name="homeButton">
-             <property name="text">
-              <string>Acceuil</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QPushButton" name="listButton">
-             <property name="text">
-              <string>Liste des quizz</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QPushButton" name="shareButton">
-             <property name="text">
-              <string>Partager</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QLabel" name="label_Fin_VotreTemps">
-          <property name="geometry">
-           <rect>
-            <x>100</x>
-            <y>350</y>
-            <width>171</width>
-            <height>51</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Votre temps</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_Fin_Temps">
-          <property name="geometry">
-           <rect>
-            <x>130</x>
-            <y>400</y>
-            <width>111</width>
-            <height>51</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>9min10sec</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_titre_2">
-          <property name="geometry">
-           <rect>
-            <x>280</x>
-            <y>150</y>
-            <width>521</width>
-            <height>51</height>
-           </rect>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Nom du Quiz</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
+       </widget>
+       <widget class="QPushButton" name="backButton">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>80</y>
+          <width>75</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources/resources.qrc">
+          <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="history">
+       <widget class="QPushButton" name="backButton_6">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>87</y>
+          <width>121</width>
+          <height>24</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Retour acceuil</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources/resources.qrc">
+          <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_4">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>180</y>
+          <width>841</width>
+          <height>421</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <widget class="QWidget" name="page_history_quizz_container_bot" native="true">
+         <property name="geometry">
+          <rect>
+           <x>190</x>
+           <y>30</y>
+           <width>450</width>
+           <height>241</height>
+          </rect>
+         </property>
         </widget>
+       </widget>
+       <widget class="QLabel" name="label_9">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>90</y>
+          <width>841</width>
+          <height>91</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:30pt;&quot;&gt;Historique&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
        </widget>
       </widget>
      </widget>
