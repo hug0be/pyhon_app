@@ -248,7 +248,7 @@ class UserMenuWindow(QMainWindow):
         for button in self.ui.choiceRightAnswerQuizz.buttons():
             if currentQuestion.is_right_answer(button.text()):
                 button.setStyleSheet("background-color: #1D8E36")
-            else:
+            elif button.text() != "":
                 button.setStyleSheet("background-color: #B41010")
 
     def is_right_answer_selected(self, currentQuestion):
