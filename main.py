@@ -178,6 +178,9 @@ class UserMenuWindow(QMainWindow):
         for i, answer in enumerate(answers):
             radioButtons[i].setText(answer)
 
+        # Affichage de l'id de la current Question
+        self.ui.label_NB_Question.setText( str(self.indexQuestion) + " / " + str(self.pendingQuizz.nb_questions()) )
+
     def init_question_page(self):
         """Créer les boutons sur la page Liste des Quizz"""
         # Tous les quizz
