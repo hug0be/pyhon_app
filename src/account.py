@@ -11,13 +11,19 @@ class Account:
         self.username = username
         self.password = password
         self.history = History()
+
     def save(self):
         """Sauvegarde un compte"""
         with open('data/accounts.json', 'r+') as accounts_file:
             accounts = json.load(accounts_file)
-            accounts.append({'username': self.username, 'password': self.password, 'admin': False, 'history': self.history.to_json()})
+            accounts.append(self.to_json())
             accounts_file.seek(0)
             json.dump(accounts, accounts_file)
+
+    def to_json(self):
+        """Renvoie le compte en format .json"""
+        return {'username': self.username, 'password': self.password, 'admin': False, 'history': self.history.to_json()}
+
     @staticmethod
     def exists(username:str):
         """Teste si un compte existe"""
