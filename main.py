@@ -15,12 +15,12 @@ from src.quizz import Quizz, Question, InvalidQuestionException, InvalidNbToDisp
 from src.ui import Ui_MainWindow, Ui_userMenu
 
 
-def change_page(name: str = "userMenu"):
+def change_page(name: str = "userMenu", currentUser:str = "user"):
     """Change de page selon le nom donné"""
     global window
     window.close()
     if name == "userMenu":
-        window = UserMenuWindow()
+        window = UserMenuWindow(currentUser)
     if name == "home":
         window = MainWindow()
     window.show()
@@ -84,7 +84,7 @@ class MainWindow(QMainWindow):
             return False
 
         # All good !
-        change_page()
+        change_page(currentUser= username)
 
     def create_account_attempt(self):
         """Méthode appeler pour une tentative de création de compte"""
@@ -111,30 +111,33 @@ class MainWindow(QMainWindow):
 
         # All good !
         Account(username, password).save()
-        change_page()
-
+        change_page(currentUser = username)
 
 class UserMenuWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self, currentUser:str):
         QMainWindow.__init__(self)
+        self.currentUser = currentUser
         self.ui = Ui_userMenu()
         self.ui.setupUi(self)
-        self.ui.pagesList.setCurrentWidget(self.ui.homePage)
-        self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
+        self.ui.pagesList.setCurrentIndex(0)
         self.ui.toggleButton.clicked.connect(lambda: self.toggle_menu(200))
-        self.pendingQuizz = None
+        self.ui.pagesList.setCurrentWidget(self.ui.homePage)
 
-# Variables utilisés pendant le quizz
+        # Variables utilisés pendant le quizz
+        self.pendingQuizz = None
         self.hasAnswered = False
         self.indexQuestion = 0
-        self.score = 0        # Binding changements de pages
+        self.score = 0
+
+        # Binding changements de pages
         # TODO: Retour arrière pour les pages "quizzListPage" et "createQuizzPage"
         self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
         self.ui.createQuizzButton.clicked.connect(self.show_quizz_creation_page)
         self.ui.importQuizzButton.clicked.connect(self.import_quizz)
         self.ui.logoutButton.clicked.connect(lambda: change_page("home"))
-        # TODO relier le bouton
         self.ui.historyButton.clicked.connect(self.show_history)
+        # Binding bouton "Valider/Prochaine question" pendant le quizz
+        self.ui.validateButton.clicked.connect(self.choose_question_page)
 
         # Les 3 étapes/pages de création d'un quizz
         self.ui.addQuestionsButton.clicked.connect(self.create_quizz1)
@@ -150,8 +153,6 @@ class UserMenuWindow(QMainWindow):
         for backButton in backButtons:
             backButton.clicked.connect(self.show_home_page)
 
-        # Binding bouton "Valider" le game quizz
-        self.ui.validateButton.clicked.connect(self.choose_question_page)
 
     def show_home_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
@@ -348,7 +349,7 @@ class UserMenuWindow(QMainWindow):
         return True
 
     def toggle_menu(self, maxWidth):
-
+        """Méthode qui ouvre et ferme le menu de gauche (sidebar)"""
         # GET WIDTH
         width = self.ui.leftMenu.width()
         maxExtend = maxWidth  # 300
@@ -359,7 +360,6 @@ class UserMenuWindow(QMainWindow):
             widthExtended = maxExtend
         else:
             widthExtended = standard
-
 
         # ANIMATION
         # -- TOGGLE
@@ -423,30 +423,22 @@ class UserMenuWindow(QMainWindow):
 
     def create_buttons_page_history(self):
         """Créer les boutons sur la page Historique"""
-        # GET THE LIST OF ALL HISTORY
+        # Historique de l'utilisateur
+        history = History.load(self.currentUser)
 
-        history = History.load_history(user = user)
-        history = History.to_obj(history)
-
-        history = history.get_history()
-        #(history[0].quizz)
-
-        # GET THE LIST HISTORY PAGE
-        page_history_quizz_container_bot = self.ui.page_history_quizz_container_bot_2
+        # Conteneur de l'historique
+        historyContainer = self.ui.historyContainer
 
         # Créer les layout pour page
         layout = QVBoxLayout()
 
-        for anItem in history:
-            # Créer un bouton
-            button = QPushButton(anItem.__str__())
-            # TODO Add the link to go on the quizz avec la methode button.clicked.connect(display_quizz(aQuizz["idQuizz"]) )
-
-            # Ajouter le bouton au layout
+        # On crée les boutons et on les ajoute dans le conteneur
+        for item in history.items:
+            button = QPushButton(item.__str__())
             layout.addWidget(button)
 
         # Mettre la layout contenant les boutons dans le conteneur page_list_history_container_bot
-        page_history_quizz_container_bot.setLayout(layout)
+        historyContainer.setLayout(layout)
 
     def import_quizz(self):
         # Tentative d'ouverture du fichier
@@ -489,28 +481,12 @@ if __name__ == "__main__":
             quizzes_file.write(json.dumps([]))
         print("Fichier quizzes.json créé")
 
-    # Test historique
-    # TODO : Supprimer ce test quand il devient obsolète
-    question = Question("Salut ça va ?", "Oui et toi", ["Non"])
-    quizz = Quizz([question], "SuperQuizz")
-    quizz2 = Quizz([question], "SuperQuizz mais 2")
-    history_item = HistoryItem(quizz, 10, 50)
-    history = History([history_item])
-    history.add_item(HistoryItem(quizz, 10, 40))
-    history.add_item(HistoryItem(quizz2, 5, 40))
-    history.save("admin")
-    print(history)
-
-    global user
-    user = "admin"
-
     # Convert file .ui -> .py
     os.system("pyside6-uic views/MainWindow.ui -o src/ui/MainWindow.py")
     os.system("pyside6-uic views/UserMenuWindow.ui -o src/ui/UserMenuWindow.py")
     os.system("pyside6-rcc resources/resources.qrc -o resources_rc.py")
 
     # Page principale
-    window = UserMenuWindow()
+    window = MainWindow()
     window.show()
     sys.exit(app.exec())
-

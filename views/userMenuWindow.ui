@@ -437,11 +437,11 @@ QRadioButton::indicator::checked {
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
-        <widget class="QWidget" name="page_history_quizz_container_bot_2" native="true">
+        <widget class="QWidget" name="historyContainer" native="true">
          <property name="geometry">
           <rect>
-           <x>190</x>
-           <y>30</y>
+           <x>240</x>
+           <y>10</y>
            <width>450</width>
            <height>241</height>
           </rect>

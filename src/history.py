@@ -4,50 +4,49 @@ import json
 from src.quizz import Quizz
 
 class HistoryItem:
-
-    def __init__(self, quizz:Quizz = None, best_score:int = None, time:float = None):
+    def __init__(self, quizz:Quizz, best_score:int = 0, time:float = 0):
         self.quizz = quizz
         self.best_score = best_score
         self.time = time
 
     def __str__(self):
-        res = f"Quizz \"{self.quizz.title}\"\n" \
-              f"Meilleur Score: {self.best_score} / {self.quizz.nb_questions()}\n" \
+        res = f"\"{self.quizz.title}\"\n" \
+              f"Meilleur score: {self.best_score} / {self.quizz.nb_questions()}\n" \
               f"Temps: {self.time}\n"
         return res
 
     def to_json(self):
         return {'quizz': self.quizz.title, 'best_score': self.best_score, 'time': self.time}
 
+    @staticmethod
+    def from_json(item:dict):
+        return HistoryItem(
+            Quizz.get(item["quizz"]),
+            item["best_score"],
+            item["time"],
+        )
 
 class History:
     def __init__(self, items:[HistoryItem]=[]):
         self.items = items
 
-    def get_history(self):
-        return self.items
-
-    def to_json(self):
-        return {'items': [item.to_json() for item in self.items]}
     @staticmethod
     def compare_item(item, itemToEdit: HistoryItem)->HistoryItem:
         """Renvoie l'item avec les meilleurs stats"""
         mustBeReplaced = item.best_score < itemToEdit.best_score or (item.best_score == item.best_score and item.time > item.time)
         return itemToEdit if mustBeReplaced else item
 
-    def add_item(self, itemToAdd: HistoryItem)->bool:
+    def update_item(self, itemToUpdate: HistoryItem)->bool:
         """
-        Ajoute un item à la liste de l'historique, 4 cas :
-            - le quizz n'a jamais été fait : on l'ajoute à la liste
-            - le quizz a déjà été fait, mais on n'a pas battu le score : il ne se passe rien
-            - le quizz a déjà été fait et on a battu le meilleur score : on remplace l'item
-            - le quizz a déjà été réalisé au même score : si le temps est meilleur on remplace l'item, sinon on ne fait rien
+        Ajoute ou remplace une instance d'historique
+        - Ajoute si le quizz n'a jamais été fait par l'user
+        - Remplace si le score/temps est meilleur que l'ancienne instance
         """
         for i_item, item in enumerate(self.items):
-            if item.quizz.title == itemToAdd.quizz.title:
-                self.items[i_item] = History.compare_item(itemToAdd, item)
+            if item.quizz.title == itemToUpdate.quizz.title:
+                self.items[i_item] = History.compare_item(itemToUpdate, item)
                 return True
-        self.items.append(itemToAdd)
+        self.items.append(itemToUpdate)
         return True
 
     def save(self, user):
@@ -67,30 +66,21 @@ class History:
             json.dump(accounts, account_file, indent=4)
 
     @staticmethod
-    def load_history(user):
+    def load(user:str):
+        """Renvoie l'historique de l'utilisateur"""
         with open('data/accounts.json', 'r') as account_file:
             accounts = json.load(account_file)
             for account in accounts:
                 if account['username'] == user:
-                    history = account['history']
-                    return history
+                    return History.from_json(account['history'])
             return None
 
     @staticmethod
-    def to_obj(dico):
-        list_items = []
-        for item in dico["items"]:
-            historyItem = HistoryItem()
-            print(item)
-            historyItem.quizz = Quizz.get(item["quizz"])
-            print(historyItem.quizz.title + "    item[quizz]")
-            historyItem.best_score = item["best_score"]
-            historyItem.time = item["time"]
-            list_items.append(historyItem)
-        history = History(list_items)
-        return history
+    def from_json(items:list):
+        return History([HistoryItem.from_json(item) for item in items])
 
-
+    def to_json(self):
+        return [item.to_json() for item in self.items]
 
     def __str__(self):
         return "\n".join(item.__str__() for item in self.items)
