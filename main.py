@@ -1,6 +1,7 @@
 import json
 import sys
 import os
+from functools import partial
 
 from PySide6 import QtCore
 from PySide6.QtCore import QPropertyAnimation
@@ -208,7 +209,8 @@ class UserMenuWindow(QMainWindow):
             # Créer un bouton
             button = QPushButton(quizz.title)
             # Binding du bouton avec sa page de quizz
-            button.clicked.connect(lambda: self.init_quizz(quizz))
+            # On utilise partial() sinon les boutons renvoient toujours sur le dernier quizz
+            button.clicked.connect(partial(self.init_quizz, quizz))
             # Ajout du bouton au layout
             layout.addWidget(button)
 

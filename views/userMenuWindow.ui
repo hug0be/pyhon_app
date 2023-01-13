@@ -353,7 +353,7 @@ QRadioButton::indicator::checked {
     <item>
      <widget class="QStackedWidget" name="pagesList">
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="homePage">
        <property name="styleSheet">
@@ -402,6 +402,79 @@ QRadioButton::indicator::checked {
         </property>
         <property name="text">
          <string>Créer un quizz</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="history">
+       <widget class="QLabel" name="label_4">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>90</y>
+          <width>841</width>
+          <height>71</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:30pt;&quot;&gt;Historique&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_4">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>163</y>
+          <width>841</width>
+          <height>421</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <widget class="QWidget" name="historyContainer" native="true">
+         <property name="geometry">
+          <rect>
+           <x>240</x>
+           <y>10</y>
+           <width>450</width>
+           <height>241</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QPushButton" name="backButton6">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>50</y>
+          <width>141</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background: transparent</string>
+        </property>
+        <property name="text">
+         <string>Retour accueil</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources/resources.qrc">
+          <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
         </property>
        </widget>
       </widget>
@@ -484,7 +557,7 @@ QRadioButton::indicator::checked {
          <rect>
           <x>0</x>
           <y>-1</y>
-          <width>841</width>
+          <width>801</width>
           <height>601</height>
          </rect>
         </property>
@@ -493,6 +566,9 @@ QRadioButton::indicator::checked {
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="currentIndex">
+         <number>1</number>
         </property>
         <widget class="QWidget" name="questionPage">
          <widget class="QWidget" name="verticalLayoutWidget_5">
@@ -675,7 +751,7 @@ QRadioButton::indicator::checked {
            <string>Points</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_Nb_Points">
+         <widget class="QLabel" name="nbPointsLabel">
           <property name="geometry">
            <rect>
             <x>690</x>
@@ -690,7 +766,7 @@ QRadioButton::indicator::checked {
            </font>
           </property>
           <property name="text">
-           <string>20</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
          <widget class="QLabel" name="label_NB_Question">
@@ -710,7 +786,7 @@ QRadioButton::indicator::checked {
           <property name="geometry">
            <rect>
             <x>290</x>
-            <y>470</y>
+            <y>460</y>
             <width>251</width>
             <height>30</height>
            </rect>
@@ -757,6 +833,34 @@ QRadioButton::indicator::checked {
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLabel" name="validateAnswerErrorsLabel">
+          <property name="geometry">
+           <rect>
+            <x>210</x>
+            <y>60</y>
+            <width>451</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: #F3A917</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
           </property>
          </widget>
         </widget>
