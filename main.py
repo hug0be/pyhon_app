@@ -113,26 +113,25 @@ class UserMenuWindow(QMainWindow):
         self.ui.setupUi(self)
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
         self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
-        self.ui.toggleButton.clicked.connect(lambda : self.toggle_menu(200))
+        self.ui.toggleButton.clicked.connect(lambda: self.toggle_menu(200))
         self.pendingQuizz = None
 
         # Variables utilisés pendant le quizz
         self.hasAnswered = False
         self.indexQuestion = 0
 
-        #Binding changements de pages
-        # TODO: Retour arrière pour les pages "quizzListPage" et "createQuizzPage"
+        # Binding changements de pages
         self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
         self.ui.createQuizzButton.clicked.connect(self.show_quizz_creation_page)
         self.ui.importQuizzButton.clicked.connect(self.import_quizz)
         self.ui.logoutButton.clicked.connect(lambda: change_page("home"))
 
-        #Les 3 étapes/pages de création d'un quizz
+        # Binding des quatre pages de création d'un quizz
         self.ui.addQuestionsButton.clicked.connect(self.create_quizz1)
         self.ui.nextQuestionButton.clicked.connect(self.create_quizz2)
         self.ui.endQuestionsButton.clicked.connect(self.end_questions)
-        self.ui.doRandomOrderButton.clicked.connect(lambda : self.create_quizz3(True))
-        self.ui.noRandomOrderButton.clicked.connect(lambda : self.create_quizz3(False))
+        self.ui.doRandomOrderButton.clicked.connect(lambda: self.create_quizz3(True))
+        self.ui.noRandomOrderButton.clicked.connect(lambda: self.create_quizz3(False))
         self.ui.saveQuizzButton.clicked.connect(self.create_quizz4)
 
         # Binding des back buttons
@@ -143,16 +142,18 @@ class UserMenuWindow(QMainWindow):
         # Binding bouton "Valider" le game quizz
         self.ui.validateButton.clicked.connect(self.choose_question_page)
 
-        # Page END QUIZZ
+        # Binding page de fin de quizz
         self.ui.homeButton.clicked.connect(self.show_home_page)
         self.ui.listButton.clicked.connect(self.show_quizz_list_page)
         self.ui.retryButton.clicked.connect(lambda: self.init_quizz( Quizz.get(self.pendingQuizz.title) ))
 
     def show_home_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
+
     def show_quizz_list_page(self):
         self.init_question_page()
         self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
+
     def show_quizz_creation_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.createQuizzPage)
 
@@ -161,6 +162,7 @@ class UserMenuWindow(QMainWindow):
         self.hasAnswered = False
         self.indexQuestion = 0
         self.pendingQuizz = None
+
     def init_quizz(self, quizz:Quizz):
         self.reset_game()
         self.pendingQuizz = quizz
@@ -214,14 +216,12 @@ class UserMenuWindow(QMainWindow):
 
     def choose_question_page(self):
         self.hasAnswered = not self.hasAnswered
-        print("Actual question:", self.indexQuestion)
         if self.hasAnswered:
             self.show_answer(self.pendingQuizz.questions[self.indexQuestion-1])
         else:
             self.update_question_page(self.pendingQuizz.title, self.next_question())
 
     def next_question(self)->Question:
-        print("Next question:", self.indexQuestion)
         if self.indexQuestion < self.pendingQuizz.nb_questions():
             self.indexQuestion += 1
             return self.pendingQuizz.questions[self.indexQuestion-1]
@@ -237,7 +237,6 @@ class UserMenuWindow(QMainWindow):
         # Check si un bouton est sélectionné
         checkedButton = self.ui.choiceRightAnswerQuizz.checkedButton()
         if checkedButton is None:
-            print("Aucun bouton sélectionné")
             return False
 
         # TODO : Ajouter 1 au score si la réponse choisi est bonne
@@ -275,7 +274,6 @@ class UserMenuWindow(QMainWindow):
         self.ui.quizzCreationSteps.setCurrentWidget(self.ui.createQuestionsPage)
     def create_quizz2(self):
         """Méthode qui constitue la deuxième étape de création d'un quizz : l'ajout des questions"""
-        # TODO : Ajouter une validation pour voir s'il n'y a pas 2 fois la même réponse
         #Récupération des données
         title = self.ui.titleQuestion.text()
         indexRightAnswer = self.ui.choiceRightAnswer.checkedId()
@@ -298,7 +296,7 @@ class UserMenuWindow(QMainWindow):
 
         #On vide les inputs
         # TODO : Il y a surement un moyen de reset la page au lieu de faire tout ça
-        # TODO : La code commenté suivant ne fonctionne  pas : le button choisi ne se désélectionne pas
+        # TODO : Le code commenté suivant ne fonctionne  pas : le button choisi ne se désélectionne pas
         # self.ui.choiceRightAnswer.checkedButton().setChecked(False)
         self.ui.titleQuestion.clear()
         for answer in answersWidget: answer.clear()
@@ -419,17 +417,6 @@ if __name__ == "__main__":
         with open('data/quizzes.json', 'w') as quizzes_file:
             quizzes_file.write(json.dumps([]))
         print("Fichier quizzes.json créé")
-
-    # Test historique
-    # TODO : Supprimer ce test quand il devient obsolète
-    # question = Question("Salut ça va ?", "Oui et toi", ["Non"])
-    # quizz = Quizz("SuperQuizz", 1, [question])
-    # history_item = HistoryItem(quizz, 10, 50)
-    # history = History([history_item])
-    # history.add_item(HistoryItem(quizz, 10, 40))
-    # history.add_item(HistoryItem(quizz, 5, 40))
-    # history.save("admin")
-    # print(history)
 
     #Convert file .ui -> .py
     os.system("pyside6-uic views/MainWindow.ui -o src/ui/MainWindow.py")
