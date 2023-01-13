@@ -124,7 +124,10 @@ class UserMenuWindow(QMainWindow):
         self.ui.toggleButton.clicked.connect(lambda: self.toggle_menu(200))
         self.pendingQuizz = None
 
-        # Binding changements de pages
+# Variables utilisés pendant le quizz
+        self.hasAnswered = False
+        self.indexQuestion = 0
+        self.score = 0        # Binding changements de pages
         # TODO: Retour arrière pour les pages "quizzListPage" et "createQuizzPage"
         self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
         self.ui.createQuizzButton.clicked.connect(self.show_quizz_creation_page)
@@ -147,6 +150,9 @@ class UserMenuWindow(QMainWindow):
         for backButton in backButtons:
             backButton.clicked.connect(self.show_home_page)
 
+        # Binding bouton "Valider" le game quizz
+        self.ui.validateButton.clicked.connect(self.choose_question_page)
+
     def show_home_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
 
@@ -155,42 +161,92 @@ class UserMenuWindow(QMainWindow):
         self.ui.pagesList.setCurrentWidget(self.ui.history)
 
     def show_quizz_list_page(self):
-        self.create_bouttons_page_list_quizz()
+        self.init_question_page()
         self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
 
     def show_quizz_creation_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.createQuizzPage)
-    def show_quizz_questions_page(self, aQuizz):
-        self.build_question_page(aQuizz["title"], aQuizz["questions"][0])
+
+    def init_quizz(self, quizz:Quizz):
+        self.pendingQuizz = quizz
+        self.update_question_page(quizz.title, self.next_question())
         self.ui.pagesList.setCurrentWidget(self.ui.questionsPage)
 
-    def build_question_page(self, titleQuizz, aQuestion):
+    def update_question_page(self, titleQuizz:str, question:Question):
         """Initialise les champs (titre, titre question, ...) d'une page question"""
         # Affichage du titre du quizz
         self.ui.label_titre.setText(titleQuizz)
 
-        #
-        currentQuestion = Question(aQuestion["title"], aQuestion["rightAnswer"], aQuestion["wrongAnswers"])
-
         # Affichage de l'intitulé de la question
-        self.ui.label_Question.setText(currentQuestion.title)
+        self.ui.label_Question.setText(question.title)
 
         # Obtention des radios boutons pour les réponses
         radioButtons = self.ui.choiceRightAnswerQuizz.buttons()
+
         # On efface leur contenu et on les désélectionne
         for radioButton in radioButtons:
             radioButton.setText(None)
             radioButton.setChecked(False)
+            radioButton.setStyleSheet("background: transparent")
 
         # Obtention des réponses
-        answers = currentQuestion.get_shuffled_answers()
+        answers = question.get_shuffled_answers()
         for i, answer in enumerate(answers):
             radioButtons[i].setText(answer)
 
-        # Binding bouton "Valider"
-        self.ui.validerButton_Quiz.clicked.connect(
-            lambda: self.show_answer(currentQuestion)
-        )
+        # Affichage de l'id de la current Question
+        self.ui.label_NB_Question.setText( str(self.indexQuestion) + " / " + str(self.pendingQuizz.nb_questions()) )
+
+    def init_question_page(self):
+        """Créer les boutons sur la page Liste des Quizz"""
+        # Tous les quizz
+        quizzes = Quizz.all()
+        # Conteneur des quizz
+        quizzContainer = self.ui.page_list_quizz_container_bot
+        # Créer le layout pour page
+        layout = QVBoxLayout()
+
+        for quizz in quizzes:
+            # Créer un bouton
+            button = QPushButton(quizz.title)
+            # Binding du bouton avec sa page de quizz
+            button.clicked.connect(lambda: self.init_quizz(quizz))
+            # Ajout du bouton au layout
+            layout.addWidget(button)
+
+        # Ajout du layout dans le conteneur des quizz
+        quizzContainer.setLayout(layout)
+
+    def choose_question_page(self):
+        self.hasAnswered = not self.hasAnswered
+        if self.hasAnswered:
+
+            # Validation du choix
+            chosenAnswer = self.ui.choiceRightAnswerQuizz.checkedButton()
+            if chosenAnswer is None or chosenAnswer.text() == "":
+                self.hasAnswered = False
+                self.ui.validateAnswerErrorsLabel.setText("Saisissez une réponse")
+                raise Exception("Saisissez une réponse")
+
+            # Augmentation du score
+            if chosenAnswer.text() == self.pendingQuizz.questions[self.indexQuestion-1].rightAnswer:
+                self.score += 1
+                self.ui.nbPointsLabel.setText(str(self.score))
+
+            self.ui.validateButton.setText("Question suivante")
+            self.show_answer(self.pendingQuizz.questions[self.indexQuestion-1])
+        else:
+            self.ui.validateButton.setText("Valider")
+            self.update_question_page(self.pendingQuizz.title, self.next_question())
+
+    def next_question(self)->Question:
+        print("Next question:", self.indexQuestion)
+        if self.indexQuestion < self.pendingQuizz.nb_questions():
+            self.indexQuestion += 1
+            return self.pendingQuizz.questions[self.indexQuestion-1]
+        else:
+            self.ui.questionPages.setCurrentWidget(self.ui.endQuizzPage)
+            raise Exception("Plus de question")
 
     def show_answer(self, currentQuestion):
         """Affiche la bonne réponse et les mauvaises réponses"""
@@ -201,22 +257,19 @@ class UserMenuWindow(QMainWindow):
         checkedButton = self.ui.choiceRightAnswerQuizz.checkedButton()
         if checkedButton is None:
             print("Aucun bouton sélectionné")
-
-        # TODO : Ajouter 1 au score si la réponse choisi est bonne
-        if checkedButton.text() == currentQuestion.rightAnswer: print("+1 !")
+            return False
 
         # Coloration des réponses
         for button in self.ui.choiceRightAnswerQuizz.buttons():
             if currentQuestion.is_right_answer(button.text()):
                 button.setStyleSheet("background-color: #1D8E36")
-            else:
+            elif button.text() != "":
                 button.setStyleSheet("background-color: #B41010")
 
     def is_right_answer_selected(self, currentQuestion):
         """Check si la réponse sélectionnée est bonne"""
         selectedButtonText = self.ui.choiceRightAnswerQuizz.checkedButton().text()
         return currentQuestion.is_right_answer(selectedButtonText)
-
 
     def create_quizz1(self):
         """Méthode qui constitue la première étape de création d'un quizz : choisir un titre"""
@@ -457,7 +510,7 @@ if __name__ == "__main__":
     os.system("pyside6-rcc resources/resources.qrc -o resources_rc.py")
 
     # Page principale
-    window = MainWindow()
+    window = UserMenuWindow()
     window.show()
     sys.exit(app.exec())
 
