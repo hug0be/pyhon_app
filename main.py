@@ -397,28 +397,6 @@ class UserMenuWindow(QMainWindow):
         self.pendingQuizz.save()
         self.show_quizz_list_page()
 
-    # def create_bouttons_page_list_quizz(self):
-    #     """Créer les boutons sur la page Liste des Quizz"""
-    #     # Tous les quizz
-    #     quizzes = Quizz.get_list_quizzes()
-    #     # Conteneur des quizz
-    #     quizzContainer = self.ui.page_list_quizz_container_bot
-    #     # Créer le layout pour page
-    #     layout = QVBoxLayout()
-    #
-    #     for quizz in quizzes:
-    #         # Créer un bouton
-    #         button = QPushButton(quizz["title"])
-    #         # Binding du bouton avec sa page de quizz
-    #         button.clicked.connect(
-    #             lambda: self.show_quizz_questions_page(Quizz.get(quizz["title"]))
-    #         )
-    #         # Ajout du bouton au layout
-    #         layout.addWidget(button)
-    #
-    #     # Ajout du layout dans le conteneur des quizz
-    #     quizzContainer.setLayout(layout)
-
     def create_buttons_page_history(self):
         """Créer les boutons sur la page Historique"""
         # Historique de l'utilisateur

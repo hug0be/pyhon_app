@@ -71,7 +71,6 @@ class Question:
         return "", [], ""
 
     @staticmethod
-    @staticmethod
     def valid_inputs(title: str, answers: [str], indexRightAnswer: int):
         """Check si les données de cette question sont valides"""
         # Pour éviter les erreurs d'adresse (ne pas modifier le paramètre appelant)
@@ -115,14 +114,6 @@ class Question:
         answers = [self.rightAnswer] + self.wrongAnswers
         random.shuffle(answers)
         return answers
-
-    @staticmethod
-    def from_json(question_json: dict):
-        return Question(
-            question_json["title"],
-            question_json["rightAnswer"],
-            question_json["wrongAnswers"]
-        )
 
     def __str__(self):
         res = f"\"{self.title}\"\n" \
@@ -369,22 +360,3 @@ class Quizz:
             for quizz_json in quizzes_json:
                 quizzes.append(Quizz.from_json(quizz_json))
         return quizzes
-
-    @staticmethod
-    def get(title:str):
-        """Récupère un Quizz avec son titre"""
-        with open('data/quizzes.json', 'r+') as quizzes_file:
-            quizzes = json.load(quizzes_file)
-            for quizz in quizzes:
-                if quizz["title"] == title:
-                    return Quizz.from_json(quizz)
-        raise UnknownQuizzException(f"Le quizz {title} n'existe pas")
-
-    @staticmethod
-    def from_json(quizz):
-        return Quizz(
-            [Question.from_json(question) for question in quizz["questions"]],
-            quizz["title"],
-            quizz["nbQuestionsToDisplay"],
-            quizz["userRandomOrder"]
-        )

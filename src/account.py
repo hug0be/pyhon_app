@@ -3,11 +3,15 @@ import json
 
 from src.history import History
 
+
 class WrongPasswordException(Exception): pass
+
+
 class UnknownAccountException(Exception): pass
 
+
 class Account:
-    def __init__(self, username:str, password:str):
+    def __init__(self, username: str, password: str):
         self.username = username
         self.password = password
         self.history = History()
@@ -25,7 +29,7 @@ class Account:
         return {'username': self.username, 'password': self.password, 'admin': False, 'history': self.history.to_json()}
 
     @staticmethod
-    def exists(username:str):
+    def exists(username: str):
         """Teste si un compte existe"""
         with open('data/accounts.json', 'r') as file:
             for account in json.load(file):
@@ -33,7 +37,7 @@ class Account:
             return False
 
     @staticmethod
-    def access(username:str, password:str):
+    def access(username: str, password: str):
         """Check compte existe et si le mot de passe est correct"""
         with open('data/accounts.json', 'r') as file:
             accounts = json.load(file)
