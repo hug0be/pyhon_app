@@ -1522,11 +1522,11 @@ QRadioButton::indicator::checked {
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="choiceRightAnswerQuizz"/>
   <buttongroup name="choiceRightAnswer">
    <property name="exclusive">
     <bool>true</bool>
    </property>
   </buttongroup>
+  <buttongroup name="choiceRightAnswerQuizz"/>
  </buttongroups>
 </ui>

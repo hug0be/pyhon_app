@@ -143,6 +143,11 @@ class UserMenuWindow(QMainWindow):
         # Binding bouton "Valider" le game quizz
         self.ui.validateButton.clicked.connect(self.choose_question_page)
 
+        # Page END QUIZZ
+        self.ui.homeButton.clicked.connect(self.show_home_page)
+        self.ui.listButton.clicked.connect(self.show_quizz_list_page)
+        self.ui.retryButton.clicked.connect(lambda: self.init_quizz( Quizz.get(self.pendingQuizz.title) ))
+
     def show_home_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
     def show_quizz_list_page(self):
@@ -151,7 +156,13 @@ class UserMenuWindow(QMainWindow):
     def show_quizz_creation_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.createQuizzPage)
 
+    def reset_game(self):
+        # Variables utilisés pendant le quizz
+        self.hasAnswered = False
+        self.indexQuestion = 0
+        self.pendingQuizz = None
     def init_quizz(self, quizz:Quizz):
+        self.reset_game()
         self.pendingQuizz = quizz
         self.update_question_page(quizz.title, self.next_question())
         self.ui.pagesList.setCurrentWidget(self.ui.questionsPage)
