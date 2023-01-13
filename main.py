@@ -51,6 +51,7 @@ class MainWindow(QMainWindow):
         self.ui.pagesList.setCurrentWidget(self.ui.createAccountPage)
     def show_connect_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.connectPage)
+
     def connect_attempt(self):
         """Méthode appeler pour une tentative de connexion"""
         # Obtention des identifiants
@@ -123,6 +124,8 @@ class UserMenuWindow(QMainWindow):
         self.ui.createQuizzButton.clicked.connect(self.show_quizz_creation_page)
         self.ui.importQuizzButton.clicked.connect(self.import_quizz)
         self.ui.logoutButton.clicked.connect(lambda: change_page("home"))
+        # TODO relier le bouton
+        self.ui.historyButton.clicked.connect(self.show_history)
 
         #Les 3 étapes/pages de création d'un quizz
         self.ui.addQuestionsButton.clicked.connect(self.create_quizz1)
@@ -139,6 +142,8 @@ class UserMenuWindow(QMainWindow):
 
     def show_home_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
+    def show_history(self):
+        self.ui.pagesList.setCurrentWidget(self.ui.history)
     def show_quizz_list_page(self):
         self.create_bouttons_page_list_quizz()
         self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
@@ -301,7 +306,7 @@ class UserMenuWindow(QMainWindow):
         list_history = history.get_history()
 
         # GET THE LIST HISTORY PAGE
-        page_list_history_container_bot = self.ui.page_list_history_container_bot
+        page_history_quizz_container_bot = self.ui.page_history_quizz_container_bot
 
         # Créer les layout pour page
         layout = QVBoxLayout()
@@ -315,7 +320,7 @@ class UserMenuWindow(QMainWindow):
             layout.addWidget(button)
 
         # Mettre la layout contenant les boutons dans le conteneur page_list_history_container_bot
-        page_list_history_container_bot.setLayout(layout)
+        page_history_quizz_container_bot.setLayout(layout)
 
     def import_quizz(self):
         # Tentative d'ouverture du fichier
