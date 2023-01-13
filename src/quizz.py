@@ -3,6 +3,7 @@ import json
 import random
 
 class InvalidQuizzException(Exception): pass
+class UnknownQuizzException(Exception): pass
 class InvalidQuestionException(Exception): pass
 class InvalidNbToDisplayException(Exception): pass
 class InvalidNbAnswersException(Exception): pass
@@ -90,10 +91,15 @@ class Question:
             raise InvalidNbAnswersException(f"La question ne peux pas avoir plus de {Question.nbAnswersMax} réponses")
         return True
 
+    def get_shuffled_answers(self):
+        answers = [self.rightAnswer] + self.wrongAnswers
+        random.shuffle(answers)
+        return answers
+
     def __str__(self):
         res = f"\"{self.title}\"\n" \
-              f"✔ {self.rightAnswer}\n"
-        res += "\n".join([f"❌ {wrongAnswer}\n" for wrongAnswer in self.wrongAnswers])
+              f"✔ {self.rightAnswer}"
+        res += "\n".join([f"❌ {wrongAnswer}" for wrongAnswer in self.wrongAnswers])
         return res
 
 class Quizz:
@@ -289,3 +295,13 @@ class Quizz:
                 })
 
         return list_quizzes
+
+    @staticmethod
+    def get(title:str):
+        """Récupère un Quizz avec son titre"""
+        with open('data/quizzes.json', 'r+') as quizzes_file:
+            quizzes = json.load(quizzes_file)
+            for quizz in quizzes:
+                if quizz["title"] == title:
+                    return quizz
+        raise UnknownQuizzException(f"Le quizz {title} n'existe pas")
