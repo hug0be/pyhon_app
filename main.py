@@ -10,16 +10,20 @@ from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout
 from PySide6.QtUiTools import QUiLoader
 
-from src import History
+from src import History, HistoryItem
 from src.account import Account, WrongPasswordException, UnknownAccountException
 from src.quizz import Quizz, Question, InvalidQuestionException, InvalidNbToDisplayException, ImportQuizzException
 from src.ui import Ui_MainWindow, Ui_userMenu
 
+class UserMenuAccessException(Exception): pass
 
-def change_page(name: str = "userMenu", currentUser:str = "user"):
+def change_page(name: str, currentUser:Account = None):
     """Change de page selon le nom donné"""
     global window
     window.close()
+    # Check si l'utilisateur est valide
+    if name == "userMenu" and currentUser is None:
+        raise UserMenuAccessException("Il faut au utilisateur valide pour accéder à cette page")
     if name == "userMenu":
         window = UserMenuWindow(currentUser)
     if name == "home":
@@ -75,7 +79,7 @@ class MainWindow(QMainWindow):
 
         # Lancement de la tentative
         try:
-            Account.access(username, password)
+            user = Account.get(username, password)
         except WrongPasswordException:
             self.ui.connectErrorsLabel.setText("Mot de passe incorrect")
             return False
@@ -84,7 +88,7 @@ class MainWindow(QMainWindow):
             return False
 
         # All good !
-        change_page(currentUser= username)
+        change_page("userMenu", user)
 
     def create_account_attempt(self):
         """Méthode appeler pour une tentative de création de compte"""
@@ -110,11 +114,12 @@ class MainWindow(QMainWindow):
             return False
 
         # All good !
-        Account(username, password).save()
-        change_page(currentUser = username)
+        user = Account(username, password)
+        user.save()
+        change_page("userMenu", user)
 
 class UserMenuWindow(QMainWindow):
-    def __init__(self, currentUser:str):
+    def __init__(self, currentUser:Account):
         QMainWindow.__init__(self)
         self.currentUser = currentUser
         self.ui = Ui_userMenu()
@@ -124,7 +129,9 @@ class UserMenuWindow(QMainWindow):
         self.ui.toggleButton.clicked.connect(lambda: self.toggle_menu(200))
 
         # Variables utilisés pendant le quizz
-        self.reset_game()
+        self.hasAnswered = False
+        self.indexQuestion = 0
+        self.pendingQuizz = None
         self.score = 0
 
         # Binding changements de pages
@@ -161,6 +168,7 @@ class UserMenuWindow(QMainWindow):
         self.hasAnswered = False
         self.indexQuestion = 0
         self.pendingQuizz = None
+        self.score = 0
 
     def show_home_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
@@ -257,10 +265,16 @@ class UserMenuWindow(QMainWindow):
             return self.pendingQuizz.questions[self.indexQuestion-1]
         else:
             # TODO : Afficher le timer
+            # Affichage de la page de résultat
             self.ui.timerLabel.clear()
             self.ui.quizzTitleEndLabel.setText(self.pendingQuizz.title)
             self.ui.finalScoreLabel.setText(f"{self.score} / {self.pendingQuizz.nb_questions()}")
             self.ui.questionPages.setCurrentWidget(self.ui.endQuizzPage)
+
+            # TODO : Comparer aussi avec le timer
+            # Sauvegarde si le résultat est meilleur que le précédent
+            result = HistoryItem(self.pendingQuizz, self.score)
+            self.currentUser.update_best_score(self.pendingQuizz ,result)
             raise Exception("Plus de question")
 
     def show_answer(self, currentQuestion):
@@ -413,7 +427,7 @@ class UserMenuWindow(QMainWindow):
     def create_buttons_page_history(self):
         """Créer les boutons sur la page Historique"""
         # Historique de l'utilisateur
-        history = History.load(self.currentUser)
+        history = History.load(self.currentUser.username)
 
         # Conteneur de l'historique
         historyContainer = self.ui.historyContainer

@@ -3,20 +3,41 @@ import json
 
 from src.quizz import Quizz
 
+class UnknownHistoryItemException(Exception): pass
+
 class HistoryItem:
     def __init__(self, quizz:Quizz, best_score:int = 0, time:float = 0):
         self.quizz = quizz
         self.best_score = best_score
         self.time = time
+    def update_high_score(self, username:str, bestScore:int, time:float):
+        with open('data/accounts.json', 'r+') as accounts_file:
+            accounts = json.load(accounts_file)
+            for account in accounts:
+                if account["username"] == username:
+                    for item in account["history"]:
+                        if item["quizz"] == self.quizz.title:
+                            item["time"] = time
+                            item["best_score"] = bestScore
+                            accounts_file.seek(0)
+                            json.dump(accounts, accounts_file, indent=4)
+                            return True
+                    raise UnknownHistoryItemException
+
+    def to_json(self):
+        return {'quizz': self.quizz.title, 'best_score': self.best_score, 'time': self.time}
 
     def __str__(self):
         res = f"\"{self.quizz.title}\"\n" \
               f"Meilleur score: {self.best_score} / {self.quizz.nb_questions()}\n" \
-              f"Temps: {self.time}\n"
+              f"Temps: {self.time}"
         return res
 
-    def to_json(self):
-        return {'quizz': self.quizz.title, 'best_score': self.best_score, 'time': self.time}
+    def __lt__(self, other):
+        """Check si le résultat est meilleur que celui-ci"""
+        if not isinstance(other, HistoryItem):
+            raise Exception(f"Impossible de comparer HistoryItem et {type(other)}")
+        return self.best_score < other.best_score or (self.best_score == other.best_score and self.time > other.time)
 
     @staticmethod
     def from_json(item:dict):
@@ -30,31 +51,12 @@ class History:
     def __init__(self, items:[HistoryItem]=[]):
         self.items = items
 
-    @staticmethod
-    def compare_item(item, itemToEdit: HistoryItem)->HistoryItem:
-        """Renvoie l'item avec les meilleurs stats"""
-        mustBeReplaced = item.best_score < itemToEdit.best_score or (item.best_score == item.best_score and item.time > item.time)
-        return itemToEdit if mustBeReplaced else item
-
-    def update_item(self, itemToUpdate: HistoryItem)->bool:
-        """
-        Ajoute ou remplace une instance d'historique
-        - Ajoute si le quizz n'a jamais été fait par l'user
-        - Remplace si le score/temps est meilleur que l'ancienne instance
-        """
-        for i_item, item in enumerate(self.items):
-            if item.quizz.title == itemToUpdate.quizz.title:
-                self.items[i_item] = History.compare_item(itemToUpdate, item)
-                return True
-        self.items.append(itemToUpdate)
-        return True
-
     def save(self, user):
         """Sauvegarde un historique"""
         # TODO : vérifier si le compte existe
         # if not Account.exists(user):
         #     raise UnknownAccountException(f"Le compte '{user}' n'existe pas")
-
+        print("I was here 2")
         with open('data/accounts.json', 'r+') as account_file:
             accounts = json.load(account_file)
             for account in accounts:
@@ -62,8 +64,13 @@ class History:
                     account['history'] = self.to_json()
                     break
             account_file.seek(0)
-        with open('data/accounts.json', 'w') as account_file:
             json.dump(accounts, account_file, indent=4)
+
+    def get_item(self, quizzTile:str):
+        for item in self.items:
+            if item.quizz.title == quizzTile:
+                return item
+        raise UnknownHistoryItemException
 
     @staticmethod
     def load(user:str):
