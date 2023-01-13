@@ -36,19 +36,17 @@ class History:
         mustBeReplaced = item.best_score < itemToEdit.best_score or (item.best_score == item.best_score and item.time > item.time)
         return itemToEdit if mustBeReplaced else item
 
-    def add_item(self, itemToAdd: HistoryItem)->bool:
+    def update_item(self, itemToUpdate: HistoryItem)->bool:
         """
-        Ajoute un item à la liste de l'historique, 4 cas :
-            - le quizz n'a jamais été fait : on l'ajoute à la liste
-            - le quizz a déjà été fait, mais on n'a pas battu le score : il ne se passe rien
-            - le quizz a déjà été fait et on a battu le meilleur score : on remplace l'item
-            - le quizz a déjà été réalisé au même score : si le temps est meilleur on remplace l'item, sinon on ne fait rien
+        Ajoute ou remplace une instance d'historique
+        - Ajoute si le quizz n'a jamais été fait par l'user
+        - Remplace si le score/temps est meilleur que l'ancienne instance
         """
         for i_item, item in enumerate(self.items):
-            if item.quizz.title == itemToAdd.quizz.title:
-                self.items[i_item] = History.compare_item(itemToAdd, item)
+            if item.quizz.title == itemToUpdate.quizz.title:
+                self.items[i_item] = History.compare_item(itemToUpdate, item)
                 return True
-        self.items.append(itemToAdd)
+        self.items.append(itemToUpdate)
         return True
 
     def save(self, user):

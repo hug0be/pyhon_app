@@ -370,18 +370,6 @@ if __name__ == "__main__":
             quizzes_file.write(json.dumps([]))
         print("Fichier quizzes.json créé")
 
-    # Test historique
-    # TODO : Supprimer ce test quand il devient obsolète
-    question = Question("Salut ça va ?", "Oui et toi", ["Non"])
-    quizz = Quizz.get("SuperQuizz")
-    quizz2 = Quizz.get("SuperQuizz2 le retour")
-    history_item = HistoryItem(quizz, 10, 50)
-    history = History([history_item])
-    history.add_item(HistoryItem(quizz, 10, 40))
-    history.add_item(HistoryItem(quizz2, 5, 40))
-    history.save("admin")
-    print(history)
-
     # Convert file .ui -> .py
     os.system("pyside6-uic views/MainWindow.ui -o src/ui/MainWindow.py")
     os.system("pyside6-uic views/UserMenuWindow.ui -o src/ui/UserMenuWindow.py")
