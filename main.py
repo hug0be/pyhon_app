@@ -144,58 +144,55 @@ class UserMenuWindow(QMainWindow):
         self.ui.pagesList.setCurrentWidget(self.ui.questionsPage)
 
     def build_question_page(self, titleQuizz, aQuestion):
-        """Méthode qui SET tous les champs (titre, titre question, ...) d'une page question"""
-        self.ui.label_titre.setText( titleQuizz )
+        """Initialise les champs (titre, titre question, ...) d'une page question"""
+        # Affichage du titre du quizz
+        self.ui.label_titre.setText(titleQuizz)
 
-        # CREATE Objet Question
+        #
         currentQuestion = Question(aQuestion["title"], aQuestion["rightAnswer"], aQuestion["wrongAnswers"])
 
-        # SET the title of current question
-        self.ui.label_Question.setText( currentQuestion.title )
+        # Affichage de l'intitulé de la question
+        self.ui.label_Question.setText(currentQuestion.title)
 
-        # -- SET the answers on the radio buttons
-        # GET All radio buttons
-        listRadioButtons = [
-            self.ui.radioButton1_Quiz,
-            self.ui.radioButton2_Quiz,
-            self.ui.radioButton3_Quiz,
-            self.ui.radioButton4_Quiz
-        ]
+        # Obtention des radios boutons pour les réponses
+        radioButtons = self.ui.choiceRightAnswerQuizz.buttons()
+        # On efface leur contenu et on les désélectionne
+        for radioButton in radioButtons:
+            radioButton.setText(None)
+            radioButton.setChecked(False)
 
-        # List of all answers of the current question
-        listAnswers = currentQuestion.get_shuffled_answers()
+        # Obtention des réponses
+        answers = currentQuestion.get_shuffled_answers()
+        for i, answer in enumerate(answers):
+            radioButtons[i].setText(answer)
 
-        # SET the label of all radio buttons (and test to avoid the out of range)
-        cpt = 0
-        for radioButton in listRadioButtons:
-            radioButton.setText( listAnswers[cpt] ) if len(listAnswers) > cpt is not None else listRadioButtons[cpt].setText( "" )
-            cpt += 1
-
-        # # SET Method Button Validate
-        self.ui.validerButton_Quiz.clicked.connect(lambda: self.show_answer(currentQuestion))
+        # Binding bouton "Valider"
+        self.ui.validerButton_Quiz.clicked.connect(
+            lambda: self.show_answer(currentQuestion)
+        )
 
     def show_answer(self, currentQuestion):
+        """Affiche la bonne réponse et les mauvaises réponses"""
+
         # TODO : Message d'erreur si pas de bouton sélectionné
+        # TODO : Message d'erreur si la réponses choisi est vide
         # Check si un bouton est sélectionné
-        boutonChoisi = self.ui.choiceRightAnswerQuizz.checkedButton()
-        if boutonChoisi is None:
-            print("Aucune bouton sélectionné")
+        checkedButton = self.ui.choiceRightAnswerQuizz.checkedButton()
+        if checkedButton is None:
+            print("Aucun bouton sélectionné")
 
         # Coloration des réponses
         for button in self.ui.choiceRightAnswerQuizz.buttons():
             if currentQuestion.is_right_answer(button.text()):
                 button.setStyleSheet("background-color: #1D8E36")
                 # TODO : Ajouter 1 au score si la réponse choisi est bonne
-                if button == boutonChoisi:
-                    print("+1 !")
+                if button == checkedButton: print("+1 !")
             else:
                 button.setStyleSheet("background-color: #B41010")
 
     def is_right_answer_selected(self, currentQuestion):
-        """Return TRUE si la réponse sélectionnée est Bonne sinon FALSE"""
-        # GET Selected radio Button
+        """Check si la réponse sélectionnée est bonne"""
         selectedButtonText = self.ui.choiceRightAnswerQuizz.checkedButton().text()
-
         return currentQuestion.is_right_answer(selectedButtonText)
 
 
@@ -324,34 +321,29 @@ class UserMenuWindow(QMainWindow):
     def save_quizz(self):
         """Enregistre le quizz après toutes les étapes terminées"""
         self.pendingQuizz.save()
-        # Ajout dynamique des boutons
         self.show_quizz_list_page()
 
     def create_btns_page_list_quizz(self):
         """Créer les boutons sur la page Liste des Quizz"""
-        # GET THE LIST OF ALL QUIZZES
-        list_quizzes = Quizz.get_list_quizzes()
-
-        # GET THE LIST QUIZZES PAGE
-        page_list_quizz_container_bot = self.ui.page_list_quizz_container_bot
-
-        # Créer les layout pour page
+        # Tous les quizz
+        quizzes = Quizz.get_list_quizzes()
+        # Conteneur des quizz
+        quizzContainer = self.ui.page_list_quizz_container_bot
+        # Créer le layout pour page
         layout = QVBoxLayout()
 
-        for aQuizz in list_quizzes:
+        for quizz in quizzes:
             # Créer un bouton
-            button = QPushButton(aQuizz["title"])
-            # TODO Add the link to go on the quizz avec la methode button.clicked.connect(display_quizz(aQuizz["idQuizz"]) )
-
-            # Link le bouton avec la page de quizz au clique
-            button.clicked.connect(lambda: self.show_quizz_questions_page( Quizz.get_quizz_by_id( aQuizz["idQuizz"] ) ) )
-
-            # Ajouter le bouton au layout
+            button = QPushButton(quizz["title"])
+            # Binding du bouton avec sa page de quizz
+            button.clicked.connect(
+                lambda: self.show_quizz_questions_page(Quizz.get(quizz["title"]))
+            )
+            # Ajout du bouton au layout
             layout.addWidget(button)
 
-        # Mettre la layout contenant les boutons dans le container page_list_quizz_container_bot
-        page_list_quizz_container_bot.setLayout(layout)
-
+        # Ajout du layout dans le conteneur des quizz
+        quizzContainer.setLayout(layout)
 
     def import_quizz(self):
         # Tentative d'ouverture du fichier
