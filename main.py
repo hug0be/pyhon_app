@@ -9,12 +9,13 @@ from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout
 from PySide6.QtUiTools import QUiLoader
 
-from src import History
+from src import History, HistoryItem
 from src.account import Account, WrongPasswordException, UnknownAccountException
 from src.quizz import Quizz, Question, InvalidQuestionException, InvalidNbToDisplayException, ImportQuizzException
 from src.ui import Ui_MainWindow, Ui_userMenu
 
-def change_page(name:str="userMenu"):
+
+def change_page(name: str = "userMenu"):
     """Change de page selon le nom donné"""
     global window
     window.close()
@@ -24,19 +25,20 @@ def change_page(name:str="userMenu"):
         window = MainWindow()
     window.show()
 
+
 class MainWindow(QMainWindow):
     def __init__(self):
-        #Setup
+        # Setup
         QMainWindow.__init__(self)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.setWindowIcon(QIcon('resources/images/favicon_96x96.png'))
 
-        #Binding
+        # Binding
         self.ui.connectButton.clicked.connect(self.connect_attempt)
         self.ui.createAccountButton.clicked.connect(self.create_account_attempt)
 
-        #Binding changements de page
+        # Binding changements de page
         self.ui.chooseConnectButton.clicked.connect(self.show_connect_page)
         self.ui.chooseCreateAccountButton.clicked.connect(self.show_create_account_page)
         self.ui.backButton.clicked.connect(self.show_home)
@@ -44,11 +46,13 @@ class MainWindow(QMainWindow):
 
     def show_home(self):
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
-        #Quand l'user reviendra les erreurs auront disparu.
+        # Quand l'user reviendra les erreurs auront disparu.
         self.ui.createAccountErrorsLabel.clear()
         self.ui.connectErrorsLabel.clear()
+
     def show_create_account_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.createAccountPage)
+
     def show_connect_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.connectPage)
 
@@ -80,6 +84,7 @@ class MainWindow(QMainWindow):
 
         # All good !
         change_page()
+
     def create_account_attempt(self):
         """Méthode appeler pour une tentative de création de compte"""
         # Obtention des identifiants
@@ -107,6 +112,7 @@ class MainWindow(QMainWindow):
         Account(username, password).save()
         change_page()
 
+
 class UserMenuWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
@@ -114,11 +120,10 @@ class UserMenuWindow(QMainWindow):
         self.ui.setupUi(self)
         self.ui.pagesList.setCurrentIndex(0)
         self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
-        self.ui.toggleButton.clicked.connect(lambda : self.toggle_menu(200))
+        self.ui.toggleButton.clicked.connect(lambda: self.toggle_menu(200))
         self.pendingQuizz = None
 
-
-        #Binding changements de pages
+        # Binding changements de pages
         # TODO: Retour arrière pour les pages "quizzListPage" et "createQuizzPage"
         self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
         self.ui.createQuizzButton.clicked.connect(self.show_quizz_creation_page)
@@ -127,28 +132,34 @@ class UserMenuWindow(QMainWindow):
         # TODO relier le bouton
         self.ui.historyButton.clicked.connect(self.show_history)
 
-        #Les 3 étapes/pages de création d'un quizz
+        # Les 3 étapes/pages de création d'un quizz
         self.ui.addQuestionsButton.clicked.connect(self.create_quizz1)
         self.ui.nextQuestionButton.clicked.connect(self.create_quizz2)
         self.ui.endQuestionsButton.clicked.connect(self.end_questions)
-        self.ui.doRandomOrderButton.clicked.connect(lambda : self.create_quizz3(True))
-        self.ui.noRandomOrderButton.clicked.connect(lambda : self.create_quizz3(False))
+        self.ui.doRandomOrderButton.clicked.connect(lambda: self.create_quizz3(True))
+        self.ui.noRandomOrderButton.clicked.connect(lambda: self.create_quizz3(False))
         self.ui.saveQuizzButton.clicked.connect(self.create_quizz4)
 
         # Binding des back buttons
-        backButtons = [self.ui.backButton1, self.ui.backButton2, self.ui.backButton3, self.ui.backButton4, self.ui.backButton5, self.ui.backButton6]
+        backButtons = [self.ui.backButton1, self.ui.backButton2, self.ui.backButton3, self.ui.backButton4,
+                       self.ui.backButton5, self.ui.backButton6]
         for backButton in backButtons:
             backButton.clicked.connect(self.show_home_page)
 
     def show_home_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
+
     def show_history(self):
+        self.create_buttons_page_history()
         self.ui.pagesList.setCurrentWidget(self.ui.history)
+
     def show_quizz_list_page(self):
         self.create_bouttons_page_list_quizz()
         self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
+
     def show_quizz_creation_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.createQuizzPage)
+
     def create_quizz1(self):
         """Méthode qui constitue la première étape de création d'un quizz : choisir un titre"""
         # Obtention des données
@@ -167,16 +178,17 @@ class UserMenuWindow(QMainWindow):
         # All good !
         self.pendingQuizz = Quizz([], title)
         self.ui.quizzCreationSteps.setCurrentWidget(self.ui.createQuestionsPage)
+
     def create_quizz2(self):
         """Méthode qui constitue la deuxième étape de création d'un quizz : l'ajout des questions"""
         # TODO : Ajouter une validation pour voir s'il n'y a pas 2 fois la même réponse
-        #Récupération des données
+        # Récupération des données
         title = self.ui.titleQuestion.text()
         indexRightAnswer = self.ui.choiceRightAnswer.checkedId()
-        answersWidget = [self.ui.answer1,self.ui.answer2,self.ui.answer3,self.ui.answer4]
+        answersWidget = [self.ui.answer1, self.ui.answer2, self.ui.answer3, self.ui.answer4]
         answers = [answerWidget.text() for answerWidget in answersWidget]
 
-        #Validation des données
+        # Validation des données
         try:
             Question.valid_inputs(title, answers, indexRightAnswer)
         except InvalidQuestionException as ex:
@@ -187,10 +199,10 @@ class UserMenuWindow(QMainWindow):
         indexRightAnswer = abs(indexRightAnswer + 2)
         rightAnswer = answers.pop(indexRightAnswer)
         wrongAnswers = [answer for answer in answers if answer != '']
-        question = Question(title, rightAnswer, wrongAnswers) #On crée la question
-        self.pendingQuizz.questions.append(question) #On ajoute la question au quizz
+        question = Question(title, rightAnswer, wrongAnswers)  # On crée la question
+        self.pendingQuizz.questions.append(question)  # On ajoute la question au quizz
 
-        #On vide les inputs
+        # On vide les inputs
         # TODO : Il y a surement un moyen de reset la page au lieu de faire tout ça
         # TODO : La code commenté suivant ne fonctionne  pas : le button choisi ne se désélectionne pas
         # self.ui.choiceRightAnswer.checkedButton().setChecked(False)
@@ -228,7 +240,7 @@ class UserMenuWindow(QMainWindow):
 
         # GET WIDTH
         width = self.ui.leftMenu.width()
-        maxExtend = maxWidth # 300
+        maxExtend = maxWidth  # 300
         standard = 75
 
         # SET MAX WIDTH
@@ -236,7 +248,6 @@ class UserMenuWindow(QMainWindow):
             widthExtended = maxExtend
         else:
             widthExtended = standard
-
 
         # ANIMATION
         # -- TOGGLE
@@ -247,11 +258,11 @@ class UserMenuWindow(QMainWindow):
         self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
         self.animation.start()
 
-    def create_quizz3(self, useRandomOrder:bool):
+    def create_quizz3(self, useRandomOrder: bool):
         """Méthode qui constitue la troisième étape de création d'un quizz : l'ordre des questions"""
         self.pendingQuizz.useRandomOrder = useRandomOrder
 
-        #Affichage du nombre de questions max pour la page suivante
+        # Affichage du nombre de questions max pour la page suivante
         nbMaxToDisplay = self.pendingQuizz.nb_questions()
         self.ui.nbQuestionsLabel.setText(f"Vous avez écrit {nbMaxToDisplay} questions")
         self.ui.quizzCreationSteps.setCurrentWidget(self.ui.chooseNbToDisplayPage)
@@ -260,14 +271,14 @@ class UserMenuWindow(QMainWindow):
         """Méthode qui constitue la quatrième et dernière étape de création d'un quizz : le choix du nombre de questions à afficher"""
         nbToDisplay = self.ui.nbToDisplay.text()
 
-        #Validation du nombre
+        # Validation du nombre
         try:
             self.pendingQuizz.valid_nb_to_display(nbToDisplay)
         except InvalidNbToDisplayException as ex:
             self.ui.nbToDisplayErrorsLabel.setText(ex.__str__())
             return False
 
-        #All good !
+        # All good !
         self.pendingQuizz.nbQuestionsToDisplay = nbToDisplay
         self.save_quizz()
 
@@ -300,18 +311,23 @@ class UserMenuWindow(QMainWindow):
         # Mettre la layout contenant les boutons dans le conteneur page_list_quizz_container_bot
         page_list_quizz_container_bot.setLayout(layout)
 
-    def create_buttons_page_history(self, history:History):
+    def create_buttons_page_history(self):
         """Créer les boutons sur la page Historique"""
-        # GET THE LIST OF ALL H
-        list_history = history.get_history()
+        # GET THE LIST OF ALL HISTORY
+
+        history = History.load_history(user = user)
+        history = History.to_obj(history)
+
+        history = history.get_history()
+        #(history[0].quizz)
 
         # GET THE LIST HISTORY PAGE
-        page_history_quizz_container_bot = self.ui.page_history_quizz_container_bot
+        page_history_quizz_container_bot = self.ui.page_history_quizz_container_bot_2
 
         # Créer les layout pour page
         layout = QVBoxLayout()
 
-        for anItem in list_history:
+        for anItem in history:
             # Créer un bouton
             button = QPushButton(anItem.__str__())
             # TODO Add the link to go on the quizz avec la methode button.clicked.connect(display_quizz(aQuizz["idQuizz"]) )
@@ -326,23 +342,26 @@ class UserMenuWindow(QMainWindow):
         # Tentative d'ouverture du fichier
         try:
             file = QFileDialog.getOpenFileName(self, 'Importer un quizz', "", "Text files (*.txt)")
-        except FileNotFoundError: return False
+        except FileNotFoundError:
+            return False
 
         # Tentative d'ajout du quizz
-        try: Quizz.import_txt(file[0]).save()
+        try:
+            Quizz.import_txt(file[0]).save()
         except ImportQuizzException as ex:
             self.ui.importQuizzErrorsLabel.setText(ex.__str__())
             return False
 
-        #All good !
+        # All good !
         self.ui.importQuizzErrorsLabel.clear()
         self.show_quizz_list_page()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     loader = QUiLoader()
 
-    #Check si le fichier accounts.json existe
+    # Check si le fichier accounts.json existe
     if not os.path.exists("data/accounts.json"):
         if not os.path.exists("data"):
             os.mkdir("data")
@@ -362,22 +381,25 @@ if __name__ == "__main__":
 
     # Test historique
     # TODO : Supprimer ce test quand il devient obsolète
-    # question = Question("Salut ça va ?", "Oui et toi", ["Non"])
-    # quizz = Quizz("SuperQuizz", 1, [question])
-    # history_item = HistoryItem(quizz, 10, 50)
-    # history = History([history_item])
-    # history.add_item(HistoryItem(quizz, 10, 40))
-    # history.add_item(HistoryItem(quizz, 5, 40))
-    # history.save("admin")
-    # print(history)
+    question = Question("Salut ça va ?", "Oui et toi", ["Non"])
+    quizz = Quizz([question], "SuperQuizz")
+    quizz2 = Quizz([question], "SuperQuizz mais 2")
+    history_item = HistoryItem(quizz, 10, 50)
+    history = History([history_item])
+    history.add_item(HistoryItem(quizz, 10, 40))
+    history.add_item(HistoryItem(quizz2, 5, 40))
+    history.save("admin")
+    print(history)
 
-    #Convert file .ui -> .py
+    global user
+    user = "admin"
+
+    # Convert file .ui -> .py
     os.system("pyside6-uic views/MainWindow.ui -o src/ui/MainWindow.py")
     os.system("pyside6-uic views/UserMenuWindow.ui -o src/ui/UserMenuWindow.py")
     os.system("pyside6-rcc resources/resources.qrc -o resources_rc.py")
 
-    #Page principale
+    # Page principale
     window = MainWindow()
     window.show()
     sys.exit(app.exec())
-

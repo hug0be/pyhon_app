@@ -66,5 +66,31 @@ class History:
         with open('data/accounts.json', 'w') as account_file:
             json.dump(accounts, account_file, indent=4)
 
+    @staticmethod
+    def load_history(user):
+        with open('data/accounts.json', 'r') as account_file:
+            accounts = json.load(account_file)
+            for account in accounts:
+                if account['username'] == user:
+                    history = account['history']
+                    return history
+            return None
+
+    @staticmethod
+    def to_obj(dico):
+        list_items = []
+        for item in dico["items"]:
+            historyItem = HistoryItem()
+            print(item)
+            historyItem.quizz = Quizz.get(item["quizz"])
+            print(historyItem.quizz.title + "    item[quizz]")
+            historyItem.best_score = item["best_score"]
+            historyItem.time = item["time"]
+            list_items.append(historyItem)
+        history = History(list_items)
+        return history
+
+
+
     def __str__(self):
         return "\n".join(item.__str__() for item in self.items)
