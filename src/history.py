@@ -24,6 +24,9 @@ class History:
     def __init__(self, items:[HistoryItem]=[]):
         self.items = items
 
+    def get_history(self):
+        return self.items
+
     def to_json(self):
         return {'items': [item.to_json() for item in self.items]}
     @staticmethod

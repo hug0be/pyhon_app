@@ -9,6 +9,7 @@ from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout
 from PySide6.QtUiTools import QUiLoader
 
+from src import History
 from src.account import Account, WrongPasswordException, UnknownAccountException
 from src.quizz import Quizz, Question, InvalidQuestionException, InvalidNbToDisplayException, ImportQuizzException
 from src.ui import Ui_MainWindow, Ui_userMenu
@@ -293,6 +294,28 @@ class UserMenuWindow(QMainWindow):
 
         # Mettre la layout contenant les boutons dans le conteneur page_list_quizz_container_bot
         page_list_quizz_container_bot.setLayout(layout)
+
+    def create_buttons_page_history(self, history:History):
+        """Créer les boutons sur la page Historique"""
+        # GET THE LIST OF ALL H
+        list_history = history.get_history()
+
+        # GET THE LIST HISTORY PAGE
+        page_list_history_container_bot = self.ui.page_list_history_container_bot
+
+        # Créer les layout pour page
+        layout = QVBoxLayout()
+
+        for anItem in list_history:
+            # Créer un bouton
+            button = QPushButton(anItem.__str__())
+            # TODO Add the link to go on the quizz avec la methode button.clicked.connect(display_quizz(aQuizz["idQuizz"]) )
+
+            # Ajouter le bouton au layout
+            layout.addWidget(button)
+
+        # Mettre la layout contenant les boutons dans le conteneur page_list_history_container_bot
+        page_list_history_container_bot.setLayout(layout)
 
     def import_quizz(self):
         # Tentative d'ouverture du fichier
