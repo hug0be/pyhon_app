@@ -168,6 +168,7 @@ class UserMenuWindow(QMainWindow):
         self.pendingQuizz = quizz
         self.update_question_page(quizz.title, self.next_question())
         self.ui.pagesList.setCurrentWidget(self.ui.questionsPage)
+        self.ui.questionPages.setCurrentWidget(self.ui.questionPage)
 
     def update_question_page(self, titleQuizz:str, question:Question):
         """Initialise les champs (titre, titre question, ...) d'une page question"""
