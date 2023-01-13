@@ -169,7 +169,6 @@ class Quizz:
     def import_txt(filepath: str):
         def attempt_create_question(title, rightAnswer, wrongAnswers)->Question:
             """Check si la creation d'une question est possible, renvoie cette question si oui"""
-            i
             # Check s'il y a une bonne réponse
             if rightAnswer is None: raise InvalidQuestionException(f"la question n'a pas de bonne réponse")
             # Check le nombre de réponses

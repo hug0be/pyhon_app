@@ -4,10 +4,9 @@ import os
 
 from PySide6 import QtCore
 from PySide6.QtCore import QPropertyAnimation
+from PySide6.QtWidgets import QFileDialog
 from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
-from PySide6.QtGui import QIcon, Qt
-from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QGroupBox, QLabel
+from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout
 from PySide6.QtUiTools import QUiLoader
 
 from src.account import Account, WrongPasswordException, UnknownAccountException
@@ -176,20 +175,22 @@ class UserMenuWindow(QMainWindow):
         self.ui.validerButton_Quiz.clicked.connect(lambda: self.show_answer(currentQuestion))
 
     def show_answer(self, currentQuestion):
-        # Si un bouton est selectionné
-        if self.ui.choiceRightAnswerQuizz.checkedId() != -1:
-            # Si ce n'est pas la bonne réponse on met la réponse sélectionnée en ROUGE
-            if not self.is_right_answer_selected(currentQuestion):
-                self.ui.choiceRightAnswerQuizz.checkedButton().setStyleSheet("QRadioButton {color: red}")
+        # TODO : Message d'erreur si pas de bouton sélectionné
+        # Check si un bouton est sélectionné
+        boutonChoisi = self.ui.choiceRightAnswerQuizz.checkedButton()
+        if boutonChoisi is None:
+            print("Aucune bouton sélectionné")
 
-            # Affichage de la réponse en VERT
-            for aButton in self.ui.choiceRightAnswerQuizz.buttons():
-                if currentQuestion.is_right_answer( aButton.text() ):
-                    aButton.setStyleSheet("QRadioButton {color: green}")
+        # Coloration des réponses
+        for button in self.ui.choiceRightAnswerQuizz.buttons():
+            if currentQuestion.is_right_answer(button.text()):
+                button.setStyleSheet("background-color: #1D8E36")
+                # TODO : Ajouter 1 au score si la réponse choisi est bonne
+                if button == boutonChoisi:
+                    print("+1 !")
+            else:
+                button.setStyleSheet("background-color: #B41010")
 
-        else:
-            # TODO Mettre error aucune réponse selectionée
-            print("Aucune réponse sélectionée")
     def is_right_answer_selected(self, currentQuestion):
         """Return TRUE si la réponse sélectionnée est Bonne sinon FALSE"""
         # GET Selected radio Button
@@ -324,8 +325,7 @@ class UserMenuWindow(QMainWindow):
         """Enregistre le quizz après toutes les étapes terminées"""
         self.pendingQuizz.save()
         # Ajout dynamique des boutons
-        self.create_btns_page_list_quizz()
-        self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
+        self.show_quizz_list_page()
 
     def create_btns_page_list_quizz(self):
         """Créer les boutons sur la page Liste des Quizz"""
