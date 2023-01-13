@@ -32,6 +32,7 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(QIcon('resources/images/favicon_96x96.png'))
 
         #Binding
+        self.ui.pagesList.setCurrentWidget(self.ui.homePage)
         self.ui.connectButton.clicked.connect(self.connect_attempt)
         self.ui.createAccountButton.clicked.connect(self.create_account_attempt)
 
@@ -110,7 +111,7 @@ class UserMenuWindow(QMainWindow):
         QMainWindow.__init__(self)
         self.ui = Ui_userMenu()
         self.ui.setupUi(self)
-        self.ui.pagesList.setCurrentIndex(1)
+        self.ui.pagesList.setCurrentWidget(self.ui.homePage)
         self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
         self.ui.toggleButton.clicked.connect(lambda : self.toggle_menu(200))
         self.pendingQuizz = None
@@ -185,12 +186,13 @@ class UserMenuWindow(QMainWindow):
         if checkedButton is None:
             print("Aucun bouton sélectionné")
 
+        # TODO : Ajouter 1 au score si la réponse choisi est bonne
+        if checkedButton.text() == currentQuestion.rightAnswer: print("+1 !")
+
         # Coloration des réponses
         for button in self.ui.choiceRightAnswerQuizz.buttons():
             if currentQuestion.is_right_answer(button.text()):
                 button.setStyleSheet("background-color: #1D8E36")
-                # TODO : Ajouter 1 au score si la réponse choisi est bonne
-                if button == checkedButton: print("+1 !")
             else:
                 button.setStyleSheet("background-color: #B41010")
 
@@ -404,7 +406,7 @@ if __name__ == "__main__":
     os.system("pyside6-rcc resources/resources.qrc -o resources_rc.py")
 
     #Page principale
-    window = UserMenuWindow()
+    window = MainWindow()
     window.show()
     sys.exit(app.exec())
 
