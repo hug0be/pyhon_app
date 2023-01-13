@@ -484,7 +484,7 @@ QRadioButton::indicator::checked {
          <rect>
           <x>0</x>
           <y>-1</y>
-          <width>841</width>
+          <width>801</width>
           <height>601</height>
          </rect>
         </property>
@@ -493,6 +493,9 @@ QRadioButton::indicator::checked {
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
         </property>
         <widget class="QWidget" name="questionPage">
          <widget class="QWidget" name="verticalLayoutWidget_5">
@@ -675,7 +678,7 @@ QRadioButton::indicator::checked {
            <string>Points</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_Nb_Points">
+         <widget class="QLabel" name="nbPointsLabel">
           <property name="geometry">
            <rect>
             <x>690</x>
@@ -690,7 +693,7 @@ QRadioButton::indicator::checked {
            </font>
           </property>
           <property name="text">
-           <string>20</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
          <widget class="QLabel" name="label_NB_Question">
@@ -710,7 +713,7 @@ QRadioButton::indicator::checked {
           <property name="geometry">
            <rect>
             <x>290</x>
-            <y>470</y>
+            <y>460</y>
             <width>251</width>
             <height>30</height>
            </rect>
@@ -757,6 +760,34 @@ QRadioButton::indicator::checked {
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLabel" name="validateAnswerErrorsLabel">
+          <property name="geometry">
+           <rect>
+            <x>210</x>
+            <y>60</y>
+            <width>451</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: #F3A917</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
           </property>
          </widget>
         </widget>

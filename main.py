@@ -119,6 +119,7 @@ class UserMenuWindow(QMainWindow):
         # Variables utilisés pendant le quizz
         self.hasAnswered = False
         self.indexQuestion = 0
+        self.score = 0
 
         #Binding changements de pages
         # TODO: Retour arrière pour les pages "quizzListPage" et "createQuizzPage"
@@ -203,10 +204,24 @@ class UserMenuWindow(QMainWindow):
 
     def choose_question_page(self):
         self.hasAnswered = not self.hasAnswered
-        print("Actual question:", self.indexQuestion)
         if self.hasAnswered:
+
+            # Validation du choix
+            chosenAnswer = self.ui.choiceRightAnswerQuizz.checkedButton()
+            if chosenAnswer is None or chosenAnswer.text() == "":
+                self.hasAnswered = False
+                self.ui.validateAnswerErrorsLabel.setText("Saisissez une réponse")
+                raise Exception("Saisissez une réponse")
+
+            # Augmentation du score
+            if chosenAnswer.text() == self.pendingQuizz.questions[self.indexQuestion-1].rightAnswer:
+                self.score += 1
+                self.ui.nbPointsLabel.setText(str(self.score))
+
+            self.ui.validateButton.setText("Question suivante")
             self.show_answer(self.pendingQuizz.questions[self.indexQuestion-1])
         else:
+            self.ui.validateButton.setText("Valider")
             self.update_question_page(self.pendingQuizz.title, self.next_question())
 
     def next_question(self)->Question:
@@ -228,9 +243,6 @@ class UserMenuWindow(QMainWindow):
         if checkedButton is None:
             print("Aucun bouton sélectionné")
             return False
-
-        # TODO : Ajouter 1 au score si la réponse choisi est bonne
-        # if checkedButton.text() == currentQuestion.rightAnswer:
 
         # Coloration des réponses
         for button in self.ui.choiceRightAnswerQuizz.buttons():
