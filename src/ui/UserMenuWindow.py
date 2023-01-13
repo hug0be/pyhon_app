@@ -641,7 +641,7 @@ class Ui_userMenu(object):
 
         self.retranslateUi(userMenu)
 
-        self.pagesList.setCurrentIndex(2)
+        self.pagesList.setCurrentIndex(1)
         self.backButton6.setDefault(False)
         self.backButton1.setDefault(False)
         self.questionPages.setCurrentIndex(0)
