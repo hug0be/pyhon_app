@@ -18,7 +18,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QButtonGroup, QFrame, QGridLayout,
     QGroupBox, QHBoxLayout, QLabel, QLineEdit,
     QMainWindow, QPushButton, QRadioButton, QSizePolicy,
-    QSpacerItem, QStackedWidget, QVBoxLayout, QWidget)
+    QStackedWidget, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_userMenu(object):
@@ -220,14 +220,16 @@ class Ui_userMenu(object):
 
         self.importQuizzErrorsLabel = QLabel(self.leftMenu)
         self.importQuizzErrorsLabel.setObjectName(u"importQuizzErrorsLabel")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.importQuizzErrorsLabel.sizePolicy().hasHeightForWidth())
+        self.importQuizzErrorsLabel.setSizePolicy(sizePolicy3)
         self.importQuizzErrorsLabel.setStyleSheet(u"color: #F3A917")
+        self.importQuizzErrorsLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.importQuizzErrorsLabel.setWordWrap(True)
 
         self.verticalLayout_3.addWidget(self.importQuizzErrorsLabel)
-
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-
-        self.verticalLayout_3.addItem(self.verticalSpacer)
 
 
         self.verticalLayout_2.addWidget(self.leftMenu, 0, Qt.AlignLeft)
@@ -467,11 +469,11 @@ class Ui_userMenu(object):
         self.answers_6.setContentsMargins(0, 0, 0, 0)
         self.answerQuestion1 = QRadioButton(self.verticalLayoutWidget_5)
         self.answerQuestion1.setObjectName(u"answerQuestion1")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Expanding)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.answerQuestion1.sizePolicy().hasHeightForWidth())
-        self.answerQuestion1.setSizePolicy(sizePolicy3)
+        sizePolicy4 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Expanding)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.answerQuestion1.sizePolicy().hasHeightForWidth())
+        self.answerQuestion1.setSizePolicy(sizePolicy4)
         self.answerQuestion1.setMinimumSize(QSize(0, 0))
         self.answerQuestion1.setFont(font)
         self.answerQuestion1.setIconSize(QSize(16, 16))
@@ -481,8 +483,8 @@ class Ui_userMenu(object):
 
         self.answerQuestion2 = QRadioButton(self.verticalLayoutWidget_5)
         self.answerQuestion2.setObjectName(u"answerQuestion2")
-        sizePolicy3.setHeightForWidth(self.answerQuestion2.sizePolicy().hasHeightForWidth())
-        self.answerQuestion2.setSizePolicy(sizePolicy3)
+        sizePolicy4.setHeightForWidth(self.answerQuestion2.sizePolicy().hasHeightForWidth())
+        self.answerQuestion2.setSizePolicy(sizePolicy4)
         self.answerQuestion2.setMinimumSize(QSize(0, 0))
         self.answerQuestion2.setFont(font)
         self.answerQuestion2.setChecked(False)
@@ -491,8 +493,8 @@ class Ui_userMenu(object):
 
         self.answerQuestion3 = QRadioButton(self.verticalLayoutWidget_5)
         self.answerQuestion3.setObjectName(u"answerQuestion3")
-        sizePolicy3.setHeightForWidth(self.answerQuestion3.sizePolicy().hasHeightForWidth())
-        self.answerQuestion3.setSizePolicy(sizePolicy3)
+        sizePolicy4.setHeightForWidth(self.answerQuestion3.sizePolicy().hasHeightForWidth())
+        self.answerQuestion3.setSizePolicy(sizePolicy4)
         self.answerQuestion3.setMinimumSize(QSize(0, 0))
         self.answerQuestion3.setFont(font)
         self.answerQuestion3.setChecked(False)
@@ -501,8 +503,8 @@ class Ui_userMenu(object):
 
         self.answerQuestion4 = QRadioButton(self.verticalLayoutWidget_5)
         self.answerQuestion4.setObjectName(u"answerQuestion4")
-        sizePolicy3.setHeightForWidth(self.answerQuestion4.sizePolicy().hasHeightForWidth())
-        self.answerQuestion4.setSizePolicy(sizePolicy3)
+        sizePolicy4.setHeightForWidth(self.answerQuestion4.sizePolicy().hasHeightForWidth())
+        self.answerQuestion4.setSizePolicy(sizePolicy4)
         self.answerQuestion4.setMinimumSize(QSize(0, 0))
         self.answerQuestion4.setFont(font)
         self.answerQuestion4.setChecked(False)

@@ -159,7 +159,7 @@ class UserMenuWindow(QMainWindow):
             return False
 
         # All good !
-        self.pendingQuizz = Quizz(title)
+        self.pendingQuizz = Quizz([], title)
         self.ui.quizzCreationSteps.setCurrentWidget(self.ui.createQuestionsPage)
     def create_quizz2(self):
         """Méthode qui constitue la deuxième étape de création d'un quizz : l'ajout des questions"""
@@ -294,17 +294,14 @@ class UserMenuWindow(QMainWindow):
         # Mettre la layout contenant les boutons dans le conteneur page_list_quizz_container_bot
         page_list_quizz_container_bot.setLayout(layout)
 
-
     def import_quizz(self):
         # Tentative d'ouverture du fichier
         try:
             file = QFileDialog.getOpenFileName(self, 'Importer un quizz', "", "Text files (*.txt)")
-        except FileNotFoundError:
-            return False
+        except FileNotFoundError: return False
 
         # Tentative d'ajout du quizz
-        try:
-            Quizz.import_txt(file[0]).save()
+        try: Quizz.import_txt(file[0]).save()
         except ImportQuizzException as ex:
             self.ui.importQuizzErrorsLabel.setText(ex.__str__())
             return False
