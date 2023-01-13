@@ -2,25 +2,36 @@
 import json
 import random
 
+
 class InvalidQuizzException(Exception): pass
+
 class UnknownQuizzException(Exception): pass
+
 class InvalidQuestionException(Exception): pass
+
+
 class InvalidNbToDisplayException(Exception): pass
+
+
 class InvalidNbAnswersException(Exception): pass
+
+
 class ImportQuizzException(Exception): pass
+
 
 class Question:
     nbAnswersMax = 4
-    def __init__(self, title:str="", rightAnswer:str="", wrongAnswers:[str]=[]):
+
+    def __init__(self, title: str = "", rightAnswer: str = "", wrongAnswers: [str] = []):
         self.title = title
         self.wrongAnswers = wrongAnswers
         self.rightAnswer = rightAnswer
 
-    def is_right_answer(self, answer)->bool:
+    def is_right_answer(self, answer) -> bool:
         """Retourne si la réponse est vraie ou fausse"""
         return answer == self.rightAnswer
 
-    def all_answers(self)->[str]:
+    def all_answers(self) -> [str]:
         """Renvoi la liste de question dans un ordre aléatoire (pour l'affichage)"""
         return random.shuffle(self.wrongAnswers + [self.rightAnswer])
 
@@ -32,14 +43,15 @@ class Question:
         if not self.title:
             raise InvalidQuestionException("Saisissez l'intitule de la question")
         # Check le nombre de réponses
-        try: Question.valid_nb_answers(self.nb_answers())
+        try:
+            Question.valid_nb_answers(self.nb_answers())
         except InvalidNbAnswersException as e:
             raise InvalidQuestionException(f"Pour la question {self.title}, {e.__str__().lower()}")
         # Check s'il y a une bonne réponse
         if self.rightAnswer == "": raise InvalidQuestionException(f"La question n'a pas de bonne réponse")
         return True
 
-    def to_json(self)->dict:
+    def to_json(self) -> dict:
         return {
             'title': self.title,
             'rightAnswer': self.rightAnswer,
@@ -52,7 +64,7 @@ class Question:
         return "", [], ""
 
     @staticmethod
-    def valid_inputs(title:str, answers:[str], indexRightAnswer:int):
+    def valid_inputs(title: str, answers: [str], indexRightAnswer: int):
         """Check si les données de cette question sont valides"""
         # Pour éviter les erreurs d'adresse (ne pas modifier le paramètre appelant)
         _answers = answers.copy()
@@ -83,7 +95,7 @@ class Question:
         return True
 
     @staticmethod
-    def valid_nb_answers(nbAnswers:int):
+    def valid_nb_answers(nbAnswers: int):
         """Check si le nombre de réponses est valide"""
         if nbAnswers < 2:
             raise InvalidNbAnswersException(f"La question doit avoir au moins deux réponses")
@@ -96,14 +108,24 @@ class Question:
         random.shuffle(answers)
         return answers
 
+    @staticmethod
+    def from_json(question_json: dict):
+        return Question(
+            question_json["title"],
+            question_json["rightAnswer"],
+            question_json["wrongAnswers"]
+        )
+
     def __str__(self):
         res = f"\"{self.title}\"\n" \
               f"✔ {self.rightAnswer}"
         res += "\n".join([f"❌ {wrongAnswer}" for wrongAnswer in self.wrongAnswers])
         return res
 
+
 class Quizz:
-    def __init__(self, questions:[Question], title:str="", nbQuestionsToDisplay:int|None=1, useRandomOrder:bool=False):
+    def __init__(self, questions: [Question], title: str = "", nbQuestionsToDisplay: int | None = 1,
+                 useRandomOrder: bool = False):
         self.title = title
         self.questions = questions
         self.useRandomOrder = useRandomOrder
@@ -111,11 +133,11 @@ class Quizz:
 
     def to_json(self):
         return {
-                'title': self.title,
-                'questions': [question.to_json() for question in self.questions],
-                'userRandomOrder': self.useRandomOrder,
-                'nbQuestionsToDisplay': self.nbQuestionsToDisplay
-            }
+            'title': self.title,
+            'questions': [question.to_json() for question in self.questions],
+            'userRandomOrder': self.useRandomOrder,
+            'nbQuestionsToDisplay': self.nbQuestionsToDisplay
+        }
 
     def save(self):
         """Sauvegarde un quizz"""
@@ -125,19 +147,20 @@ class Quizz:
             quizzes_file.seek(0)
             json.dump(quizzes, quizzes_file, indent=4)
 
-    def nb_questions(self)->int:
+    def nb_questions(self) -> int:
         return len(self.questions)
 
-    def has_no_question(self)->bool:
+    def has_no_question(self) -> bool:
         return self.nb_questions() == 0
 
-    def valid_inputs(self, title:str, nbToDisplay:str):
+    def valid_inputs(self, title: str, nbToDisplay: str):
         """Méthode qui check si un titre et un nombre de questions à afficher sont valides"""
         Quizz.valid_title(title)
 
         # Check si le quizz a au moins une question
         if self.has_no_question(): raise InvalidQuizzException("le Quizz n'a pas de question")
-        if self.nb_questions() > Question.nbAnswersMax: raise InvalidQuizzException(f"le Quizz ne peux pas avoir plus de {Question.nbAnswersMax}")
+        if self.nb_questions() > Question.nbAnswersMax: raise InvalidQuizzException(
+            f"le Quizz ne peux pas avoir plus de {Question.nbAnswersMax}")
 
         # Check si le nbToDisplay est valide
         if self.nb_questions() > 1:
@@ -158,28 +181,32 @@ class Quizz:
 
         # Check les questions
         for question in self.questions:
-            try: question.is_valid()
+            try:
+                question.is_valid()
             except InvalidQuestionException as ex:
                 raise InvalidQuizzException(ex.__str__())
 
         # Check le nbQuestionsToDisplay
-        try: self.valid_nb_to_display(self.nbQuestionsToDisplay)
+        try:
+            self.valid_nb_to_display(self.nbQuestionsToDisplay)
         except InvalidNbToDisplayException as ex:
             raise InvalidQuizzException(f"Le nombre de questions à affiché est invalide, {ex.__str__().lower()}")
 
         return True
+
     def __str__(self):
         res = f"Quizz \"{self.title}\"\n" \
-               f"Ordre aléatoire: {self.useRandomOrder}\n" \
-               f"Nombre de questions affichés: {self.nbQuestionsToDisplay}/{self.nb_questions()}\n\n"
+              f"Ordre aléatoire: {self.useRandomOrder}\n" \
+              f"Nombre de questions affichés: {self.nbQuestionsToDisplay}/{self.nb_questions()}\n\n"
         res += '\n'.join(question.__str__() for question in self.questions)
         return res
 
-    def valid_nb_to_display(self, nbToDisplay:str|int):
+    def valid_nb_to_display(self, nbToDisplay: str | int):
         """Methode qui vérifie si le nombre de questions à afficher pour créer une question est valide"""
         if nbToDisplay == "": raise InvalidNbToDisplayException("Saisissez un nombre de questions à afficher")
         nbQuestionsMax = self.nb_questions()
-        try: nbToDisplay = int(nbToDisplay)
+        try:
+            nbToDisplay = int(nbToDisplay)
         except ValueError:
             raise InvalidNbToDisplayException(f"Saisissez un nombre valide")
         if nbToDisplay <= 0:
@@ -189,8 +216,18 @@ class Quizz:
         # All good !
         return True
 
+    # TODO gérer les exceptions
     @staticmethod
-    def exists(title:str):
+    def from_json(quizz: dict):
+        return Quizz(
+            [Question.from_json(question) for question in quizz["questions"]],
+            quizz["title"],
+            quizz["nbQuestionsToDisplay"],
+            quizz["userRandomOrder"]
+        )
+
+    @staticmethod
+    def exists(title: str):
         """Teste si un quizz existe"""
         with open('data/quizzes.json', 'r') as file:
             for quizz in json.load(file):
@@ -198,7 +235,17 @@ class Quizz:
             return False
 
     @staticmethod
-    def valid_title(title:str):
+    def get(title: str):
+        """Récupère un Quizz avec son titre"""
+        with open('data/quizzes.json', 'r+') as quizzes_file:
+            quizzes = json.load(quizzes_file)
+            for quizz in quizzes:
+                if quizz["title"] == title:
+                    return Quizz.from_json(quizz)
+        raise UnknownQuizzException(f"Le quizz {title} n'existe pas")
+
+    @staticmethod
+    def valid_title(title: str):
         # Check si le titre est vide
         if not title: raise InvalidQuizzException("Le Quizz n'a pas de titre")
         # Check si le Quizz existe déjà
@@ -208,7 +255,7 @@ class Quizz:
     def import_txt(filepath: str):
         with open(filepath, encoding='utf8') as f:
             iLine = 1
-            keywords = ["quizz:","question:","reponse:","bonne_reponse:","ordre:","nombre_questions:"]
+            keywords = ["quizz:", "question:", "reponse:", "bonne_reponse:", "ordre:", "nombre_questions:"]
 
             questionTitle, questionWrongAnswers, questionRightAnswer = Question.default_values()
             nbAnswers = 0
@@ -227,16 +274,20 @@ class Quizz:
                 if not line:
                     # Check si l'ordre est valide
                     if questionOrder:
-                        if questionOrder == "aléatoire": questionOrder = True
-                        elif questionOrder == "normal": questionOrder = False
-                        else: raise ImportQuizzException(f"L'ordre \"{questionOrder}\" n'existe pas")
-
+                        if questionOrder == "aléatoire":
+                            questionOrder = True
+                        elif questionOrder == "normal":
+                            questionOrder = False
+                        else:
+                            raise ImportQuizzException(f"L'ordre \"{questionOrder}\" n'existe pas")
 
                     # Check du titre et du nombre de questions à afficher
                     try:
                         quizz = Quizz(questions, quizzTitle, nbQuestionsToDisplay, questionOrder)
-                        if nbQuestionsToDisplay == "": quizz.nbQuestionsToDisplay = quizz.nb_questions()
-                        elif quizz.nb_questions() == 1: quizz.nbQuestionsToDisplay = 1
+                        if nbQuestionsToDisplay == "":
+                            quizz.nbQuestionsToDisplay = quizz.nb_questions()
+                        elif quizz.nb_questions() == 1:
+                            quizz.nbQuestionsToDisplay = 1
                         quizz.is_valid()
                     except InvalidQuizzException as ex:
                         raise ImportQuizzException(f"{ex}")
@@ -253,16 +304,20 @@ class Quizz:
                     raise ImportQuizzException(f"A la ligne {iLine}, le mot clé \"{keyword}\" n'existe pas")
 
                 # TODO : On autorise que le ces valeurs soient affectés plusieurs fois ?
-                if keyword == "quizz:": quizzTitle = rest
-                elif keyword == "ordre:": questionOrder = rest
-                elif keyword == "nombre_questions:": nbQuestionsToDisplay = rest
+                if keyword == "quizz:":
+                    quizzTitle = rest
+                elif keyword == "ordre:":
+                    questionOrder = rest
+                elif keyword == "nombre_questions:":
+                    nbQuestionsToDisplay = rest
                 elif keyword == "reponse:":
                     nbAnswers += 1
                     questionWrongAnswers.append(rest)
                 elif keyword == "bonne_reponse:":
                     nbAnswers += 1
                     # Check s'il y a déjà une bonne réponse
-                    if questionRightAnswer != "": raise ImportQuizzException(f"A la ligne {iLine}, il y a plusieurs bonnes réponse. Il ne peut en rester qu'une !")
+                    if questionRightAnswer != "": raise ImportQuizzException(
+                        f"A la ligne {iLine}, il y a plusieurs bonnes réponse. Il ne peut en rester qu'une !")
                     questionRightAnswer = rest
 
                 # Première question
