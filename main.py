@@ -189,7 +189,7 @@ class UserMenuWindow(QMainWindow):
         self.ui.label_titre.setText(titleQuizz)
 
         # Affichage de l'intitulé de la question
-        self.ui.label_Question.setText(question.title)
+        self.ui.questionLabel.setText(question.title)
 
         # Obtention des radios boutons pour les réponses
         radioButtons = self.ui.choiceRightAnswerQuizz.buttons()
@@ -206,7 +206,7 @@ class UserMenuWindow(QMainWindow):
             radioButtons[i].setText(answer)
 
         # Affichage de l'id de la current Question
-        self.ui.label_NB_Question.setText( str(self.indexQuestion) + " / " + str(self.pendingQuizz.nb_questions()) )
+        self.ui.nbQuestionLabel.setText(f"{self.indexQuestion} / {self.pendingQuizz.nb_questions()}")
 
     def init_question_page(self):
         """Créer les boutons sur la page Liste des Quizz"""
@@ -256,14 +256,16 @@ class UserMenuWindow(QMainWindow):
             self.indexQuestion += 1
             return self.pendingQuizz.questions[self.indexQuestion-1]
         else:
+            # TODO : Afficher le timer
+            self.ui.timerLabel.clear()
+            self.ui.quizzTitleEndLabel.setText(self.pendingQuizz.title)
+            self.ui.finalScoreLabel.setText(f"{self.score} / {self.pendingQuizz.nb_questions()}")
             self.ui.questionPages.setCurrentWidget(self.ui.endQuizzPage)
             raise Exception("Plus de question")
 
     def show_answer(self, currentQuestion):
         """Affiche la bonne réponse et les mauvaises réponses"""
 
-        # TODO : Message d'erreur si pas de bouton sélectionné
-        # TODO : Message d'erreur si la réponses choisi est vide
         # Check si un bouton est sélectionné
         checkedButton = self.ui.choiceRightAnswerQuizz.checkedButton()
         if checkedButton is None:

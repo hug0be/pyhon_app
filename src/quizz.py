@@ -172,6 +172,21 @@ class Quizz:
                 raise InvalidQuizzException(f"{ex.__str__().lower()}")
         return True
 
+    def valid_nb_to_display(self, nbToDisplay: str | int):
+        """Methode qui vérifie si le nombre de questions à afficher pour créer une question est valide"""
+        if nbToDisplay == "": raise InvalidNbToDisplayException("Saisissez un nombre de questions à afficher")
+        nbQuestionsMax = self.nb_questions()
+        try:
+            nbToDisplay = int(nbToDisplay)
+        except ValueError:
+            raise InvalidNbToDisplayException(f"Saisissez un nombre valide")
+        if nbToDisplay <= 0:
+            raise InvalidNbToDisplayException(f"Saisissez un nombre supérieur à 0")
+        if nbToDisplay > nbQuestionsMax:
+            raise InvalidNbToDisplayException(f"Saisissez un nombre entre 1 et {nbQuestionsMax}")
+        # All good !
+        return True
+
     def is_valid(self):
         """Check si le quizz en cours est valide"""
         # Check le titre
@@ -203,22 +218,6 @@ class Quizz:
         res += '\n'.join(question.__str__() for question in self.questions)
         return res
 
-    def valid_nb_to_display(self, nbToDisplay: str | int):
-        """Methode qui vérifie si le nombre de questions à afficher pour créer une question est valide"""
-        if nbToDisplay == "": raise InvalidNbToDisplayException("Saisissez un nombre de questions à afficher")
-        nbQuestionsMax = self.nb_questions()
-        try:
-            nbToDisplay = int(nbToDisplay)
-        except ValueError:
-            raise InvalidNbToDisplayException(f"Saisissez un nombre valide")
-        if nbToDisplay <= 0:
-            raise InvalidNbToDisplayException(f"Saisissez un nombre supérieur à 0")
-        if nbToDisplay > nbQuestionsMax:
-            raise InvalidNbToDisplayException(f"Saisissez un nombre entre 1 et {nbQuestionsMax}")
-        # All good !
-        return True
-
-    # TODO gérer les exceptions
     @staticmethod
     def from_json(quizz: dict):
         return Quizz(
@@ -305,7 +304,6 @@ class Quizz:
                 if not keyword in keywords:
                     raise ImportQuizzException(f"A la ligne {iLine}, le mot clé \"{keyword}\" n'existe pas")
 
-                # TODO : On autorise que le ces valeurs soient affectés plusieurs fois ?
                 if keyword == "quizz:":
                     quizzTitle = rest
                 elif keyword == "ordre:":

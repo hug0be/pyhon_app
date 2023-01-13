@@ -353,7 +353,7 @@ QRadioButton::indicator::checked {
     <item>
      <widget class="QStackedWidget" name="pagesList">
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="homePage">
        <property name="styleSheet">
@@ -568,7 +568,7 @@ QRadioButton::indicator::checked {
          </sizepolicy>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="questionPage">
          <widget class="QWidget" name="verticalLayoutWidget_5">
@@ -722,22 +722,6 @@ QRadioButton::indicator::checked {
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Votre réponse&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
-         <widget class="QLabel" name="questionErrorsLabel">
-          <property name="geometry">
-           <rect>
-            <x>150</x>
-            <y>470</y>
-            <width>391</width>
-            <height>41</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">color: #F3A917</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
          <widget class="QLabel" name="label_Points">
           <property name="geometry">
            <rect>
@@ -769,7 +753,7 @@ QRadioButton::indicator::checked {
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;0&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_NB_Question">
+         <widget class="QLabel" name="nbQuestionLabel">
           <property name="geometry">
            <rect>
             <x>690</x>
@@ -801,7 +785,7 @@ QRadioButton::indicator::checked {
            <string>Valider</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_Question">
+         <widget class="QLabel" name="questionLabel">
           <property name="geometry">
            <rect>
             <x>220</x>
@@ -894,7 +878,7 @@ QRadioButton::indicator::checked {
            <string>Votre score</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_Fin_Score">
+         <widget class="QLabel" name="finalScoreLabel">
           <property name="geometry">
            <rect>
             <x>110</x>
@@ -960,7 +944,7 @@ QRadioButton::indicator::checked {
            <string>Votre temps</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_Fin_Temps">
+         <widget class="QLabel" name="timerLabel">
           <property name="geometry">
            <rect>
             <x>130</x>
@@ -973,7 +957,7 @@ QRadioButton::indicator::checked {
            <string>9min10sec</string>
           </property>
          </widget>
-         <widget class="QLabel" name="label_titre_2">
+         <widget class="QLabel" name="quizzTitleEndLabel">
           <property name="geometry">
            <rect>
             <x>280</x>
@@ -1626,11 +1610,11 @@ QRadioButton::indicator::checked {
  </resources>
  <connections/>
  <buttongroups>
+  <buttongroup name="choiceRightAnswerQuizz"/>
   <buttongroup name="choiceRightAnswer">
    <property name="exclusive">
     <bool>true</bool>
    </property>
   </buttongroup>
-  <buttongroup name="choiceRightAnswerQuizz"/>
  </buttongroups>
 </ui>
