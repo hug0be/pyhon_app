@@ -115,7 +115,8 @@ class UserMenuWindow(QMainWindow):
         self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
         self.ui.toggleButton.clicked.connect(lambda : self.toggle_menu(200))
         self.pendingQuizz = None
-
+        # Variable qui permet de savoir si l'user à répondu (pendant le quizz)
+        self.hasAnswered = False
 
         #Binding changements de pages
         # TODO: Retour arrière pour les pages "quizzListPage" et "createQuizzPage"
@@ -137,44 +138,70 @@ class UserMenuWindow(QMainWindow):
         for backButton in backButtons:
             backButton.clicked.connect(self.show_home_page)
 
+        # Binding bouton "Valider" le game quizz
+        self.ui.validateButton.clicked.connect(self.choose_question_page)
+
     def show_home_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
     def show_quizz_list_page(self):
-        self.create_bouttons_page_list_quizz()
+        self.init_question_page()
         self.ui.pagesList.setCurrentWidget(self.ui.quizzListPage)
     def show_quizz_creation_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.createQuizzPage)
-    def show_quizz_questions_page(self, aQuizz):
-        self.build_question_page(aQuizz["title"], aQuizz["questions"][0])
+    def init_quizz(self, quizz:Quizz):
+        self.update_question_page(quizz.title, quizz.questions[0])
         self.ui.pagesList.setCurrentWidget(self.ui.questionsPage)
+        self.pendingQuizz = quizz
 
-    def build_question_page(self, titleQuizz, aQuestion):
+    def update_question_page(self, titleQuizz:str, question:Question):
         """Initialise les champs (titre, titre question, ...) d'une page question"""
         # Affichage du titre du quizz
         self.ui.label_titre.setText(titleQuizz)
 
-        #
-        currentQuestion = Question(aQuestion["title"], aQuestion["rightAnswer"], aQuestion["wrongAnswers"])
-
         # Affichage de l'intitulé de la question
-        self.ui.label_Question.setText(currentQuestion.title)
+        self.ui.label_Question.setText(question.title)
 
         # Obtention des radios boutons pour les réponses
         radioButtons = self.ui.choiceRightAnswerQuizz.buttons()
+
         # On efface leur contenu et on les désélectionne
         for radioButton in radioButtons:
             radioButton.setText(None)
             radioButton.setChecked(False)
 
         # Obtention des réponses
-        answers = currentQuestion.get_shuffled_answers()
+        answers = question.get_shuffled_answers()
         for i, answer in enumerate(answers):
             radioButtons[i].setText(answer)
 
-        # Binding bouton "Valider"
-        self.ui.validerButton_Quiz.clicked.connect(
-            lambda: self.show_answer(currentQuestion)
-        )
+    def init_question_page(self):
+        """Créer les boutons sur la page Liste des Quizz"""
+        # Tous les quizz
+        quizzes = Quizz.all()
+        # Conteneur des quizz
+        quizzContainer = self.ui.page_list_quizz_container_bot
+        # Créer le layout pour page
+        layout = QVBoxLayout()
+
+        for quizz in quizzes:
+            # Créer un bouton
+            button = QPushButton(quizz.title)
+            # Binding du bouton avec sa page de quizz
+            button.clicked.connect(lambda: self.init_quizz(quizz))
+            # Ajout du bouton au layout
+            layout.addWidget(button)
+
+        # Ajout du layout dans le conteneur des quizz
+        quizzContainer.setLayout(layout)
+
+    def choose_question_page(self):
+        self.hasAnswered = not self.hasAnswered
+        currentQuestion = self.pendingQuizz.questions[0]
+        if self.hasAnswered:
+            self.show_answer(currentQuestion)
+        else:
+            # TODO : Choose next question
+            self.update_question_page(self.pendingQuizz.title, currentQuestion)
 
     def show_answer(self, currentQuestion):
         """Affiche la bonne réponse et les mauvaises réponses"""
@@ -185,9 +212,10 @@ class UserMenuWindow(QMainWindow):
         checkedButton = self.ui.choiceRightAnswerQuizz.checkedButton()
         if checkedButton is None:
             print("Aucun bouton sélectionné")
+            return False
 
         # TODO : Ajouter 1 au score si la réponse choisi est bonne
-        if checkedButton.text() == currentQuestion.rightAnswer: print("+1 !")
+        # if checkedButton.text() == currentQuestion.rightAnswer:
 
         # Coloration des réponses
         for button in self.ui.choiceRightAnswerQuizz.buttons():
@@ -200,7 +228,6 @@ class UserMenuWindow(QMainWindow):
         """Check si la réponse sélectionnée est bonne"""
         selectedButtonText = self.ui.choiceRightAnswerQuizz.checkedButton().text()
         return currentQuestion.is_right_answer(selectedButtonText)
-
 
     def create_quizz1(self):
         """Méthode qui constitue la première étape de création d'un quizz : choisir un titre"""
@@ -329,28 +356,6 @@ class UserMenuWindow(QMainWindow):
         self.pendingQuizz.save()
         self.show_quizz_list_page()
 
-    def create_bouttons_page_list_quizz(self):
-        """Créer les boutons sur la page Liste des Quizz"""
-        # Tous les quizz
-        quizzes = Quizz.get_list_quizzes()
-        # Conteneur des quizz
-        quizzContainer = self.ui.page_list_quizz_container_bot
-        # Créer le layout pour page
-        layout = QVBoxLayout()
-
-        for quizz in quizzes:
-            # Créer un bouton
-            button = QPushButton(quizz["title"])
-            # Binding du bouton avec sa page de quizz
-            button.clicked.connect(
-                lambda: self.show_quizz_questions_page(Quizz.get(quizz["title"]))
-            )
-            # Ajout du bouton au layout
-            layout.addWidget(button)
-
-        # Ajout du layout dans le conteneur des quizz
-        quizzContainer.setLayout(layout)
-
     def import_quizz(self):
         # Tentative d'ouverture du fichier
         try:
@@ -406,7 +411,7 @@ if __name__ == "__main__":
     os.system("pyside6-rcc resources/resources.qrc -o resources_rc.py")
 
     #Page principale
-    window = MainWindow()
+    window = UserMenuWindow()
     window.show()
     sys.exit(app.exec())
 

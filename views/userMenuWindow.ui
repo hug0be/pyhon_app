@@ -353,7 +353,7 @@ QRadioButton::indicator::checked {
     <item>
      <widget class="QStackedWidget" name="pagesList">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="homePage">
        <property name="styleSheet">
@@ -700,7 +700,7 @@ QRadioButton::indicator::checked {
            <string>23/30</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="validerButton_Quiz">
+         <widget class="QPushButton" name="validateButton">
           <property name="geometry">
            <rect>
             <x>290</x>

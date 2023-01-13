@@ -45,12 +45,20 @@ class Question:
             'rightAnswer': self.rightAnswer,
             'wrongAnswers': [answer for answer in self.wrongAnswers]
         }
+    @staticmethod
+    def from_json(question_json:dict):
+        return Question(
+            question_json["title"],
+            question_json["rightAnswer"],
+            question_json["wrongAnswers"]
+        )
 
     @staticmethod
     def default_values():
         """Retourne les valeurs par défaut de title, wrongAnswers et rightAnswer"""
         return "", [], ""
 
+    @staticmethod
     @staticmethod
     def valid_inputs(title:str, answers:[str], indexRightAnswer:int):
         """Check si les données de cette question sont valides"""
@@ -110,12 +118,15 @@ class Quizz:
         self.nbQuestionsToDisplay = nbQuestionsToDisplay
 
     def to_json(self):
+        # TODO POURQUOI IL Y A ÉCRIT "useRRRRRandomOrder" ??
         return {
-                'title': self.title,
-                'questions': [question.to_json() for question in self.questions],
-                'userRandomOrder': self.useRandomOrder,
-                'nbQuestionsToDisplay': self.nbQuestionsToDisplay
-            }
+            'title': self.title,
+            'questions': [
+                question.to_json() for question in self.questions
+            ],
+            'userRandomOrder': self.useRandomOrder,
+            'nbQuestionsToDisplay': self.nbQuestionsToDisplay
+        }
 
     def save(self):
         """Sauvegarde un quizz"""
@@ -293,8 +304,16 @@ class Quizz:
                     "idQuizz": idQuizz,
                     "title": aQuizz["title"]
                 })
-
         return list_quizzes
+
+    @staticmethod
+    def all():
+        quizzes = []
+        with open('data/quizzes.json', 'r+') as quizzes_file:
+            quizzes_json = json.load(quizzes_file)
+            for quizz_json in quizzes_json:
+                quizzes.append(Quizz.from_json(quizz_json))
+        return quizzes
 
     @staticmethod
     def get(title:str):
@@ -303,5 +322,14 @@ class Quizz:
             quizzes = json.load(quizzes_file)
             for quizz in quizzes:
                 if quizz["title"] == title:
-                    return quizz
+                    return Quizz.from_json(quizz)
         raise UnknownQuizzException(f"Le quizz {title} n'existe pas")
+
+    @staticmethod
+    def from_json(quizz):
+        return Quizz(
+            [Question.from_json(question) for question in quizz["questions"]],
+            quizz["title"],
+            quizz["nbQuestionsToDisplay"],
+            quizz["userRandomOrder"]
+        )
