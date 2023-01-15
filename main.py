@@ -1,6 +1,7 @@
 import json
 import sys
 import os
+import time
 from functools import partial
 
 from PySide6 import QtCore
@@ -133,6 +134,7 @@ class UserMenuWindow(QMainWindow):
         self.indexQuestion = 0
         self.pendingQuizz = None
         self.score = 0
+        self.startTime = None
 
         # Binding changements de pages
         self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
@@ -169,6 +171,7 @@ class UserMenuWindow(QMainWindow):
         self.indexQuestion = 0
         self.pendingQuizz = None
         self.score = 0
+        self.startTime = time.time()
 
     def show_home_page(self):
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
@@ -266,7 +269,7 @@ class UserMenuWindow(QMainWindow):
         else:
             # TODO : Afficher le timer
             # Affichage de la page de résultat
-            self.ui.timerLabel.clear()
+            self.ui.timerLabel.setText(f"{time.time() - self.startTime:.2f}s")
             self.ui.quizzTitleEndLabel.setText(self.pendingQuizz.title)
             self.ui.finalScoreLabel.setText(f"{self.score} / {self.pendingQuizz.nb_questions()}")
             self.ui.questionPages.setCurrentWidget(self.ui.endQuizzPage)
