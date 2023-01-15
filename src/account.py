@@ -31,7 +31,6 @@ class Account:
             if pastResult < result:
                 pastResult.update_high_score(self.username, result.best_score, result.time)
         except UnknownHistoryItemException:
-            print("I was here")
             self.history.items.append(result)
             self.history.save(self.username)
 

@@ -56,7 +56,6 @@ class History:
         # TODO : vérifier si le compte existe
         # if not Account.exists(user):
         #     raise UnknownAccountException(f"Le compte '{user}' n'existe pas")
-        print("I was here 2")
         with open('data/accounts.json', 'r+') as account_file:
             accounts = json.load(account_file)
             for account in accounts:

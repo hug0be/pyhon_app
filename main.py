@@ -267,16 +267,15 @@ class UserMenuWindow(QMainWindow):
             self.indexQuestion += 1
             return self.pendingQuizz.questions[self.indexQuestion-1]
         else:
-            # TODO : Afficher le timer
             # Affichage de la page de résultat
-            self.ui.timerLabel.setText(f"{time.time() - self.startTime:.2f}s")
+            timeTaken = time.time() - self.startTime
+            self.ui.timerLabel.setText(f"{timeTaken:.2f}s")
             self.ui.quizzTitleEndLabel.setText(self.pendingQuizz.title)
             self.ui.finalScoreLabel.setText(f"{self.score} / {self.pendingQuizz.nb_questions()}")
             self.ui.questionPages.setCurrentWidget(self.ui.endQuizzPage)
 
-            # TODO : Comparer aussi avec le timer
             # Sauvegarde si le résultat est meilleur que le précédent
-            result = HistoryItem(self.pendingQuizz, self.score)
+            result = HistoryItem(self.pendingQuizz, self.score, timeTaken)
             self.currentUser.update_best_score(self.pendingQuizz ,result)
             raise Exception("Plus de question")
 
