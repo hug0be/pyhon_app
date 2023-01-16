@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'UserMenuWindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.4.1
+## Created by: Qt User Interface Compiler version 6.4.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -17,8 +17,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QButtonGroup, QFrame, QGridLayout,
     QGroupBox, QHBoxLayout, QLabel, QLineEdit,
-    QMainWindow, QPushButton, QRadioButton, QSizePolicy,
-    QStackedWidget, QVBoxLayout, QWidget)
+    QListWidget, QListWidgetItem, QMainWindow, QPushButton,
+    QRadioButton, QSizePolicy, QStackedWidget, QVBoxLayout,
+    QWidget)
 import resources_rc
 
 class Ui_userMenu(object):
@@ -30,6 +31,9 @@ class Ui_userMenu(object):
         userMenu.setMaximumSize(QSize(917, 600))
         font = QFont()
         userMenu.setFont(font)
+        icon = QIcon()
+        icon.addFile(u":/favicon/images/favicon_96x96.png", QSize(), QIcon.Normal, QIcon.Off)
+        userMenu.setWindowIcon(icon)
         userMenu.setStyleSheet(u"* {\n"
 "	border: none;\n"
 "	background-color: transparent;\n"
@@ -44,16 +48,12 @@ class Ui_userMenu(object):
 "	font-size : 50px\n"
 "}\n"
 "\n"
-"#label_Points{\n"
+"#label_Points, #nbQuestionLabel, #questionLabel {\n"
 "	font-size : 20px\n"
 "}\n"
 "\n"
 "#label_NB_Question{\n"
 "	font-size : 20px\n"
-"}\n"
-"\n"
-"#label_titre{\n"
-"	font-size : 30px\n"
 "}\n"
 "\n"
 "#label_titre_2{\n"
@@ -64,10 +64,13 @@ class Ui_userMenu(object):
 "	font-size : 55px;\n"
 "}\n"
 "\n"
-"#label_Fin_VotreScore{\n"
+"#label_Fin_VotreScore, #quizzTitleEndLabel, #label_titre {\n"
 "	font-size : 30px;\n"
 "}\n"
 "\n"
+"#finalScoreLabel, #timerLabel {\n"
+"	font-size: 15px;\n"
+"}\n"
 "\n"
 "#label_Fin_Score{\n"
 "	font-size : 55px;\n"
@@ -93,13 +96,15 @@ class Ui_userMenu(object):
 "	text-align: left;\n"
 "}\n"
 "\n"
-"#pagesList QPushButton {\n"
+""
+                        "#pagesList QPushButton {\n"
 "	background-color: #F26DF9;\n"
 "	padding: 5px 10px;\n"
-""
-                        "    qproperty-cursor: PointingHandCursor;\n"
+"	border-radius: 12px;\n"
+"    qproperty-cursor: PointingHandCursor;\n"
 "}\n"
-"#pagesList > QWidget  {\n"
+"\n"
+"#pagesList > QWidget, QListWidget  {\n"
 "	background-color: #5158BB;\n"
 "}\n"
 "\n"
@@ -159,9 +164,9 @@ class Ui_userMenu(object):
         self.toggleButton.setCursor(QCursor(Qt.PointingHandCursor))
         self.toggleButton.setLayoutDirection(Qt.LeftToRight)
         self.toggleButton.setAutoFillBackground(False)
-        icon = QIcon()
-        icon.addFile(u":/icons/images/menu.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.toggleButton.setIcon(icon)
+        icon1 = QIcon()
+        icon1.addFile(u":/icons/images/menu.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.toggleButton.setIcon(icon1)
         self.toggleButton.setIconSize(QSize(24, 24))
 
         self.horizontalLayout_3.addWidget(self.toggleButton)
@@ -183,9 +188,9 @@ class Ui_userMenu(object):
         self.historyButton = QPushButton(self.frame_2)
         self.historyButton.setObjectName(u"historyButton")
         self.historyButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon1 = QIcon()
-        icon1.addFile(u":/icons/images/archive.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.historyButton.setIcon(icon1)
+        icon2 = QIcon()
+        icon2.addFile(u":/icons/images/archive.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.historyButton.setIcon(icon2)
         self.historyButton.setIconSize(QSize(24, 24))
 
         self.verticalLayout_4.addWidget(self.historyButton)
@@ -198,9 +203,9 @@ class Ui_userMenu(object):
         sizePolicy2.setHeightForWidth(self.importQuizzButton.sizePolicy().hasHeightForWidth())
         self.importQuizzButton.setSizePolicy(sizePolicy2)
         self.importQuizzButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon2 = QIcon()
-        icon2.addFile(u":/icons/images/download.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.importQuizzButton.setIcon(icon2)
+        icon3 = QIcon()
+        icon3.addFile(u":/icons/images/download.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.importQuizzButton.setIcon(icon3)
         self.importQuizzButton.setIconSize(QSize(24, 24))
 
         self.verticalLayout_4.addWidget(self.importQuizzButton)
@@ -210,9 +215,9 @@ class Ui_userMenu(object):
         sizePolicy2.setHeightForWidth(self.logoutButton.sizePolicy().hasHeightForWidth())
         self.logoutButton.setSizePolicy(sizePolicy2)
         self.logoutButton.setCursor(QCursor(Qt.PointingHandCursor))
-        icon3 = QIcon()
-        icon3.addFile(u":/icons/images/log-out.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.logoutButton.setIcon(icon3)
+        icon4 = QIcon()
+        icon4.addFile(u":/icons/images/log-out.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.logoutButton.setIcon(icon4)
         self.logoutButton.setIconSize(QSize(24, 24))
 
         self.verticalLayout_4.addWidget(self.logoutButton)
@@ -241,12 +246,19 @@ class Ui_userMenu(object):
 
         self.pagesList = QStackedWidget(self.centralwidget)
         self.pagesList.setObjectName(u"pagesList")
+        sizePolicy4 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.pagesList.sizePolicy().hasHeightForWidth())
+        self.pagesList.setSizePolicy(sizePolicy4)
         self.homePage = QWidget()
         self.homePage.setObjectName(u"homePage")
+        sizePolicy1.setHeightForWidth(self.homePage.sizePolicy().hasHeightForWidth())
+        self.homePage.setSizePolicy(sizePolicy1)
         self.homePage.setStyleSheet(u"")
         self.showQuizzListButton = QPushButton(self.homePage)
         self.showQuizzListButton.setObjectName(u"showQuizzListButton")
-        self.showQuizzListButton.setGeometry(QRect(150, 250, 375, 31))
+        self.showQuizzListButton.setGeometry(QRect(150, 230, 375, 31))
         self.showQuizzListButton.setCursor(QCursor(Qt.PointingHandCursor))
         self.label = QLabel(self.homePage)
         self.label.setObjectName(u"label")
@@ -262,22 +274,18 @@ class Ui_userMenu(object):
         self.label_4.setObjectName(u"label_4")
         self.label_4.setGeometry(QRect(0, 90, 841, 71))
         self.label_4.setAlignment(Qt.AlignCenter)
-        self.groupBox_4 = QGroupBox(self.history)
-        self.groupBox_4.setObjectName(u"groupBox_4")
-        self.groupBox_4.setGeometry(QRect(0, 163, 841, 421))
-        self.groupBox_4.setAlignment(Qt.AlignCenter)
-        self.historyContainer = QWidget(self.groupBox_4)
-        self.historyContainer.setObjectName(u"historyContainer")
-        self.historyContainer.setGeometry(QRect(240, 10, 450, 241))
         self.backButton6 = QPushButton(self.history)
         self.backButton6.setObjectName(u"backButton6")
         self.backButton6.setGeometry(QRect(70, 50, 141, 31))
         self.backButton6.setCursor(QCursor(Qt.PointingHandCursor))
         self.backButton6.setStyleSheet(u"background: transparent")
-        icon4 = QIcon()
-        icon4.addFile(u":/icons/images/back.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.backButton6.setIcon(icon4)
+        icon5 = QIcon()
+        icon5.addFile(u":/icons/images/back.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.backButton6.setIcon(icon5)
         self.backButton6.setAutoDefault(False)
+        self.historyItemsContainer = QListWidget(self.history)
+        self.historyItemsContainer.setObjectName(u"historyItemsContainer")
+        self.historyItemsContainer.setGeometry(QRect(100, 190, 641, 411))
         self.pagesList.addWidget(self.history)
         self.quizzListPage = QWidget()
         self.quizzListPage.setObjectName(u"quizzListPage")
@@ -297,7 +305,7 @@ class Ui_userMenu(object):
         self.backButton1.setGeometry(QRect(70, 60, 141, 31))
         self.backButton1.setCursor(QCursor(Qt.PointingHandCursor))
         self.backButton1.setStyleSheet(u"background: transparent")
-        self.backButton1.setIcon(icon4)
+        self.backButton1.setIcon(icon5)
         self.backButton1.setAutoDefault(False)
         self.pagesList.addWidget(self.quizzListPage)
         self.questionsPage = QWidget()
@@ -305,11 +313,11 @@ class Ui_userMenu(object):
         self.questionPages = QStackedWidget(self.questionsPage)
         self.questionPages.setObjectName(u"questionPages")
         self.questionPages.setGeometry(QRect(0, -1, 801, 601))
-        sizePolicy4 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
-        sizePolicy4.setHorizontalStretch(0)
-        sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.questionPages.sizePolicy().hasHeightForWidth())
-        self.questionPages.setSizePolicy(sizePolicy4)
+        sizePolicy5 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.questionPages.sizePolicy().hasHeightForWidth())
+        self.questionPages.setSizePolicy(sizePolicy5)
         self.questionPage = QWidget()
         self.questionPage.setObjectName(u"questionPage")
         self.verticalLayoutWidget_5 = QWidget(self.questionPage)
@@ -323,11 +331,11 @@ class Ui_userMenu(object):
         self.choiceRightAnswerQuizz.setObjectName(u"choiceRightAnswerQuizz")
         self.choiceRightAnswerQuizz.addButton(self.radioButton1_Quiz)
         self.radioButton1_Quiz.setObjectName(u"radioButton1_Quiz")
-        sizePolicy5 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Expanding)
-        sizePolicy5.setHorizontalStretch(0)
-        sizePolicy5.setVerticalStretch(0)
-        sizePolicy5.setHeightForWidth(self.radioButton1_Quiz.sizePolicy().hasHeightForWidth())
-        self.radioButton1_Quiz.setSizePolicy(sizePolicy5)
+        sizePolicy6 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Expanding)
+        sizePolicy6.setHorizontalStretch(0)
+        sizePolicy6.setVerticalStretch(0)
+        sizePolicy6.setHeightForWidth(self.radioButton1_Quiz.sizePolicy().hasHeightForWidth())
+        self.radioButton1_Quiz.setSizePolicy(sizePolicy6)
         self.radioButton1_Quiz.setMinimumSize(QSize(0, 0))
         self.radioButton1_Quiz.setFont(font)
         self.radioButton1_Quiz.setIconSize(QSize(16, 16))
@@ -338,8 +346,8 @@ class Ui_userMenu(object):
         self.radioButton2_Quiz = QRadioButton(self.verticalLayoutWidget_5)
         self.choiceRightAnswerQuizz.addButton(self.radioButton2_Quiz)
         self.radioButton2_Quiz.setObjectName(u"radioButton2_Quiz")
-        sizePolicy5.setHeightForWidth(self.radioButton2_Quiz.sizePolicy().hasHeightForWidth())
-        self.radioButton2_Quiz.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.radioButton2_Quiz.sizePolicy().hasHeightForWidth())
+        self.radioButton2_Quiz.setSizePolicy(sizePolicy6)
         self.radioButton2_Quiz.setMinimumSize(QSize(0, 0))
         self.radioButton2_Quiz.setFont(font)
         self.radioButton2_Quiz.setChecked(False)
@@ -349,8 +357,8 @@ class Ui_userMenu(object):
         self.radioButton3_Quiz = QRadioButton(self.verticalLayoutWidget_5)
         self.choiceRightAnswerQuizz.addButton(self.radioButton3_Quiz)
         self.radioButton3_Quiz.setObjectName(u"radioButton3_Quiz")
-        sizePolicy5.setHeightForWidth(self.radioButton3_Quiz.sizePolicy().hasHeightForWidth())
-        self.radioButton3_Quiz.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.radioButton3_Quiz.sizePolicy().hasHeightForWidth())
+        self.radioButton3_Quiz.setSizePolicy(sizePolicy6)
         self.radioButton3_Quiz.setMinimumSize(QSize(0, 0))
         self.radioButton3_Quiz.setFont(font)
         self.radioButton3_Quiz.setChecked(False)
@@ -360,8 +368,8 @@ class Ui_userMenu(object):
         self.radioButton4_Quiz = QRadioButton(self.verticalLayoutWidget_5)
         self.choiceRightAnswerQuizz.addButton(self.radioButton4_Quiz)
         self.radioButton4_Quiz.setObjectName(u"radioButton4_Quiz")
-        sizePolicy5.setHeightForWidth(self.radioButton4_Quiz.sizePolicy().hasHeightForWidth())
-        self.radioButton4_Quiz.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.radioButton4_Quiz.sizePolicy().hasHeightForWidth())
+        self.radioButton4_Quiz.setSizePolicy(sizePolicy6)
         self.radioButton4_Quiz.setMinimumSize(QSize(0, 0))
         self.radioButton4_Quiz.setFont(font)
         self.radioButton4_Quiz.setChecked(False)
@@ -373,25 +381,29 @@ class Ui_userMenu(object):
         self.label_VotreReponse.setGeometry(QRect(190, 190, 101, 16))
         self.label_Points = QLabel(self.questionPage)
         self.label_Points.setObjectName(u"label_Points")
-        self.label_Points.setGeometry(QRect(690, 120, 61, 20))
+        self.label_Points.setGeometry(QRect(690, 130, 61, 20))
         self.nbPointsLabel = QLabel(self.questionPage)
         self.nbPointsLabel.setObjectName(u"nbPointsLabel")
-        self.nbPointsLabel.setGeometry(QRect(690, 70, 61, 51))
+        self.nbPointsLabel.setGeometry(QRect(690, 70, 61, 61))
         self.nbPointsLabel.setFont(font)
+        self.nbPointsLabel.setTextFormat(Qt.RichText)
         self.nbQuestionLabel = QLabel(self.questionPage)
         self.nbQuestionLabel.setObjectName(u"nbQuestionLabel")
-        self.nbQuestionLabel.setGeometry(QRect(690, 480, 61, 16))
+        self.nbQuestionLabel.setGeometry(QRect(690, 450, 111, 41))
+        self.nbQuestionLabel.setTextFormat(Qt.RichText)
         self.validateButton = QPushButton(self.questionPage)
         self.validateButton.setObjectName(u"validateButton")
         self.validateButton.setGeometry(QRect(290, 460, 251, 30))
         self.validateButton.setMinimumSize(QSize(0, 30))
         self.questionLabel = QLabel(self.questionPage)
         self.questionLabel.setObjectName(u"questionLabel")
-        self.questionLabel.setGeometry(QRect(220, 110, 391, 51))
+        self.questionLabel.setGeometry(QRect(190, 100, 391, 51))
+        self.questionLabel.setTextFormat(Qt.RichText)
         self.label_titre = QLabel(self.questionPage)
         self.label_titre.setObjectName(u"label_titre")
         self.label_titre.setGeometry(QRect(0, 10, 841, 51))
         self.label_titre.setFont(font)
+        self.label_titre.setTextFormat(Qt.RichText)
         self.label_titre.setAlignment(Qt.AlignCenter)
         self.validateAnswerErrorsLabel = QLabel(self.questionPage)
         self.validateAnswerErrorsLabel.setObjectName(u"validateAnswerErrorsLabel")
@@ -413,12 +425,15 @@ class Ui_userMenu(object):
         self.label_Fin_VotreScore.setGeometry(QRect(110, 180, 151, 51))
         self.finalScoreLabel = QLabel(self.endQuizzPage)
         self.finalScoreLabel.setObjectName(u"finalScoreLabel")
-        self.finalScoreLabel.setGeometry(QRect(110, 210, 141, 121))
+        self.finalScoreLabel.setGeometry(QRect(110, 230, 141, 31))
+        self.finalScoreLabel.setTextFormat(Qt.RichText)
         self.gridLayoutWidget = QWidget(self.endQuizzPage)
         self.gridLayoutWidget.setObjectName(u"gridLayoutWidget")
-        self.gridLayoutWidget.setGeometry(QRect(310, 210, 461, 241))
+        self.gridLayoutWidget.setGeometry(QRect(310, 200, 471, 161))
         self.finQuestionLayout = QGridLayout(self.gridLayoutWidget)
         self.finQuestionLayout.setObjectName(u"finQuestionLayout")
+        self.finQuestionLayout.setHorizontalSpacing(25)
+        self.finQuestionLayout.setVerticalSpacing(6)
         self.finQuestionLayout.setContentsMargins(0, 0, 0, 0)
         self.retryButton = QPushButton(self.gridLayoutWidget)
         self.retryButton.setObjectName(u"retryButton")
@@ -442,14 +457,16 @@ class Ui_userMenu(object):
 
         self.label_Fin_VotreTemps = QLabel(self.endQuizzPage)
         self.label_Fin_VotreTemps.setObjectName(u"label_Fin_VotreTemps")
-        self.label_Fin_VotreTemps.setGeometry(QRect(100, 350, 171, 51))
+        self.label_Fin_VotreTemps.setGeometry(QRect(110, 270, 171, 51))
         self.timerLabel = QLabel(self.endQuizzPage)
         self.timerLabel.setObjectName(u"timerLabel")
-        self.timerLabel.setGeometry(QRect(130, 400, 111, 51))
+        self.timerLabel.setGeometry(QRect(110, 320, 141, 31))
+        self.timerLabel.setTextFormat(Qt.RichText)
         self.quizzTitleEndLabel = QLabel(self.endQuizzPage)
         self.quizzTitleEndLabel.setObjectName(u"quizzTitleEndLabel")
-        self.quizzTitleEndLabel.setGeometry(QRect(280, 150, 521, 51))
+        self.quizzTitleEndLabel.setGeometry(QRect(420, 140, 241, 51))
         self.quizzTitleEndLabel.setFont(font)
+        self.quizzTitleEndLabel.setTextFormat(Qt.RichText)
         self.quizzTitleEndLabel.setAlignment(Qt.AlignCenter)
         self.questionPages.addWidget(self.endQuizzPage)
         self.pagesList.addWidget(self.questionsPage)
@@ -476,7 +493,7 @@ class Ui_userMenu(object):
         self.backButton2.setGeometry(QRect(70, 60, 121, 31))
         self.backButton2.setCursor(QCursor(Qt.PointingHandCursor))
         self.backButton2.setStyleSheet(u"background: transparent")
-        self.backButton2.setIcon(icon4)
+        self.backButton2.setIcon(icon5)
         self.backButton2.setAutoDefault(False)
         self.quizzCreationSteps.addWidget(self.nameQuizzPage)
         self.createQuestionsPage = QWidget()
@@ -574,7 +591,7 @@ class Ui_userMenu(object):
         self.backButton3.setGeometry(QRect(70, 40, 121, 31))
         self.backButton3.setCursor(QCursor(Qt.PointingHandCursor))
         self.backButton3.setStyleSheet(u"background: transparent")
-        self.backButton3.setIcon(icon4)
+        self.backButton3.setIcon(icon5)
         self.backButton3.setAutoDefault(False)
         self.quizzCreationSteps.addWidget(self.createQuestionsPage)
         self.chooseOrderPage = QWidget()
@@ -596,7 +613,7 @@ class Ui_userMenu(object):
         self.backButton4.setGeometry(QRect(60, 60, 121, 31))
         self.backButton4.setCursor(QCursor(Qt.PointingHandCursor))
         self.backButton4.setStyleSheet(u"background: transparent")
-        self.backButton4.setIcon(icon4)
+        self.backButton4.setIcon(icon5)
         self.backButton4.setAutoDefault(False)
         self.quizzCreationSteps.addWidget(self.chooseOrderPage)
         self.chooseNbToDisplayPage = QWidget()
@@ -626,7 +643,7 @@ class Ui_userMenu(object):
         self.backButton5.setGeometry(QRect(70, 60, 121, 31))
         self.backButton5.setCursor(QCursor(Qt.PointingHandCursor))
         self.backButton5.setStyleSheet(u"background: transparent")
-        self.backButton5.setIcon(icon4)
+        self.backButton5.setIcon(icon5)
         self.backButton5.setAutoDefault(False)
         self.quizzCreationSteps.addWidget(self.chooseNbToDisplayPage)
         self.pagesList.addWidget(self.createQuizzPage)
@@ -640,7 +657,7 @@ class Ui_userMenu(object):
         self.pagesList.setCurrentIndex(3)
         self.backButton6.setDefault(False)
         self.backButton1.setDefault(False)
-        self.questionPages.setCurrentIndex(1)
+        self.questionPages.setCurrentIndex(0)
         self.quizzCreationSteps.setCurrentIndex(0)
         self.backButton2.setDefault(False)
         self.backButton3.setDefault(False)
@@ -674,7 +691,6 @@ class Ui_userMenu(object):
         self.label.setText(QCoreApplication.translate("userMenu", u"<html><head/><body><p><span style=\" font-size:24pt; font-weight:600;\">Bienvenue sur WinQuest !</span></p></body></html>", None))
         self.createQuizzButton.setText(QCoreApplication.translate("userMenu", u"Cr\u00e9er un quizz", None))
         self.label_4.setText(QCoreApplication.translate("userMenu", u"<html><head/><body><p><span style=\" font-size:30pt;\">Historique</span></p></body></html>", None))
-        self.groupBox_4.setTitle("")
         self.backButton6.setText(QCoreApplication.translate("userMenu", u"Retour accueil", None))
         self.label_3.setText(QCoreApplication.translate("userMenu", u"<html><head/><body><p><span style=\" font-size:24pt;\">Liste des quizz</span></p></body></html>", None))
         self.groupBox_3.setTitle("")
@@ -691,7 +707,7 @@ class Ui_userMenu(object):
         self.questionLabel.setText(QCoreApplication.translate("userMenu", u"Question", None))
         self.label_titre.setText(QCoreApplication.translate("userMenu", u"Nom du Quiz", None))
         self.validateAnswerErrorsLabel.setText("")
-        self.label_Fin_Quiz.setText(QCoreApplication.translate("userMenu", u"Le Quiz est termin\u00e9e", None))
+        self.label_Fin_Quiz.setText(QCoreApplication.translate("userMenu", u"Le Quizz est termin\u00e9e", None))
         self.label_Fin_VotreScore.setText(QCoreApplication.translate("userMenu", u"Votre score", None))
         self.finalScoreLabel.setText(QCoreApplication.translate("userMenu", u"28/30", None))
         self.retryButton.setText(QCoreApplication.translate("userMenu", u"Recommencer", None))

@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'MainWindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.4.1
+## Created by: Qt User Interface Compiler version 6.4.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -24,8 +24,11 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1024, 512)
+        MainWindow.resize(488, 512)
         MainWindow.setBaseSize(QSize(1024, 512))
+        icon = QIcon()
+        icon.addFile(u":/favicon/images/favicon_96x96.png", QSize(), QIcon.Normal, QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet(u"* {\n"
 "	border: none;\n"
 "	background-color: transparent;\n"
@@ -47,6 +50,8 @@ class Ui_MainWindow(object):
 ".QPushButton {\n"
 "	background-color: #F26DF9;\n"
 "	padding: 2px 5px;\n"
+"	border-radius: 10px;\n"
+"	font-size: 12px;\n"
 "}\n"
 "\n"
 "#backButton, #backButton2 {\n"
@@ -81,14 +86,17 @@ class Ui_MainWindow(object):
         self.label.setAlignment(Qt.AlignCenter)
         self.chooseConnectButton = QPushButton(self.homePage)
         self.chooseConnectButton.setObjectName(u"chooseConnectButton")
-        self.chooseConnectButton.setGeometry(QRect(159, 170, 152, 24))
+        self.chooseConnectButton.setGeometry(QRect(160, 150, 152, 31))
+        font1 = QFont()
+        self.chooseConnectButton.setFont(font1)
         self.chooseConnectButton.setStyleSheet(u"*{\n"
 "display: flex;\n"
 "justify-content : center\n"
 "}")
         self.chooseCreateAccountButton = QPushButton(self.homePage)
         self.chooseCreateAccountButton.setObjectName(u"chooseCreateAccountButton")
-        self.chooseCreateAccountButton.setGeometry(QRect(159, 210, 151, 24))
+        self.chooseCreateAccountButton.setGeometry(QRect(160, 210, 151, 31))
+        self.chooseCreateAccountButton.setFont(font1)
         self.pagesList.addWidget(self.homePage)
         self.connectPage = QWidget()
         self.connectPage.setObjectName(u"connectPage")
@@ -134,9 +142,9 @@ class Ui_MainWindow(object):
         self.backButton2 = QPushButton(self.connectPage)
         self.backButton2.setObjectName(u"backButton2")
         self.backButton2.setGeometry(QRect(40, 50, 75, 24))
-        icon = QIcon()
-        icon.addFile(u":/icons/images/back.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.backButton2.setIcon(icon)
+        icon1 = QIcon()
+        icon1.addFile(u":/icons/images/back.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.backButton2.setIcon(icon1)
         self.backButton2.setAutoDefault(False)
         self.pagesList.addWidget(self.connectPage)
         self.createAccountPage = QWidget()
@@ -186,7 +194,7 @@ class Ui_MainWindow(object):
         self.backButton = QPushButton(self.createAccountPage)
         self.backButton.setObjectName(u"backButton")
         self.backButton.setGeometry(QRect(40, 50, 75, 24))
-        self.backButton.setIcon(icon)
+        self.backButton.setIcon(icon1)
         self.backButton.setAutoDefault(False)
         self.pagesList.addWidget(self.createAccountPage)
 

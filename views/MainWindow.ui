@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1024</width>
+    <width>488</width>
     <height>512</height>
    </rect>
   </property>
@@ -18,6 +18,10 @@
   </property>
   <property name="windowTitle">
    <string>WinQuest</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../resources/resources.qrc">
+    <normaloff>:/favicon/images/favicon_96x96.png</normaloff>:/favicon/images/favicon_96x96.png</iconset>
   </property>
   <property name="toolTip">
    <string/>
@@ -44,6 +48,8 @@
 .QPushButton {
 	background-color: #F26DF9;
 	padding: 2px 5px;
+	border-radius: 10px;
+	font-size: 12px;
 }
 
 #backButton, #backButton2 {
@@ -96,6 +102,7 @@
         <property name="font">
          <font>
           <pointsize>28</pointsize>
+          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -109,11 +116,16 @@
        <widget class="QPushButton" name="chooseConnectButton">
         <property name="geometry">
          <rect>
-          <x>159</x>
-          <y>170</y>
+          <x>160</x>
+          <y>150</y>
           <width>152</width>
-          <height>24</height>
+          <height>31</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>-1</pointsize>
+         </font>
         </property>
         <property name="styleSheet">
          <string notr="true">*{
@@ -128,11 +140,16 @@ justify-content : center
        <widget class="QPushButton" name="chooseCreateAccountButton">
         <property name="geometry">
          <rect>
-          <x>159</x>
+          <x>160</x>
           <y>210</y>
           <width>151</width>
-          <height>24</height>
+          <height>31</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>-1</pointsize>
+         </font>
         </property>
         <property name="text">
          <string>Créer mon compte</string>

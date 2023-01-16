@@ -6,8 +6,7 @@ from functools import partial
 
 from PySide6 import QtCore
 from PySide6.QtCore import QPropertyAnimation
-from PySide6.QtWidgets import QFileDialog
-from PySide6.QtGui import QIcon
+from PySide6.QtWidgets import QFileDialog, QListWidget
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout
 from PySide6.QtUiTools import QUiLoader
 
@@ -37,7 +36,6 @@ class MainWindow(QMainWindow):
         QMainWindow.__init__(self)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.setWindowIcon(QIcon('resources/images/favicon_96x96.png'))
 
         # Binding
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
@@ -243,7 +241,6 @@ class UserMenuWindow(QMainWindow):
     def choose_question_page(self):
         self.hasAnswered = not self.hasAnswered
         if self.hasAnswered:
-
             # Validation du choix
             chosenAnswer = self.ui.choiceRightAnswerQuizz.checkedButton()
             if chosenAnswer is None or chosenAnswer.text() == "":
@@ -383,7 +380,7 @@ class UserMenuWindow(QMainWindow):
         standard = 75
 
         # SET MAX WIDTH
-        if width == 75:
+        if width == standard:
             widthExtended = maxExtend
         else:
             widthExtended = standard
@@ -432,18 +429,12 @@ class UserMenuWindow(QMainWindow):
         history = History.load(self.currentUser.username)
 
         # Conteneur de l'historique
-        historyContainer = self.ui.historyContainer
-
-        # Créer les layout pour page
-        layout = QVBoxLayout()
+        historyContainer:QListWidget = self.ui.historyItemsContainer
 
         # On crée les boutons et on les ajoute dans le conteneur
         for item in history.items:
-            button = QPushButton(item.__str__())
-            layout.addWidget(button)
-
-        # Mettre la layout contenant les boutons dans le conteneur page_list_history_container_bot
-        historyContainer.setLayout(layout)
+            historyContainer.addItem(item.__str__())
+            # historyContainer.addWidget(button)
 
     def import_quizz(self):
         # Tentative d'ouverture du fichier
@@ -490,5 +481,6 @@ if __name__ == "__main__":
 
     # Page principale
     window = MainWindow()
+    # window = UserMenuWindow(Account.get("admin","foobar2"))
     window.show()
     sys.exit(app.exec())

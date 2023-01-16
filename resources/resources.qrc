@@ -8,4 +8,7 @@
     <file>images/archive.svg</file>
     <file>images/log-out.svg</file>
   </qresource>
+  <qresource prefix="favicon">
+    <file>images/favicon_96x96.png</file>
+  </qresource>
 </RCC>
