@@ -6,7 +6,7 @@ from functools import partial
 
 from PySide6 import QtCore
 from PySide6.QtCore import QPropertyAnimation
-from PySide6.QtWidgets import QFileDialog, QListWidget
+from PySide6.QtWidgets import QFileDialog
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout
 from PySide6.QtUiTools import QUiLoader
 
@@ -265,7 +265,8 @@ class UserMenuWindow(QMainWindow):
                 raise Exception("Saisissez une réponse")
 
             # Augmentation du score
-            if chosenAnswer.text() == self.pendingQuizz.questions[self.indexQuestion-1].rightAnswer:
+            currentQuestion:Question = self.pendingQuizz.questions[self.indexQuestion-1]
+            if currentQuestion.is_right_answer(chosenAnswer.text()):
                 self.score += 1
                 self.ui.nbPointsLabel.setText(str(self.score))
 
@@ -276,21 +277,22 @@ class UserMenuWindow(QMainWindow):
             self.update_question_page(self.pendingQuizz.title, self.next_question())
 
     def next_question(self)->Question:
-        if self.indexQuestion < self.pendingQuizz.nb_questions():
-            self.indexQuestion += 1
-            return self.pendingQuizz.questions[self.indexQuestion-1]
-        else:
+        if self.pendingQuizz.is_finished(self.indexQuestion+1):
             # Affichage de la page de résultat
             timeTaken = time.time() - self.startTime
             self.ui.timerLabel.setText(f"{timeTaken:.2f}s")
             self.ui.quizzTitleEndLabel.setText(self.pendingQuizz.title)
-            self.ui.finalScoreLabel.setText(f"{self.score} / {self.pendingQuizz.nb_questions()}")
+            self.ui.finalScoreLabel.setText(f"{self.score} / {self.pendingQuizz.nbQuestionsToDisplay}")
             self.ui.questionPages.setCurrentWidget(self.ui.endQuizzPage)
 
             # Sauvegarde si le résultat est meilleur que le précédent
             result = HistoryItem(self.pendingQuizz, self.score, timeTaken)
-            self.currentUser.update_best_score(self.pendingQuizz ,result)
+            self.currentUser.update_best_score(self.pendingQuizz, result)
             raise Exception("Plus de question")
+        else:
+            self.indexQuestion += 1
+            return self.pendingQuizz.questions[self.indexQuestion-1]
+
 
     def show_answer(self, currentQuestion):
         """Affiche la bonne réponse et les mauvaises réponses"""

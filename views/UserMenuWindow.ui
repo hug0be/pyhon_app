@@ -364,7 +364,7 @@ QRadioButton::indicator::checked {
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="homePage">
        <property name="sizePolicy">
@@ -468,15 +468,39 @@ QRadioButton::indicator::checked {
          <bool>false</bool>
         </property>
        </widget>
-       <widget class="QListWidget" name="historyItemsContainer">
+       <widget class="QWidget" name="verticalLayoutWidget_2">
         <property name="geometry">
          <rect>
-          <x>100</x>
-          <y>190</y>
-          <width>641</width>
-          <height>411</height>
+          <x>-1</x>
+          <y>169</y>
+          <width>841</width>
+          <height>431</height>
          </rect>
         </property>
+        <layout class="QVBoxLayout" name="historyItemsContainer">
+         <property name="spacing">
+          <number>20</number>
+         </property>
+         <property name="leftMargin">
+          <number>20</number>
+         </property>
+         <property name="rightMargin">
+          <number>20</number>
+         </property>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </widget>
       </widget>
       <widget class="QWidget" name="quizzListPage">

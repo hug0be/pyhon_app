@@ -9,12 +9,9 @@ class UnknownQuizzException(Exception): pass
 
 class InvalidQuestionException(Exception): pass
 
-
 class InvalidNbToDisplayException(Exception): pass
 
-
 class InvalidNbAnswersException(Exception): pass
-
 
 class ImportQuizzException(Exception): pass
 
@@ -131,14 +128,13 @@ class Quizz:
         self.nbQuestionsToDisplay = nbQuestionsToDisplay
 
     def to_json(self):
-        # TODO POURQUOI IL Y A ÉCRIT "useRRRRRandomOrder" ??
         return {
             'title': self.title,
             'questions': [
                 question.to_json() for question in self.questions
             ],
-            'userRandomOrder': self.useRandomOrder,
-            'nbQuestionsToDisplay': self.nbQuestionsToDisplay
+            'useRandomOrder': self.useRandomOrder,
+            'nbQuestionsToDisplay': int(self.nbQuestionsToDisplay)
         }
 
     def save(self):
@@ -211,6 +207,9 @@ class Quizz:
 
         return True
 
+    def is_finished(self, iQuestion:int):
+        return iQuestion > self.nbQuestionsToDisplay or iQuestion > self.nb_questions()
+
     def __str__(self):
         res = f"Quizz \"{self.title}\"\n" \
               f"Ordre aléatoire: {self.useRandomOrder}\n" \
@@ -224,7 +223,7 @@ class Quizz:
             [Question.from_json(question) for question in quizz["questions"]],
             quizz["title"],
             quizz["nbQuestionsToDisplay"],
-            quizz["userRandomOrder"]
+            quizz["useRandomOrder"]
         )
 
     @staticmethod

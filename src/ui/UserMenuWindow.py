@@ -17,9 +17,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QButtonGroup, QFrame, QGridLayout,
     QGroupBox, QHBoxLayout, QLabel, QLineEdit,
-    QListWidget, QListWidgetItem, QMainWindow, QPushButton,
-    QRadioButton, QSizePolicy, QStackedWidget, QVBoxLayout,
-    QWidget)
+    QMainWindow, QPushButton, QRadioButton, QSizePolicy,
+    QSpacerItem, QStackedWidget, QVBoxLayout, QWidget)
 import resources_rc
 
 class Ui_userMenu(object):
@@ -283,9 +282,17 @@ class Ui_userMenu(object):
         icon5.addFile(u":/icons/images/back.png", QSize(), QIcon.Normal, QIcon.Off)
         self.backButton6.setIcon(icon5)
         self.backButton6.setAutoDefault(False)
-        self.historyItemsContainer = QListWidget(self.history)
+        self.verticalLayoutWidget_2 = QWidget(self.history)
+        self.verticalLayoutWidget_2.setObjectName(u"verticalLayoutWidget_2")
+        self.verticalLayoutWidget_2.setGeometry(QRect(-1, 169, 841, 431))
+        self.historyItemsContainer = QVBoxLayout(self.verticalLayoutWidget_2)
+        self.historyItemsContainer.setSpacing(20)
         self.historyItemsContainer.setObjectName(u"historyItemsContainer")
-        self.historyItemsContainer.setGeometry(QRect(100, 190, 641, 411))
+        self.historyItemsContainer.setContentsMargins(20, 0, 20, 0)
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.historyItemsContainer.addItem(self.verticalSpacer)
+
         self.pagesList.addWidget(self.history)
         self.quizzListPage = QWidget()
         self.quizzListPage.setObjectName(u"quizzListPage")
@@ -654,7 +661,7 @@ class Ui_userMenu(object):
 
         self.retranslateUi(userMenu)
 
-        self.pagesList.setCurrentIndex(3)
+        self.pagesList.setCurrentIndex(1)
         self.backButton6.setDefault(False)
         self.backButton1.setDefault(False)
         self.questionPages.setCurrentIndex(0)
