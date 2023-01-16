@@ -175,8 +175,24 @@ class UserMenuWindow(QMainWindow):
         self.ui.pagesList.setCurrentWidget(self.ui.homePage)
 
     def show_history(self):
-        self.create_buttons_page_history()
+        self.init_history_page()
         self.ui.pagesList.setCurrentWidget(self.ui.history)
+    
+    def init_history_page(self):
+        """Créer les boutons sur la page Historique"""
+        # Historique de l'utilisateur
+        history = History.load(self.currentUser.username)
+
+        # Conteneur de l'historique
+        historyContainer:QVBoxLayout = self.ui.historyItemsContainer
+
+        # On crée les boutons et on les ajoute dans le conteneur
+        for item in history.items:
+            button = QPushButton(item.__str__())
+            historyContainer.addWidget(button)
+
+        # On inverse l'ordre pour que le spacer soit en bas
+        historyContainer.setDirection(QVBoxLayout.Direction.BottomToTop)
 
     def show_quizz_list_page(self):
         self.init_question_page()
@@ -291,10 +307,51 @@ class UserMenuWindow(QMainWindow):
             elif button.text() != "":
                 button.setStyleSheet("background-color: #B41010")
 
-    def is_right_answer_selected(self, currentQuestion):
-        """Check si la réponse sélectionnée est bonne"""
-        selectedButtonText = self.ui.choiceRightAnswerQuizz.checkedButton().text()
-        return currentQuestion.is_right_answer(selectedButtonText)
+    def end_questions(self):
+        """
+        Méthode qui passe à la troisième étape si les questions ont bien été faites.
+        Elle peut aussi skipper l'étape 3 et 4 s'il n'y a qu'une question.
+        """
+        # On tente d'enregistré la question en cours
+        self.create_quizz2()
+
+        # Nombre de questions enregistré après la tentative
+        nbQuestions = self.pendingQuizz.nb_questions()
+
+        # La question en cours est invalide
+        # Un message d'erreur à déjà été écrit dans create_quizz2()
+        if nbQuestions == 0: return False
+
+        # On peut skip les étapes s'il n'y a qu'une question
+        if nbQuestions == 1:
+            self.save_quizz()
+            return True
+
+        # Il y a plus d'une question, on passe à la prochaine étape
+        self.ui.quizzCreationSteps.setCurrentWidget(self.ui.chooseOrderPage)
+        return True
+
+    def toggle_menu(self, maxWidth):
+        """Méthode qui ouvre et ferme le menu de gauche (sidebar)"""
+        # GET WIDTH
+        width = self.ui.leftMenu.width()
+        maxExtend = maxWidth  # 300
+        standard = 75
+
+        # SET MAX WIDTH
+        if width == standard:
+            widthExtended = maxExtend
+        else:
+            widthExtended = standard
+
+        # ANIMATION
+        # -- TOGGLE
+        self.animation = QPropertyAnimation(self.ui.leftMenu, b"minimumWidth")
+        self.animation.setDuration(400)
+        self.animation.setStartValue(width)
+        self.animation.setEndValue(widthExtended)
+        self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
+        self.animation.start()
 
     def create_quizz1(self):
         """Méthode qui constitue la première étape de création d'un quizz : choisir un titre"""
@@ -348,52 +405,6 @@ class UserMenuWindow(QMainWindow):
         self.ui.questionNumberLabel.setText(f"Question {self.pendingQuizz.nb_questions() + 1}")
         return True
 
-    def end_questions(self):
-        """
-        Méthode qui passe à la troisième étape si les questions ont bien été faites.
-        Elle peut aussi skipper l'étape 3 et 4 s'il n'y a qu'une question.
-        """
-        # On tente d'enregistré la question en cours
-        self.create_quizz2()
-
-        # Nombre de questions enregistré après la tentative
-        nbQuestions = self.pendingQuizz.nb_questions()
-
-        # La question en cours est invalide
-        # Un message d'erreur à déjà été écrit dans create_quizz2()
-        if nbQuestions == 0: return False
-
-        # On peut skip les étapes s'il n'y a qu'une question
-        if nbQuestions == 1:
-            self.save_quizz()
-            return True
-
-        # Il y a plus d'une question, on passe à la prochaine étape
-        self.ui.quizzCreationSteps.setCurrentWidget(self.ui.chooseOrderPage)
-        return True
-
-    def toggle_menu(self, maxWidth):
-        """Méthode qui ouvre et ferme le menu de gauche (sidebar)"""
-        # GET WIDTH
-        width = self.ui.leftMenu.width()
-        maxExtend = maxWidth  # 300
-        standard = 75
-
-        # SET MAX WIDTH
-        if width == standard:
-            widthExtended = maxExtend
-        else:
-            widthExtended = standard
-
-        # ANIMATION
-        # -- TOGGLE
-        self.animation = QPropertyAnimation(self.ui.leftMenu, b"minimumWidth")
-        self.animation.setDuration(400)
-        self.animation.setStartValue(width)
-        self.animation.setEndValue(widthExtended)
-        self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
-        self.animation.start()
-
     def create_quizz3(self, useRandomOrder: bool):
         """Méthode qui constitue la troisième étape de création d'un quizz : l'ordre des questions"""
         self.pendingQuizz.useRandomOrder = useRandomOrder
@@ -422,19 +433,6 @@ class UserMenuWindow(QMainWindow):
         """Enregistre le quizz après toutes les étapes terminées"""
         self.pendingQuizz.save()
         self.show_quizz_list_page()
-
-    def create_buttons_page_history(self):
-        """Créer les boutons sur la page Historique"""
-        # Historique de l'utilisateur
-        history = History.load(self.currentUser.username)
-
-        # Conteneur de l'historique
-        historyContainer:QListWidget = self.ui.historyItemsContainer
-
-        # On crée les boutons et on les ajoute dans le conteneur
-        for item in history.items:
-            historyContainer.addItem(item.__str__())
-            # historyContainer.addWidget(button)
 
     def import_quizz(self):
         # Tentative d'ouverture du fichier
