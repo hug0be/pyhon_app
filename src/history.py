@@ -30,7 +30,7 @@ class HistoryItem:
     def __str__(self):
         res = f"\"{self.quizz.title}\"\n" \
               f"Meilleur score: {self.best_score} / {self.quizz.nb_questions()}\n" \
-              f"Temps: {self.time}"
+              f"Temps: {self.time:.2f}s"
         return res
 
     def __lt__(self, other):
