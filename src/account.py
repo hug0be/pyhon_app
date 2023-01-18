@@ -23,7 +23,7 @@ class Account:
             accounts = json.load(accounts_file)
             accounts.append(self.to_json())
             accounts_file.seek(0)
-            json.dump(accounts, accounts_file)
+            json.dump(accounts, accounts_file, indent=4)
 
     def update_best_score(self, quizz, result:HistoryItem):
         try:

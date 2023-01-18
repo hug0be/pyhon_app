@@ -462,8 +462,8 @@ if __name__ == "__main__":
             os.mkdir("data")
         with open('data/accounts.json', 'w') as accounts_file:
             accounts = [
-                {"username": "admin", "password": "foobar2", "admin": True},
-                {"username": "user", "password": "foobar2", "admin": False}
+                Account("admin","foobar2",True).to_json(),
+                Account("user","foobar2",False).to_json()
             ]
             accounts_file.write(json.dumps(accounts))
             print("Fichier accounts.json créé")
@@ -473,6 +473,8 @@ if __name__ == "__main__":
         with open('data/quizzes.json', 'w') as quizzes_file:
             quizzes_file.write(json.dumps([]))
         print("Fichier quizzes.json créé")
+        Quizz.import_txt("SuperQuizz.txt").save()
+        print("SuperQuizz ajouté")
 
     # Convert file .ui -> .py
     os.system("pyside6-uic views/MainWindow.ui -o src/ui/MainWindow.py")
