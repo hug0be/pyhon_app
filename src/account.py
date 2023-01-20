@@ -11,6 +11,13 @@ class UnknownAccountException(Exception): pass
 
 
 class Account:
+    """
+    Classe qui représente un compte utilisateur
+    Propriétés :
+        username (nom d'utilisateur), password (mot de passe)
+        isAdmin (vrai si l'utilisateur est un admin)
+        history (l'historique des quizz joué par l'utilisateur)
+    """
     def __init__(self, username: str, password: str, isAdmin: bool = False, history:History = History()):
         self.username = username
         self.password = password

@@ -127,6 +127,11 @@ class UserMenuWindow(QMainWindow):
         self.ui.showQuizzListButton.clicked.connect(self.show_quizz_list_page)
         self.ui.toggleButton.clicked.connect(lambda: self.toggle_menu(200))
 
+        # On cache les boutons si l'utilisateur n'est pas admin
+        if not self.currentUser.isAdmin:
+            self.ui.createQuizzButton.hide()
+            self.ui.importQuizzButton.hide()
+
         # Variables utilisés pendant le quizz
         self.hasAnswered = False
         self.indexQuestion = 0
@@ -356,7 +361,11 @@ class UserMenuWindow(QMainWindow):
         self.animation.start()
 
     def create_quizz1(self):
-        """Méthode qui constitue la première étape de création d'un quizz : choisir un titre"""
+        """
+        Méthode qui constitue la première étape de création d'un quizz : choisir un titre
+        Passe à la page suivante si le titre est valide
+        Sinon, affiche des messages d'erreurs
+        """
         # Obtention des données
         title = self.ui.quizzTitle.text()
 
