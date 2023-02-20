@@ -1,14 +1,5 @@
 <RCC>
-  <qresource prefix="icons">
-    <file>images/checked-radio-button.svg</file>
-    <file>images/download.svg</file>
-    <file>images/radio-button.svg</file>
-    <file>images/menu.svg</file>
-    <file>images/back.png</file>
-    <file>images/archive.svg</file>
-    <file>images/log-out.svg</file>
-  </qresource>
   <qresource prefix="favicon">
-    <file>images/favicon_96x96.png</file>
+    <file>images/favicon_32x32.svg</file>
   </qresource>
 </RCC>

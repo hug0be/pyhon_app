@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/proj531.iml" filepath="$PROJECT_DIR$/.idea/proj531.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/pyhon_app.iml" filepath="$PROJECT_DIR$/.idea/pyhon_app.iml" />
     </modules>
   </component>
 </project>

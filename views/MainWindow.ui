@@ -17,11 +17,11 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>WinQuest</string>
+   <string>Accueil</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../resources/resources.qrc">
-    <normaloff>:/favicon/images/favicon_96x96.png</normaloff>:/favicon/images/favicon_96x96.png</iconset>
+    <normaloff>:/favicon/images/favicon_32x32.svg</normaloff>:/favicon/images/favicon_32x32.svg</iconset>
   </property>
   <property name="toolTip">
    <string/>
@@ -107,7 +107,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Bienvenue sur WinQuest</string>
+         <string>Bienvenue</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -252,7 +252,7 @@ justify-content : center
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../resources/resources.qrc">
+         <iconset>
           <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
         </property>
         <property name="autoDefault">
@@ -381,7 +381,7 @@ justify-content : center
          <string/>
         </property>
         <property name="icon">
-         <iconset resource="../resources/resources.qrc">
+         <iconset>
           <normaloff>:/icons/images/back.png</normaloff>:/icons/images/back.png</iconset>
         </property>
         <property name="autoDefault">

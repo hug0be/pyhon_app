@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'MainWindow.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.4.2
+## Created by: Qt User Interface Compiler version 6.4.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
         MainWindow.resize(488, 512)
         MainWindow.setBaseSize(QSize(1024, 512))
         icon = QIcon()
-        icon.addFile(u":/favicon/images/favicon_96x96.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u":/favicon/images/favicon_32x32.svg", QSize(), QIcon.Normal, QIcon.Off)
         MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet(u"* {\n"
 "	border: none;\n"
@@ -213,11 +213,11 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"WinQuest", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Accueil", None))
 #if QT_CONFIG(tooltip)
         MainWindow.setToolTip("")
 #endif // QT_CONFIG(tooltip)
-        self.label.setText(QCoreApplication.translate("MainWindow", u"Bienvenue sur WinQuest", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Bienvenue", None))
         self.chooseConnectButton.setText(QCoreApplication.translate("MainWindow", u"Se connecter", None))
         self.chooseCreateAccountButton.setText(QCoreApplication.translate("MainWindow", u"Cr\u00e9er mon compte", None))
         self.connectUsername.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Nom d'utilisateur", None))
